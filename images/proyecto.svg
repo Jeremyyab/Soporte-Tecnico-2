@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <rect x="290" y="40" width="220" height="50" rx="12" fill="#dbeafe" stroke="#0b66c3" stroke-width="1.2" stroke-opacity="0.5"/>
+  <text x="400" y="70" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0b66c3" text-anchor="middle">Proyecto Grupal — 55%</text>
+  <rect x="50" y="120" width="320" height="150" rx="12" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="210" y="150" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#0b66c3" text-anchor="middle">Escenario</text>
+  <text x="70" y="176" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Empresa ficticia 3 departamentos</text><text x="70" y="196" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Usuarios fijos + móviles</text>
+  <text x="70" y="216" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Servidor local + Internet</text><text x="70" y="236" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Seguridad básica requerida</text>
+
+  <rect x="430" y="120" width="320" height="150" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="590" y="150" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#16a34a" text-anchor="middle">Entregables</text>
+  <text x="450" y="176" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Red en Packet Tracer</text><text x="450" y="196" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Essentials Virtual Desktop</text>
+  <text x="450" y="216" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Documentación técnica</text><text x="450" y="236" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">• Defensa oral (Semana 4)</text>
+
+  <rect x="50" y="300" width="700" height="110" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="400" y="326" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#d97706" text-anchor="middle">Rúbrica — 6 criterios evaluados</text>
+  <text x="130" y="352" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Requerimientos</text><text x="310" y="352" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Diseño red</text>
+  <text x="480" y="352" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Implementación</text><text x="660" y="352" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Dispositivos</text>
+  <text x="130" y="372" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Resolución prob.</text><text x="310" y="372" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Documentación</text>
+
+  <rect x="50" y="430" width="700" height="40" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="400" y="456" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">Esta semana: definan escenario + esbozo inicial de la red (9 horas extra clase)</text>
+</svg>

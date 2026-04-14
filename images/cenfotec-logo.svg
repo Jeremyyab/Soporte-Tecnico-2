@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <!-- Central emblem -->
+  <circle cx="400" cy="220" r="130" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <circle cx="400" cy="220" r="100" fill="url(#brand)"/>
+  <text x="400" y="215" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">TI-312</text>
+  <text x="400" y="245" font-family="Arial,sans-serif" font-size="14" font-weight="normal" fill="#ffffff" text-anchor="middle">Soporte Técnico II</text>
+  <!-- Orbiting nodes -->
+  <circle cx="260" cy="120" r="22" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="260" y="125" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0b66c3" text-anchor="middle">NET</text>
+  <circle cx="540" cy="120" r="22" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="540" y="125" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0b66c3" text-anchor="middle">WiFi</text>
+  <circle cx="240" cy="320" r="22" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="240" y="325" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0b66c3" text-anchor="middle">LAN</text>
+  <circle cx="560" cy="320" r="22" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="560" y="325" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0b66c3" text-anchor="middle">TCP</text>
+  <line x1="282" y1="133" x2="370" y2="165" stroke="#0b66c380" stroke-width="1.5"/>
+  <line x1="518" y1="133" x2="430" y2="165" stroke="#0b66c380" stroke-width="1.5"/>
+  <line x1="260" y1="143" x2="290" y2="250" stroke="#0b66c380" stroke-width="1.5"/>
+  <line x1="540" y1="143" x2="510" y2="250" stroke="#0b66c380" stroke-width="1.5"/>
+  <!-- Bottom title -->
+  <text x="400" y="430" font-family="Arial,sans-serif" font-size="16" font-weight="normal" fill="#50607a" text-anchor="middle">Universidad CENFOTEC</text>
+  <text x="400" y="455" font-family="Arial,sans-serif" font-size="13" font-weight="normal" fill="#50607a" text-anchor="middle">Escuela de Tecnologías de Información</text>
+</svg>
