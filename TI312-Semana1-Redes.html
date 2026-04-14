@@ -1,0 +1,1717 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-312 · Semana 1 — Fundamentos de Redes y Conectividad</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+
+    :root{
+      --bg1:#eaf1f8;
+      --bg2:#cfdceb;
+      --card:#ffffffcc;
+      --card2:#ffffffd9;
+      --stroke:#cfd9e6;
+      --stroke2:#b9c8da;
+      --text:#0f172a;
+      --muted:#50607a;
+      --brand:#0b66c3;
+      --brand2:#0a4f96;
+      --accent:#0ea5e9;
+      --green:#16a34a;
+      --amber:#d97706;
+      --red:#dc2626;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .12);
+      --round: 22px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 30% 10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(800px 450px at 75% 65%, #ffffff 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:16px;
+    }
+
+    .shell{
+      width:min(1400px, 100%);
+      position:relative;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar{
+      background:linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.58));
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+      padding:12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+      flex-shrink:0;
+    }
+    .brand img{
+      height:38px;
+      width:auto;
+      display:block;
+    }
+    .brand .txt{
+      display:flex;
+      flex-direction:column;
+      line-height:1.2;
+      min-width:0;
+    }
+    .brand .txt b{
+      font-size:13px;
+      color:var(--brand2);
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .txt span{
+      font-size:11px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .topcenter{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1;
+      justify-content:center;
+      min-width:0;
+    }
+    .counterPill{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.65);
+      font-weight:800;
+      color:var(--brand2);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:999px;background:var(--brand);
+      box-shadow:0 0 0 4px rgba(11,102,195,.12);
+      flex-shrink:0;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      flex-shrink:0;
+    }
+
+    .pill{
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.65);
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:7px;
+      font-size:11px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .pill .miniDot{
+      width:8px;height:8px;border-radius:999px;
+      background:rgba(11,102,195,.9);
+      box-shadow:0 0 0 3px rgba(11,102,195,.10);
+      flex-shrink:0;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid var(--stroke2);
+      background:rgba(255,255,255,.78);
+      color:var(--brand2);
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:12px;
+      cursor:pointer;
+      transition:.15s transform ease, .15s background ease, .15s box-shadow ease;
+      user-select:none;
+      white-space:nowrap;
+      font-family: inherit;
+    }
+    .btn:hover{ transform: translateY(-1px); background:rgba(255,255,255,.95); box-shadow:0 4px 12px rgba(15,23,42,.08); }
+    .btn:active{ transform: translateY(0px); }
+    .btn.primary{
+      background:rgba(11,102,195,.10);
+      border-color: rgba(11,102,195,.28);
+    }
+    .btn.danger{
+      color:#7a2230;
+      background:rgba(220,38,38,.08);
+      border-color: rgba(220,38,38,.20);
+    }
+    .btn.on{
+      background:rgba(11,102,195,.18);
+      border-color: rgba(11,102,195,.38);
+    }
+    .btn.success{
+      color:#166534;
+      background:rgba(22,163,74,.10);
+      border-color:rgba(22,163,74,.28);
+    }
+
+    /* ── DECK ── */
+    .deck{
+      margin-top:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.32));
+      border:1px solid var(--stroke);
+      border-radius: var(--round);
+      box-shadow: var(--shadow);
+      padding:14px;
+      position:relative;
+    }
+
+    .slide{
+      background:rgba(255,255,255,.42);
+      border:1px solid var(--stroke);
+      border-radius: 20px;
+      padding:18px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      min-height: 610px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .left{
+      padding:4px 4px 4px 6px;
+      display:flex;
+      flex-direction:column;
+      overflow-y:auto;
+      max-height:610px;
+    }
+    .left::-webkit-scrollbar{ width:4px; }
+    .left::-webkit-scrollbar-thumb{ background:var(--stroke2); border-radius:99px; }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+      flex-shrink:0;
+    }
+    .kicker .bar{
+      width:34px;
+      height:9px;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--brand2), var(--accent));
+      box-shadow:0 0 0 5px rgba(11,102,195,.08);
+      flex-shrink:0;
+    }
+    .kicker span{
+      font-weight:800;
+      letter-spacing:.4px;
+      font-size:11px;
+      color:var(--brand2);
+      text-transform:uppercase;
+    }
+
+    h1{
+      margin:0 0 8px 0;
+      font-size:clamp(26px, 3.2vw, 42px);
+      letter-spacing:-.6px;
+      line-height:1.06;
+      flex-shrink:0;
+    }
+    .desc{
+      margin:0 0 12px 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      flex-shrink:0;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.68);
+      border:1px solid var(--stroke);
+      border-radius:14px;
+      padding:11px 13px;
+    }
+    .card strong{
+      display:block;
+      font-size:12.5px;
+      margin-bottom:7px;
+      color:var(--text);
+    }
+    .card ul{
+      margin:0;
+      padding-left:16px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+    .card li{ margin:3px 0; }
+
+    .bigcard{
+      background:rgba(255,255,255,.68);
+      border:1px solid var(--stroke);
+      border-radius:14px;
+      padding:11px 14px;
+      margin-top:10px;
+    }
+    .bigcard:first-child{ margin-top:0; }
+    .bigcard .title{
+      font-weight:800;
+      color:var(--brand2);
+      margin-bottom:5px;
+      font-size:13px;
+    }
+    .bigcard ul{
+      margin:4px 0 0 0;
+      padding-left:16px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+    .bigcard li{ margin:3px 0; }
+
+    /* Colored accent cards */
+    .bigcard.green{ border-color:rgba(22,163,74,.25); background:rgba(22,163,74,.06); }
+    .bigcard.green .title{ color:var(--green); }
+    .bigcard.amber{ border-color:rgba(217,119,6,.25); background:rgba(217,119,6,.06); }
+    .bigcard.amber .title{ color:var(--amber); }
+    .bigcard.red{ border-color:rgba(220,38,38,.20); background:rgba(220,38,38,.05); }
+    .bigcard.red .title{ color:var(--red); }
+
+    /* ── RIGHT PANEL ── */
+    .right{
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      background:
+        radial-gradient(400px 260px at 70% 15%, rgba(255,255,255,.88), rgba(255,255,255,.0) 65%),
+        linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.16));
+      padding:13px;
+      display:flex;
+      flex-direction:column;
+      gap:11px;
+    }
+
+    .media{
+      background:rgba(255,255,255,.62);
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:10px;
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      position:relative;
+      min-height:200px;
+    }
+    .media img{
+      max-width:100%;
+      max-height:100%;
+      border-radius:12px;
+      display:none;
+      box-shadow: 0 16px 38px rgba(15,23,42,.16);
+      object-fit:cover;
+    }
+    .media .placeholder{
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      padding:16px;
+      line-height:1.6;
+    }
+
+    .rightBottom{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      flex-shrink:0;
+    }
+    .miniCard{
+      background:rgba(255,255,255,.68);
+      border:1px solid var(--stroke);
+      border-radius:14px;
+      padding:11px 13px;
+    }
+    .miniCard .label{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:4px;
+      font-weight:600;
+    }
+    .miniCard .value{
+      font-weight:900;
+      font-size:18px;
+      color:var(--text);
+      letter-spacing:-.2px;
+      line-height:1.2;
+    }
+
+    /* ── CONTROLS ── */
+    .controls{
+      margin-top:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.80), rgba(255,255,255,.54));
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:9px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-shrink:0;
+    }
+
+    .progressWrap{
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:0 8px;
+      min-width:0;
+    }
+    .progressTrack{
+      height:9px;
+      border-radius:999px;
+      background:rgba(15,23,42,.06);
+      border:1px solid rgba(185,200,218,.7);
+      overflow:hidden;
+      flex:1;
+      min-width:60px;
+    }
+    .progressBar{
+      height:100%;
+      width:5%;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--brand2), var(--accent));
+      transition: width .35s cubic-bezier(.4,0,.2,1);
+    }
+    .hint{
+      color:var(--muted);
+      font-size:11px;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+
+    /* ── REVEAL ── */
+    .revealRow{
+      display:flex;
+      gap:8px;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+    .revealBox{
+      background:rgba(255,255,255,.72);
+      border:1px dashed rgba(11,102,195,.35);
+      border-radius:14px;
+      padding:11px 13px;
+      margin-top:8px;
+      display:none;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.65;
+    }
+    .revealBox.show{ display:block; }
+
+    /* ── PEN CANVAS ── */
+    .penCanvas{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:50;
+      border-radius: var(--round);
+    }
+
+    .select{
+      border:1px solid var(--stroke2);
+      background:rgba(255,255,255,.78);
+      border-radius:999px;
+      padding:7px 10px;
+      font-weight:700;
+      color:var(--brand2);
+      font-size:11px;
+      outline:none;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    /* ── TIMER ── */
+    .timerBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:rgba(11,102,195,.10);
+      border:1px solid rgba(11,102,195,.22);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:11.5px;
+      font-weight:700;
+      color:var(--brand2);
+      margin-bottom:8px;
+    }
+
+    /* ── DEBATE BOX ── */
+    .debateBox{
+      background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(11,102,195,.04));
+      border:1px solid rgba(11,102,195,.22);
+      border-left:4px solid var(--brand);
+      border-radius:14px;
+      padding:12px 14px;
+      margin-top:10px;
+    }
+    .debateBox .dtitle{
+      font-weight:800;
+      font-size:12.5px;
+      color:var(--brand2);
+      margin-bottom:5px;
+    }
+    .debateBox p{
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.6;
+      margin:0;
+    }
+
+    /* ── LAB BOX ── */
+    .labBox{
+      background:linear-gradient(135deg,rgba(22,163,74,.07),rgba(22,163,74,.02));
+      border:1px solid rgba(22,163,74,.22);
+      border-left:4px solid var(--green);
+      border-radius:14px;
+      padding:12px 14px;
+      margin-top:10px;
+    }
+    .labBox .ltitle{
+      font-weight:800;
+      font-size:12.5px;
+      color:var(--green);
+      margin-bottom:5px;
+    }
+    .labBox p{
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.6;
+      margin:0;
+    }
+
+    /* ── STEP LIST ── */
+    .stepList{
+      counter-reset: step;
+      list-style:none;
+      padding:0;
+      margin:8px 0 0 0;
+    }
+    .stepList li{
+      counter-increment: step;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:12.5px;
+      color:var(--muted);
+      line-height:1.55;
+      margin:6px 0;
+    }
+    .stepList li::before{
+      content:counter(step);
+      min-width:22px;
+      height:22px;
+      border-radius:999px;
+      background:rgba(11,102,195,.12);
+      color:var(--brand2);
+      font-weight:800;
+      font-size:11px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      margin-top:1px;
+    }
+
+    /* no print styles needed — PDF is generated separately */
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:1100px){
+      .slide{ grid-template-columns: 1fr; min-height:unset; }
+      .right{ gap:10px; }
+      .right .media{ min-height:240px; flex:unset; height:240px; }
+      .left{ max-height:unset; overflow:visible; }
+      .actions .pill{ display:none; }
+    }
+    @media (max-width:700px){
+      body{ padding:10px; }
+      .topbar{ padding:10px 12px; gap:8px; }
+      .brand img{ height:30px; }
+      .brand .txt b{ font-size:12px; }
+      .topcenter{ justify-content:flex-start; flex:unset; }
+      .actions{ gap:6px; }
+      .select{ display:none; }
+      h1{ font-size:22px; }
+      .grid{ grid-template-columns:1fr; }
+      .grid3{ grid-template-columns:1fr; }
+      .slide{ padding:12px; gap:12px; }
+      .deck{ padding:10px; }
+      .controls{ flex-wrap:wrap; gap:8px; }
+      .progressWrap{ order:3; width:100%; padding:0; }
+      .hint{ display:none; }
+    }
+    @media (max-width:480px){
+      .rightBottom{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brand">
+      <img id="logo" src="cenfotec-logo.png" alt="Universidad CENFOTEC"
+        onerror="this.style.display='none'"/>
+      <div class="txt">
+        <b id="topTitle">Fundamentos de Redes y Conectividad</b>
+        <span id="topSub">TI-312 · Semana 1 — Soporte Técnico II</span>
+      </div>
+    </div>
+
+    <div class="topcenter">
+      <div class="counterPill">
+        <span class="dot"></span>
+        <span id="counterTxt">01 / 20</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="pill"><span class="miniDot"></span><span>Presencial</span></div>
+      <div class="pill"><span class="miniDot" style="background:rgba(22,163,74,.7)"></span><span>Lab: Packet Tracer</span></div>
+      <button class="btn primary" id="penToggle">✏️ Lápiz</button>
+      <button class="btn danger" id="penClear">Borrar</button>
+      <select class="select" id="penSize" title="Grosor">
+        <option value="3">Fino</option>
+        <option value="5" selected>Medio</option>
+        <option value="8">Grueso</option>
+        <option value="12">Extra</option>
+      </select>
+      <select class="select" id="penColor" title="Color">
+        <option value="#0b66c3" selected>Azul</option>
+        <option value="#0f172a">Negro</option>
+        <option value="#dc2626">Rojo</option>
+        <option value="#16a34a">Verde</option>
+        <option value="#f59e0b">Amarillo</option>
+      </select>
+
+    </div>
+  </div>
+
+  <!-- DECK -->
+  <div class="deck">
+    <canvas id="penCanvas" class="penCanvas"></canvas>
+
+    <div class="slide">
+      <div class="left">
+        <div class="kicker">
+          <div class="bar"></div>
+          <span id="kicker">CURSO</span>
+        </div>
+        <h1 id="title">TI-312 · Introducción al Soporte Técnico II</h1>
+        <p class="desc" id="desc">Soporte técnico en redes y dispositivos móviles — diagnóstico, configuración y resolución de problemas.</p>
+        <div id="leftBlocks"></div>
+      </div>
+
+      <div class="right">
+        <div class="media">
+          <img id="slideImg" alt=""/>
+          <div class="placeholder" id="placeholder">
+            Colocá la imagen en la carpeta del HTML.<br>
+            (Usá el campo <b>imgFile</b> en el array de slides.)
+          </div>
+        </div>
+        <div class="rightBottom" id="rightBottom"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <button class="btn primary" id="nextBtn">Siguiente →</button>
+      </div>
+      <div class="progressWrap">
+        <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+        <div class="hint">Teclas: ← → / Espacio</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /shell -->
+
+<script>
+(function(){
+  function pad2(n){ return String(n).padStart(2,"0"); }
+
+  /* ═══════════════════════════════════════════════
+     SLIDES — TI-312 Semana 1
+     Tema 1: Fundamentos de Redes y Conectividad
+     Duración total clase: ~3.3 hrs (200 min)
+     Estructura: 40% teoría / 40% práctica / 20% retro
+  ═══════════════════════════════════════════════ */
+  const slides = [
+
+    /* ─── SLIDE 1 · Portada ─── */
+    {
+      kicker:"CURSO",
+      title:"TI-312 · Introducción al Soporte Técnico II",
+      desc:"Soporte técnico en redes y dispositivos móviles — diagnóstico, configuración y resolución de problemas con criterio técnico.",
+      leftBlocksHTML:`
+        <div class="grid">
+          <div class="card">
+            <strong>Datos del curso</strong>
+            <ul>
+              <li>Código: TI-312</li>
+              <li>Crédito: 1 académico</li>
+              <li>Modalidad: Presencial</li>
+              <li>Sesiones: 4 clases</li>
+              <li>Requisito: TI-311</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Docente</strong>
+            <ul>
+              <li>Ing. Jeremy Alvarado B.</li>
+              <li>Cel: 8573-9967</li>
+              <li>jalvarado@ucenfotec.ac.cr</li>
+              <li>Escuela de TI</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">Evaluación del curso</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.7">
+            📋 <b>Proyecto grupal:</b> 55% — Red en Packet Tracer + gestión en Essentials Virtual Desktop<br>
+            🧪 <b>Casos prácticos (3):</b> 45% — Resolución guiada en clase
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">Reglas de clase</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.7">
+            Participación activa · Trabajo grupal · Evidencia técnica · Entregas a tiempo
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Semana",av:"1 de 4",bk:"Horas/semana",bv:"3.3 hrs"},
+      imgFile:"images/cenfotec-logo.svg"
+    },
+
+    /* ─── SLIDE 2 · Agenda de hoy ─── */
+    {
+      kicker:"AGENDA",
+      title:"¿Qué hacemos hoy?",
+      desc:"Semana 1 · Tema 1: Fundamentos de redes y conectividad — 200 minutos de clase.",
+      leftBlocksHTML:`
+        <div class="timerBadge">⏱ Clase 1 · ~200 minutos</div>
+        <div class="bigcard green">
+          <div class="title">📖 Bloque A — Teoría (80 min)</div>
+          <ul>
+            <li>Términos clave de redes</li>
+            <li>Tipos y componentes de red e Internet</li>
+            <li>Protocolos de capa de transporte e inalámbricos</li>
+            <li>Número de puertos</li>
+            <li>Dispositivos de red básicos y de seguridad</li>
+          </ul>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">🧪 Bloque B — Caso práctico 1 (80 min)</div>
+          <ul>
+            <li>Actividad grupal guiada en Packet Tracer</li>
+            <li>Identificación de componentes de una red básica</li>
+            <li>Diagnóstico de conectividad</li>
+          </ul>
+        </div>
+        <div class="bigcard">
+          <div class="title">💬 Bloque C — Retro + Proyecto (40 min)</div>
+          <ul>
+            <li>Revisión de soluciones del caso</li>
+            <li>Asignación del proyecto del curso</li>
+          </ul>
+        </div>
+      `,
+      rightBadges:{ak:"Caso práctico",av:"Hoy",bk:"Proyecto",bv:"Se asigna"},
+      imgFile:"images/redes-agenda.svg"
+    },
+
+    /* ─── SLIDE 3 · ¿Qué es una red? ─── */
+    {
+      kicker:"CONCEPTO BASE",
+      title:"¿Qué es una red de computadoras?",
+      desc:"Una red es un conjunto de dispositivos interconectados que comparten recursos e información mediante protocolos establecidos.",
+      leftBlocksHTML:`
+        <div class="bigcard">
+          <div class="title">Definición técnica</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.7">
+            Una <b>red de computadoras</b> es un sistema de dispositivos electrónicos (nodos) conectados entre sí
+            para intercambiar datos, compartir recursos (impresoras, almacenamiento, internet) y comunicarse.
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <strong>Componentes básicos</strong>
+            <ul>
+              <li>Dispositivos finales (PCs, móviles)</li>
+              <li>Dispositivos intermediarios (routers, switches)</li>
+              <li>Medios de transmisión</li>
+              <li>Protocolos de comunicación</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Beneficios</strong>
+            <ul>
+              <li>Compartir recursos</li>
+              <li>Comunicación eficiente</li>
+              <li>Acceso a Internet</li>
+              <li>Centralización de datos</li>
+              <li>Reducción de costos</li>
+            </ul>
+          </div>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">🗣 Pregunta de activación</div>
+          <p>¿Cuál es la diferencia entre conectar dos PCs directo con un cable y conectarlas a través de un switch? ¿Qué cambia en la red?</p>
+        </div>
+      `,
+      rightBadges:{ak:"Nodos",av:"2 o más",bk:"Base",bv:"Protocolos"},
+      imgFile:"images/red-concepto.svg"
+    },
+
+    /* ─── SLIDE 4 · Términos clave ─── */
+    {
+      kicker:"VOCABULARIO",
+      title:"Términos clave de redes",
+      desc:"Antes de configurar o solucionar problemas, todo técnico debe dominar el vocabulario esencial de redes.",
+      leftBlocksHTML:`
+        <div class="grid">
+          <div class="card">
+            <strong>📡 Ancho de banda</strong>
+            <ul>
+              <li>Capacidad máxima de transmisión</li>
+              <li>Se mide en bps, Mbps, Gbps</li>
+              <li>No es lo mismo que velocidad real</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>⏱ Latencia</strong>
+            <ul>
+              <li>Tiempo de respuesta de la red</li>
+              <li>Se mide en milisegundos (ms)</li>
+              <li>Afecta videollamadas y gaming</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>📦 Paquete</strong>
+            <ul>
+              <li>Unidad de datos transmitida</li>
+              <li>Contiene encabezado + datos</li>
+              <li>Tiene IP origen y destino</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🔀 Protocolo</strong>
+            <ul>
+              <li>Conjunto de reglas de comunicación</li>
+              <li>Define formato y secuencia</li>
+              <li>Ej: TCP/IP, HTTP, DNS</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🖧 IP Address</strong>
+            <ul>
+              <li>Identificador único de dispositivo</li>
+              <li>IPv4: 192.168.1.1 (32 bits)</li>
+              <li>IPv6: 128 bits, nueva generación</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🔲 MAC Address</strong>
+            <ul>
+              <li>Dirección física de la NIC</li>
+              <li>48 bits, asignada por fabricante</li>
+              <li>Opera en capa 2 (enlace)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">🗣 Debate rápido (2 min)</div>
+          <p>Un usuario se queja de que "el internet está lento". ¿Es un problema de <b>ancho de banda</b>, <b>latencia</b> o <b>algo más</b>? ¿Qué preguntas harías para diagnosticarlo?</p>
+        </div>
+      `,
+      rightBadges:{ak:"Clave",av:"Vocabulario",bk:"Sin esto",bv:"No hay diagnóstico"},
+      imgFile:"images/terminos-redes.svg"
+    },
+
+    /* ─── SLIDE 5 · Tipos de red ─── */
+    {
+      kicker:"TIPOS DE RED",
+      title:"Tipos de redes: LAN, WAN, MAN y más",
+      desc:"Las redes se clasifican según su alcance geográfico y propósito. Cada tipo tiene implicaciones técnicas diferentes.",
+      leftBlocksHTML:`
+        <div class="bigcard green">
+          <div class="title">🏠 LAN — Red de Área Local</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Cubre un área pequeña (casa, oficina, piso). Alta velocidad (1 Gbps típico), baja latencia.
+            Se conecta con switches y routers. Tecnología: Ethernet o Wi-Fi.
+          </div>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">🌐 WAN — Red de Área Amplia</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Cubre grandes distancias (países, continentes). Internet es la WAN más grande del mundo.
+            Usa tecnologías como fibra óptica, satélite, MPLS. Más latencia que LAN.
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">🏙 MAN — Red de Área Metropolitana</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Cubre una ciudad o campus universitario. Interconecta varias LAN.
+            Usada por ISPs, universidades, municipalidades.
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <strong>PAN (Personal)</strong>
+            <ul><li>Bluetooth, USB</li><li>Radio: metros</li></ul>
+          </div>
+          <div class="card">
+            <strong>WLAN (Inalámbrica)</strong>
+            <ul><li>Wi-Fi 802.11</li><li>Sin cables físicos</li></ul>
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"La más usada",av:"LAN",bk:"La más grande",bv:"WAN = Internet"},
+      imgFile:"images/tipos-red.svg"
+    },
+
+    /* ─── SLIDE 6 · Topologías ─── */
+    {
+      kicker:"TOPOLOGÍA",
+      title:"Topologías de red",
+      desc:"La topología define cómo están conectados físicamente (o lógicamente) los dispositivos de una red.",
+      leftBlocksHTML:`
+        <div class="grid">
+          <div class="card">
+            <strong>⭐ Estrella</strong>
+            <ul>
+              <li>Todos conectados a un switch central</li>
+              <li>La más común en redes LAN actuales</li>
+              <li>Fallo de nodo no afecta a los demás</li>
+              <li>Punto único de fallo: el switch</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🔵 Bus</strong>
+            <ul>
+              <li>Todos en un cable compartido</li>
+              <li>Antigua (coaxial 10Base2)</li>
+              <li>Fallo del bus = red caída</li>
+              <li>Colisiones frecuentes</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🔄 Anillo</strong>
+            <ul>
+              <li>Datos circulan en loop</li>
+              <li>Token Ring (legacy)</li>
+              <li>Fallo en un nodo = red caída</li>
+              <li>Poco usada hoy en día</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🕸 Malla</strong>
+            <ul>
+              <li>Múltiples rutas entre nodos</li>
+              <li>Alta redundancia y tolerancia</li>
+              <li>Costosa de implementar</li>
+              <li>Usada en WAN críticas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">🗣 Pregunta de debate (3 min)</div>
+          <p>Si tenés que diseñar la red de una clínica con 20 computadoras, ¿qué topología usarías y por qué? ¿Qué pasa si falla el switch central?</p>
+        </div>
+      `,
+      rightBadges:{ak:"Más usada hoy",av:"Estrella",bk:"Más robusta",bv:"Malla"},
+      imgFile:"images/topologias.svg"
+    },
+
+    /* ─── SLIDE 7 · Modelo OSI ─── */
+    {
+      kicker:"MODELO OSI",
+      title:"Modelo OSI — Las 7 capas",
+      desc:"El modelo OSI es el marco de referencia que explica cómo viajan los datos de un punto a otro en una red.",
+      leftBlocksHTML:`
+        <div class="bigcard">
+          <div class="title">¿Por qué importa el modelo OSI en soporte?</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Un técnico usa el modelo OSI para <b>aislar en qué capa está el problema</b>.
+            Si hay conectividad física pero no hay comunicación, el fallo está en capas superiores.
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
+          <div class="bigcard red" style="padding:8px 13px;margin-top:0">
+            <div class="title" style="font-size:12px;margin:0">7 · Aplicación — HTTP, FTP, DNS, SMTP</div>
+          </div>
+          <div class="bigcard" style="padding:8px 13px;margin-top:0;border-color:rgba(217,119,6,.25);background:rgba(217,119,6,.06)">
+            <div class="title" style="font-size:12px;margin:0;color:var(--amber)">6 · Presentación — Cifrado, compresión, SSL/TLS</div>
+          </div>
+          <div class="bigcard" style="padding:8px 13px;margin-top:0;border-color:rgba(217,119,6,.18);background:rgba(217,119,6,.04)">
+            <div class="title" style="font-size:12px;margin:0;color:var(--amber)">5 · Sesión — Control de sesiones, autenticación</div>
+          </div>
+          <div class="bigcard green" style="padding:8px 13px;margin-top:0">
+            <div class="title" style="font-size:12px;margin:0">4 · Transporte — TCP / UDP, puertos, segmentación</div>
+          </div>
+          <div class="bigcard green" style="padding:8px 13px;margin-top:0">
+            <div class="title" style="font-size:12px;margin:0">3 · Red — IP, routers, enrutamiento</div>
+          </div>
+          <div class="bigcard" style="padding:8px 13px;margin-top:0">
+            <div class="title" style="font-size:12px;margin:0">2 · Enlace — MAC, switches, tramas Ethernet</div>
+          </div>
+          <div class="bigcard" style="padding:8px 13px;margin-top:0">
+            <div class="title" style="font-size:12px;margin:0">1 · Física — Cables, señales, bits</div>
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Capas clave",av:"4 (TCP/UDP)",bk:"Inicio diagnóstico",bv:"Capa 1 → arriba"},
+      imgFile:"images/modelo-osi.svg"
+    },
+
+    /* ─── SLIDE 8 · TCP vs UDP ─── */
+    {
+      kicker:"CAPA DE TRANSPORTE",
+      title:"TCP vs UDP — Protocolos de transporte",
+      desc:"TCP y UDP son los dos protocolos principales de la capa 4 (transporte). Cada uno tiene un propósito específico.",
+      leftBlocksHTML:`
+        <div class="grid">
+          <div class="card">
+            <strong>🔒 TCP — Transmission Control Protocol</strong>
+            <ul>
+              <li>Orientado a conexión (3-way handshake)</li>
+              <li>Garantiza entrega de datos</li>
+              <li>Control de flujo y congestión</li>
+              <li>Reenvía paquetes perdidos</li>
+              <li>Más lento, más confiable</li>
+              <li><b>Uso:</b> HTTP, HTTPS, FTP, SSH, correo</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>⚡ UDP — User Datagram Protocol</strong>
+            <ul>
+              <li>Sin conexión (sin handshake)</li>
+              <li>No garantiza entrega</li>
+              <li>Sin control de flujo</li>
+              <li>No reenvía paquetes perdidos</li>
+              <li>Más rápido, menos confiable</li>
+              <li><b>Uso:</b> Streaming, DNS, VoIP, gaming</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">El 3-way handshake de TCP</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.7">
+            <b>SYN</b> → El cliente solicita conexión<br>
+            <b>SYN-ACK</b> → El servidor acepta y confirma<br>
+            <b>ACK</b> → El cliente confirma. Conexión establecida ✓
+          </div>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">🗣 Debate (2 min)</div>
+          <p>¿Por qué YouTube usa TCP para cargar el video pero una videollamada en tiempo real usa UDP? ¿Cuándo preferirías perder un paquete antes que esperar?</p>
+        </div>
+      `,
+      rightBadges:{ak:"TCP usa",av:"Handshake",bk:"UDP prioriza",bv:"Velocidad"},
+      imgFile:"images/tcp-udp.svg"
+    },
+
+    /* ─── SLIDE 9 · Puertos ─── */
+    {
+      kicker:"PUERTOS DE RED",
+      title:"Número de puertos — La dirección dentro del servidor",
+      desc:"Los puertos identifican qué servicio (aplicación) debe recibir el tráfico dentro de un dispositivo.",
+      leftBlocksHTML:`
+        <div class="bigcard">
+          <div class="title">¿Qué es un puerto?</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Un número de puerto (0–65535) es un identificador lógico que indica <b>qué aplicación</b> dentro
+            de un host debe procesar un paquete. La IP llega al dispositivo; el puerto lleva el dato a la aplicación correcta.
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <strong>Puertos bien conocidos (0–1023)</strong>
+            <ul>
+              <li>20/21 — FTP</li>
+              <li>22 — SSH</li>
+              <li>23 — Telnet</li>
+              <li>25 — SMTP (correo saliente)</li>
+              <li>53 — DNS</li>
+              <li>80 — HTTP</li>
+              <li>443 — HTTPS</li>
+              <li>3389 — RDP</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Clasificación</strong>
+            <ul>
+              <li><b>0–1023:</b> Well-known (servicios del sistema)</li>
+              <li><b>1024–49151:</b> Registrados (apps conocidas)</li>
+              <li><b>49152–65535:</b> Dinámicos / efímeros</li>
+            </ul>
+            <br>
+            <strong>Técnica de diagnóstico</strong>
+            <ul>
+              <li>netstat -an (ver puertos activos)</li>
+              <li>telnet IP puerto (probar servicio)</li>
+              <li>nmap (escaneo de puertos)</li>
+            </ul>
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Rango total",av:"0 – 65535",bk:"HTTPS usa",bv:"Puerto 443"},
+      imgFile:"images/puertos.svg"
+    },
+
+    /* ─── SLIDE 10 · Protocolos inalámbricos ─── */
+    {
+      kicker:"WI-FI Y INALÁMBRICO",
+      title:"Protocolos inalámbricos — Estándares 802.11",
+      desc:"El estándar IEEE 802.11 define cómo funcionan las redes Wi-Fi. Cada versión trae mejoras en velocidad y frecuencia.",
+      leftBlocksHTML:`
+        <div class="bigcard">
+          <div class="title">Evolución de Wi-Fi</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.7">
+            Los estándares 802.11 son definidos por el IEEE. Cada versión mejora la velocidad máxima, el alcance
+            y el manejo de múltiples dispositivos simultáneos.
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <strong>Estándar / Wi-Fi</strong>
+            <ul>
+              <li>802.11b (Wi-Fi 1) — 11 Mbps, 2.4 GHz</li>
+              <li>802.11g (Wi-Fi 3) — 54 Mbps, 2.4 GHz</li>
+              <li>802.11n (Wi-Fi 4) — 600 Mbps, dual</li>
+              <li>802.11ac (Wi-Fi 5) — 3.5 Gbps, 5 GHz</li>
+              <li>802.11ax (Wi-Fi 6) — 9.6 Gbps, dual</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>2.4 GHz vs 5 GHz</strong>
+            <ul>
+              <li><b>2.4 GHz:</b> Mayor alcance, más interferencia (microondas, BT), más lenta</li>
+              <li><b>5 GHz:</b> Menor alcance, menos interferencia, mayor velocidad</li>
+              <li><b>Wi-Fi 6E:</b> Agrega banda de 6 GHz</li>
+            </ul>
+          </div>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">🗣 Caso de diagnóstico (2 min)</div>
+          <p>Un usuario se queja de que su Wi-Fi va lento en la cocina. Su laptop está en 5 GHz. ¿Cuál es el problema probable y qué le recomendarías?</p>
+        </div>
+      `,
+      rightBadges:{ak:"Más nuevo",av:"Wi-Fi 6 (ax)",bk:"Banda recomendada",bv:"5 GHz cercano"},
+      imgFile:"images/wifi-estandares.svg"
+    },
+
+    /* ─── SLIDE 11 · Dispositivos de red ─── */
+    {
+      kicker:"DISPOSITIVOS DE RED",
+      title:"Dispositivos de red — Hub, Switch, Router",
+      desc:"Cada dispositivo opera en una capa diferente del modelo OSI y cumple una función específica en la red.",
+      leftBlocksHTML:`
+        <div class="bigcard red">
+          <div class="title">🔆 Hub (Concentrador) — Capa 1</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Reenvía la señal a <b>todos los puertos</b> sin distinción. Sin inteligencia.
+            Genera colisiones. Obsoleto. No se recomienda en redes modernas.
+          </div>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">🔀 Switch (Conmutador) — Capa 2</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Aprende direcciones MAC. Envía tramas solo al puerto correcto.
+            Reduce colisiones. Base de las redes LAN modernas.
+            Puede ser administrable (VLANs, QoS, STP) o no administrable.
+          </div>
+        </div>
+        <div class="bigcard green">
+          <div class="title">🌐 Router (Enrutador) — Capa 3</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Conecta redes diferentes. Usa direcciones IP. Determina la mejor ruta para los paquetes.
+            Contiene tabla de enrutamiento. Separa dominios de broadcast.
+            Permite acceso a Internet (NAT).
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">📡 Access Point (AP)</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Extiende la red alámbrica al espacio inalámbrico. Convierte tráfico Ethernet a Wi-Fi.
+            Diferente al router (el AP no enruta, solo da acceso inalámbrico).
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Switch opera en",av:"Capa 2 (MAC)",bk:"Router opera en",bv:"Capa 3 (IP)"},
+      imgFile:"images/dispositivos-red.svg"
+    },
+
+    /* ─── SLIDE 12 · Dispositivos de seguridad ─── */
+    {
+      kicker:"SEGURIDAD DE RED",
+      title:"Dispositivos de seguridad en redes",
+      desc:"Además de routers y switches, las redes modernas incluyen dispositivos especializados para proteger el tráfico.",
+      leftBlocksHTML:`
+        <div class="grid">
+          <div class="card">
+            <strong>🔥 Firewall</strong>
+            <ul>
+              <li>Filtra tráfico por reglas</li>
+              <li>Puede ser hardware o software</li>
+              <li>Bloquea puertos y protocolos</li>
+              <li>Inspecciona paquetes (stateful)</li>
+              <li>Primera línea de defensa</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🔍 IDS / IPS</strong>
+            <ul>
+              <li>IDS: Detecta intrusiones</li>
+              <li>IPS: Detecta y bloquea</li>
+              <li>Analiza patrones de tráfico</li>
+              <li>Genera alertas y logs</li>
+              <li>Trabaja junto al firewall</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>🔐 VPN Gateway</strong>
+            <ul>
+              <li>Crea túneles cifrados</li>
+              <li>Conecta redes remotas</li>
+              <li>Cifra tráfico en tránsito</li>
+              <li>Protege datos en redes públicas</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>📊 NAT</strong>
+            <ul>
+              <li>Traduce IPs privadas a públicas</li>
+              <li>Oculta estructura interna</li>
+              <li>Permite compartir una IP pública</li>
+              <li>Función común en routers</li>
+            </ul>
+          </div>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">🗣 Debate (3 min)</div>
+          <p>Una empresa solo tiene firewall y cree que está segura. ¿Es eso suficiente? ¿Qué otros dispositivos o medidas completarían la estrategia de seguridad?</p>
+        </div>
+      `,
+      rightBadges:{ak:"Primera defensa",av:"Firewall",bk:"Complemento",bv:"IDS/IPS + VPN"},
+      imgFile:"images/seguridad-red.svg"
+    },
+
+    /* ─── SLIDE 13 · DNS, DHCP, IP ─── */
+    {
+      kicker:"SERVICIOS DE RED",
+      title:"DNS, DHCP y direccionamiento IP",
+      desc:"Estos tres servicios son fundamentales para que una red funcione de forma automática y que los usuarios puedan navegar.",
+      leftBlocksHTML:`
+        <div class="bigcard green">
+          <div class="title">🌐 DNS — Domain Name System</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Traduce nombres de dominio (google.com) a direcciones IP (142.250.x.x).
+            Es la "guía telefónica" de Internet. Puerto 53 UDP/TCP.
+            Si falla: "No se puede resolver el nombre del host".
+          </div>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">⚙️ DHCP — Dynamic Host Configuration Protocol</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Asigna automáticamente IP, máscara, gateway y DNS a los dispositivos de la red.
+            Sin DHCP, cada dispositivo necesita configuración manual.
+            Si falla: el dispositivo obtiene IP 169.254.x.x (APIPA).
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">🔢 Direccionamiento IPv4</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            <b>IP privadas:</b> 192.168.x.x / 10.x.x.x / 172.16–31.x.x (uso interno)<br>
+            <b>IP pública:</b> Asignada por el ISP (única en Internet)<br>
+            <b>Máscara:</b> Define qué parte es red y qué parte es host<br>
+            <b>Gateway:</b> Dirección del router (puerta de salida)
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"DNS puerto",av:"53",bk:"IP sin DHCP",bv:"169.254.x.x"},
+      imgFile:"images/dns-dhcp.svg"
+    },
+
+    /* ─── SLIDE 14 · Pausa activa ─── */
+    {
+      kicker:"PAUSA ACTIVA",
+      title:"Pausa activa — 5 minutos",
+      desc:"Estiramiento, descanso visual, hidratación. Volvemos con la práctica guiada.",
+      leftBlocksHTML:`
+        <div class="bigcard green">
+          <div class="title">✅ Lo que vimos hasta aquí</div>
+          <ul>
+            <li>Definición y componentes de una red</li>
+            <li>Tipos: LAN, WAN, MAN, WLAN</li>
+            <li>Topologías: estrella, bus, malla</li>
+            <li>Modelo OSI — 7 capas</li>
+            <li>TCP vs UDP y puertos</li>
+            <li>Wi-Fi: estándares 802.11</li>
+            <li>Dispositivos: hub, switch, router, AP</li>
+            <li>Seguridad: firewall, IDS/IPS, VPN</li>
+            <li>Servicios: DNS, DHCP, IP</li>
+          </ul>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">⏭ Al volver</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Arrancamos con el <b>Caso Práctico 1</b> en grupos.<br>
+            Asegurate de tener Packet Tracer abierto.
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Duración",av:"5 minutos",bk:"Siguiente",bv:"Caso Práctico 1"},
+      imgFile:"images/pausa.svg"
+    },
+
+    /* ─── SLIDE 15 · Caso práctico — Intro ─── */
+    {
+      kicker:"CASO PRÁCTICO 1",
+      title:"Laboratorio — Diseño de una red básica",
+      desc:"Actividad grupal en Packet Tracer. Aplicamos todo lo visto: tipos de red, dispositivos, direccionamiento y diagnóstico.",
+      leftBlocksHTML:`
+        <div class="labBox">
+          <div class="ltitle">🧪 Herramienta: Cisco Packet Tracer</div>
+          <p>Simulador de redes gratuito de Cisco. Permite diseñar, configurar y probar redes de forma virtual sin equipos físicos.</p>
+        </div>
+        <div class="bigcard">
+          <div class="title">📋 Escenario del caso</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Una pequeña empresa de 3 departamentos necesita conectar sus equipos.
+            Tienen: <b>6 PCs</b>, <b>1 servidor</b>, <b>1 impresora de red</b>, <b>acceso a Internet</b>.
+            El presupuesto es limitado, así que deben elegir los dispositivos mínimos necesarios.
+          </div>
+        </div>
+        <div class="bigcard">
+          <div class="title">🎯 Objetivos del laboratorio</div>
+          <ul>
+            <li>Diseñar la topología adecuada</li>
+            <li>Seleccionar los dispositivos correctos</li>
+            <li>Asignar direccionamiento IP lógico</li>
+            <li>Verificar conectividad con ping</li>
+            <li>Documentar la red diseñada</li>
+          </ul>
+        </div>
+      `,
+      rightBadges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},
+      imgFile:"images/packet-tracer.svg"
+    },
+
+    /* ─── SLIDE 16 · Instrucciones lab ─── */
+    {
+      kicker:"INSTRUCCIONES",
+      title:"Pasos del laboratorio — Caso 1",
+      desc:"Sigan estos pasos en Packet Tracer. Documenten cada decisión con justificación técnica.",
+      leftBlocksHTML:`
+        <div class="bigcard">
+          <div class="title">Paso a paso</div>
+          <ol class="stepList">
+            <li>Abrir Packet Tracer y crear un proyecto nuevo. Nombrar con sus nombres.</li>
+            <li>Arrastrar los dispositivos: 2 switches, 1 router, 6 PCs, 1 servidor, 1 impresora.</li>
+            <li>Conectar los dispositivos usando los cables correctos (¿straight o cross-over?). ¿Por qué?</li>
+            <li>Asignar IPs estáticas a todos los dispositivos. Usar red 192.168.10.0/24.</li>
+            <li>Configurar el gateway en cada PC (IP del router).</li>
+            <li>Verificar conectividad: ping entre PCs de distintos switches.</li>
+            <li>Verificar acceso al servidor: ping desde todas las PCs.</li>
+            <li>Documentar: captura de pantalla + tabla de IPs + topología elegida.</li>
+          </ol>
+        </div>
+        <div class="debateBox">
+          <div class="dtitle">💡 Pregunta guía durante el lab</div>
+          <p>¿Por qué usamos dos switches en lugar de uno? ¿Qué ventaja da eso a la red? ¿Qué pasaría si uno de los switches falla?</p>
+        </div>
+      `,
+      rightBadges:{ak:"Red a usar",av:"192.168.10.0/24",bk:"Verificación",bv:"Ping ✓"},
+      imgFile:"images/lab-instrucciones.svg"
+    },
+
+    /* ─── SLIDE 17 · Tabla de IPs ─── */
+    {
+      kicker:"DIRECCIONAMIENTO",
+      title:"Tabla de direccionamiento sugerida",
+      desc:"Usen esta tabla como guía. Pueden adaptarla según el diseño que elijan para su red.",
+      leftBlocksHTML:`
+        <div class="bigcard">
+          <div class="title">📋 Asignación de IPs — Red 192.168.10.0/24</div>
+          <div style="overflow-x:auto;margin-top:8px">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;color:var(--muted)">
+              <thead>
+                <tr style="background:rgba(11,102,195,.10);color:var(--brand2)">
+                  <th style="padding:7px 10px;text-align:left;border-radius:8px 0 0 8px">Dispositivo</th>
+                  <th style="padding:7px 10px;text-align:left">Dirección IP</th>
+                  <th style="padding:7px 10px;text-align:left">Máscara</th>
+                  <th style="padding:7px 10px;text-align:left;border-radius:0 8px 8px 0">Gateway</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">Router (LAN)</td><td>192.168.10.1</td><td>255.255.255.0</td><td>—</td></tr>
+                <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">Servidor</td><td>192.168.10.2</td><td>255.255.255.0</td><td>192.168.10.1</td></tr>
+                <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">Impresora</td><td>192.168.10.3</td><td>255.255.255.0</td><td>192.168.10.1</td></tr>
+                <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">PC-1 a PC-6</td><td>192.168.10.10–15</td><td>255.255.255.0</td><td>192.168.10.1</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">⚠️ Errores comunes a evitar</div>
+          <ul>
+            <li>IPs duplicadas en la red</li>
+            <li>Gateway incorrecto (debe ser la IP del router)</li>
+            <li>Máscara diferente entre dispositivos</li>
+            <li>Cable equivocado (PC-PC necesita crossover en PT si no hay auto-MDIX)</li>
+          </ul>
+        </div>
+      `,
+      rightBadges:{ak:"Máscara",av:"/24",bk:"IPs útiles",bv:"254 por red"},
+      imgFile:"images/tabla-ips.svg"
+    },
+
+    /* ─── SLIDE 18 · Retroalimentación ─── */
+    {
+      kicker:"RETROALIMENTACIÓN",
+      title:"Revisión del Caso Práctico 1",
+      desc:"Cada grupo comparte su diseño. Analizamos las decisiones técnicas y las posibles mejoras.",
+      leftBlocksHTML:`
+        <div class="bigcard green">
+          <div class="title">✅ ¿Qué revisamos?</div>
+          <ul>
+            <li>¿La topología elegida es la más eficiente?</li>
+            <li>¿Los dispositivos seleccionados son los correctos?</li>
+            <li>¿El direccionamiento IP es coherente?</li>
+            <li>¿El ping entre todos los nodos funciona?</li>
+            <li>¿La documentación es clara y completa?</li>
+          </ul>
+        </div>
+
+        <div class="bigcard">
+          <div class="title">💬 Discusión grupal</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Cada grupo tiene <b>2 minutos</b> para explicar:<br>
+            1) Topología elegida y por qué<br>
+            2) Un problema que encontraron y cómo lo resolvieron<br>
+            3) ¿Qué cambiarían si tuvieran más presupuesto?
+          </div>
+        </div>
+
+        <div class="revealRow">
+          <button class="btn primary" data-reveal="r1">Ver errores frecuentes</button>
+          <button class="btn" data-hide="r1">Ocultar</button>
+        </div>
+        <div class="revealBox" id="r1">
+          Los errores más comunes: IP duplicada, gateway apuntando a sí mismo, cable equivocado entre switch y router,
+          olvidar configurar el servidor, no probar con ping antes de entregar.
+        </div>
+      `,
+      rightBadges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Evidencia técnica"},
+      imgFile:"images/retroalimentacion.svg"
+    },
+
+    /* ─── SLIDE 19 · Proyecto del curso ─── */
+    {
+      kicker:"PROYECTO DEL CURSO",
+      title:"Proyecto grupal — Red empresarial completa",
+      desc:"El proyecto integra todos los temas del curso. Se trabaja a lo largo de las 4 semanas y se presenta en la Semana 4.",
+      leftBlocksHTML:`
+        <div class="grid">
+          <div class="card">
+            <strong>📁 Escenario</strong>
+            <ul>
+              <li>Empresa ficticia con 3 departamentos</li>
+              <li>Usuarios fijos + dispositivos móviles</li>
+              <li>Servidor local + acceso a Internet</li>
+              <li>Necesidades de seguridad básica</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>📋 Entregables</strong>
+            <ul>
+              <li>Red en Packet Tracer (funcional)</li>
+              <li>Gestión de dispositivos móviles en Essentials VD</li>
+              <li>Documentación técnica completa</li>
+              <li>Defensa oral (semana 4)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">📌 Rúbrica de evaluación (55%)</div>
+          <ul>
+            <li>Definición de requerimientos</li>
+            <li>Esbozo y diseño de la red</li>
+            <li>Implementación en Packet Tracer</li>
+            <li>Configuración de dispositivos móviles/portátiles</li>
+            <li>Resolución de problemas demostrada</li>
+            <li>Documentación de la configuración</li>
+          </ul>
+        </div>
+        <div class="bigcard green">
+          <div class="title">⏱ Avance esta semana (9 horas extra clase)</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Definan el escenario y hagan el esbozo inicial de la red. Usen lo aprendido hoy.
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Peso total",av:"55%",bk:"Grupos de",bv:"3–4 estudiantes"},
+      imgFile:"images/proyecto.svg"
+    },
+
+    /* ─── SLIDE 20 · Cierre ─── */
+    {
+      kicker:"CIERRE DE CLASE",
+      title:"Resumen y próxima semana",
+      desc:"Semana 1 completada. Próxima clase: Configuración y mantenimiento de redes.",
+      leftBlocksHTML:`
+        <div class="bigcard green">
+          <div class="title">✅ Lo que aprendimos hoy</div>
+          <ul>
+            <li>Términos clave: ancho de banda, latencia, paquete, protocolo, IP, MAC</li>
+            <li>Tipos de red: LAN, WAN, MAN, WLAN, PAN</li>
+            <li>Topologías: estrella, bus, anillo, malla</li>
+            <li>Modelo OSI y sus 7 capas</li>
+            <li>TCP vs UDP — cuándo usar cada uno</li>
+            <li>Puertos de red más importantes</li>
+            <li>Estándares Wi-Fi 802.11</li>
+            <li>Dispositivos: hub, switch, router, AP, firewall</li>
+            <li>Servicios: DNS, DHCP, direccionamiento IPv4</li>
+          </ul>
+        </div>
+        <div class="bigcard amber">
+          <div class="title">📚 Semana 2 — Tema 2: Configuración y mantenimiento de redes</div>
+          <ul>
+            <li>Conexión de dispositivos a la red</li>
+            <li>Configuración de redes cableadas e inalámbricas</li>
+            <li>Tarjetas de red y dispositivos IoT</li>
+            <li>Configuración de cortafuegos</li>
+            <li>Diagnóstico y solución de problemas</li>
+          </ul>
+        </div>
+        <div class="bigcard">
+          <div class="title">📌 Recordatorio</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+            Avancen 9 horas en el proyecto esta semana. Traigan el esbozo de red para la próxima clase.
+          </div>
+        </div>
+      `,
+      rightBadges:{ak:"Próxima clase",av:"Semana 2",bk:"Avance extra clase",bv:"9 horas"},
+      imgFile:"images/cierre.svg"
+    }
+
+  ]; // fin slides
+
+  /* ─── DOM refs ─── */
+  const elCounter   = document.getElementById("counterTxt");
+  const elKicker    = document.getElementById("kicker");
+  const elTitle     = document.getElementById("title");
+  const elDesc      = document.getElementById("desc");
+  const elLeft      = document.getElementById("leftBlocks");
+  const elRightBot  = document.getElementById("rightBottom");
+  const elImg       = document.getElementById("slideImg");
+  const elPh        = document.getElementById("placeholder");
+  const elProgress  = document.getElementById("progressBar");
+  const prevBtn     = document.getElementById("prevBtn");
+  const nextBtn     = document.getElementById("nextBtn");
+  const topTitle    = document.getElementById("topTitle");
+  const topSub      = document.getElementById("topSub");
+
+  /* ─── Image loader ─── */
+  function setSlideImage(src){
+    if(!src){ elImg.style.display="none"; elPh.style.display="block"; return; }
+    elImg.style.display="none";
+    elPh.style.display="block";
+    elImg.src=src;
+    elImg.onload=()=>{ elImg.style.display="block"; elPh.style.display="none"; };
+    elImg.onerror=()=>{ elImg.style.display="none"; elPh.textContent="Imagen no encontrada: "+src; };
+  }
+
+  /* ─── Badges ─── */
+  function renderBadges(b){
+    elRightBot.innerHTML="";
+    const mk=(label,value)=>{
+      const d=document.createElement("div");
+      d.className="miniCard";
+      d.innerHTML=`<div class="label">${label}</div><div class="value">${value}</div>`;
+      return d;
+    };
+    if(b?.ak) elRightBot.appendChild(mk(b.ak,b.av||""));
+    if(b?.bk) elRightBot.appendChild(mk(b.bk,b.bv||""));
+  }
+
+  /* ─── Reveal buttons ─── */
+  function wireReveal(){
+    document.querySelectorAll("[data-reveal]").forEach(btn=>{
+      btn.onclick=()=>{
+        const el=document.getElementById(btn.dataset.reveal);
+        if(el) el.style.display="block";
+      };
+    });
+    document.querySelectorAll("[data-hide]").forEach(btn=>{
+      btn.onclick=()=>{
+        const el=document.getElementById(btn.dataset.hide);
+        if(el) el.style.display="none";
+      };
+    });
+  }
+
+  /* ─── Render ─── */
+  let idx=0;
+  function render(){
+    const s=slides[idx];
+    elCounter.textContent=`${pad2(idx+1)} / ${pad2(slides.length)}`;
+    elKicker.textContent=s.kicker||"";
+    elTitle.textContent=s.title||"";
+    elDesc.textContent=s.desc||"";
+    topTitle.textContent=s.topTitle||"Fundamentos de Redes y Conectividad";
+    topSub.textContent=s.topSub||"TI-312 · Semana 1 — Soporte Técnico II";
+    elLeft.innerHTML=s.leftBlocksHTML||"";
+    renderBadges(s.rightBadges||null);
+    setSlideImage(s.imgFile||"");
+    elProgress.style.width=(((idx+1)/slides.length)*100)+"%";
+    wireReveal();
+    clearPen();
+    // scroll left to top on slide change
+    document.querySelector(".left").scrollTop=0;
+  }
+
+  function next(){ if(idx<slides.length-1){idx++;render();} }
+  function prev(){ if(idx>0){idx--;render();} }
+
+  nextBtn.addEventListener("click",next);
+  prevBtn.addEventListener("click",prev);
+  window.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"||e.key===" "){ e.preventDefault(); next(); }
+    if(e.key==="ArrowLeft"){ e.preventDefault(); prev(); }
+  });
+
+
+
+  /* ─── PEN / Canvas ─── */
+  const canvas    = document.getElementById("penCanvas");
+  const penToggle = document.getElementById("penToggle");
+  const penClear  = document.getElementById("penClear");
+  const penSize   = document.getElementById("penSize");
+  const penColor  = document.getElementById("penColor");
+
+  let penOn=false, drawing=false, last={x:0,y:0};
+
+  function resizeCanvas(){
+    const deck=document.querySelector(".deck");
+    const r=deck.getBoundingClientRect();
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=Math.floor(r.width*dpr);
+    canvas.height=Math.floor(r.height*dpr);
+    canvas.style.width=r.width+"px";
+    canvas.style.height=r.height+"px";
+    canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener("resize",resizeCanvas);
+
+  function getPos(ev){
+    const r=document.querySelector(".deck").getBoundingClientRect();
+    const src=ev.touches?ev.touches[0]:ev;
+    return {x:src.clientX-r.left, y:src.clientY-r.top};
+  }
+  function drawLine(a,b){
+    const ctx=canvas.getContext("2d");
+    ctx.lineCap="round"; ctx.lineJoin="round";
+    ctx.strokeStyle=penColor.value;
+    ctx.lineWidth=Number(penSize.value);
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+  }
+  function clearPen(){
+    const ctx=canvas.getContext("2d");
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+
+  const deck=document.querySelector(".deck");
+  deck.addEventListener("mousedown",e=>{ if(!penOn)return; drawing=true; last=getPos(e); e.preventDefault(); });
+  deck.addEventListener("mousemove",e=>{ if(!penOn||!drawing)return; const p=getPos(e); drawLine(last,p); last=p; e.preventDefault(); });
+  window.addEventListener("mouseup",()=>{ drawing=false; });
+  deck.addEventListener("touchstart",e=>{ if(!penOn)return; drawing=true; last=getPos(e); e.preventDefault(); },{passive:false});
+  deck.addEventListener("touchmove",e=>{ if(!penOn||!drawing)return; const p=getPos(e); drawLine(last,p); last=p; e.preventDefault(); },{passive:false});
+  window.addEventListener("touchend",()=>{ drawing=false; });
+
+  penToggle.addEventListener("click",()=>{
+    penOn=!penOn;
+    canvas.style.pointerEvents=penOn?"auto":"none";
+    penToggle.classList.toggle("on",penOn);
+    penToggle.textContent=penOn?"✏️ Activo":"✏️ Lápiz";
+  });
+  penClear.addEventListener("click",()=>clearPen());
+
+  /* ─── Init ─── */
+  resizeCanvas();
+  render();
+
+})();
+</script>
+</body>
+</html>
