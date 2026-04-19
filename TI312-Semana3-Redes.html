@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-312 · Semana 3 — Dispositivos Móviles y Portátiles</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    :root{--bg1:#eaf1f8;--bg2:#cfdceb;--stroke:#cfd9e6;--stroke2:#b9c8da;--text:#0f172a;--muted:#50607a;--brand:#0b66c3;--brand2:#0a4f96;--accent:#0ea5e9;--green:#16a34a;--amber:#d97706;--red:#dc2626;--shadow:0 18px 45px rgba(15,23,42,.12);--round:22px;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;color:var(--text);background:radial-gradient(900px 500px at 30% 10%,#fff 0%,rgba(255,255,255,0) 60%),radial-gradient(800px 450px at 75% 65%,#fff 0%,rgba(255,255,255,0) 55%),linear-gradient(160deg,var(--bg1),var(--bg2));min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:16px;}
+    .shell{width:min(1400px,100%);position:relative}
+    .topbar{background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.58));border:1px solid var(--stroke);border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:0}
+    .brand img{height:38px;width:auto;display:block}
+    .brand .txt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+    .brand .txt b{font-size:13px;color:var(--brand2);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand .txt span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topcenter{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0}
+    .counterPill{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);font-weight:800;color:var(--brand2);font-size:13px;white-space:nowrap}
+    .dot{width:9px;height:9px;border-radius:999px;background:var(--brand);box-shadow:0 0 0 4px rgba(11,102,195,.12);flex-shrink:0}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
+    .pill{padding:7px 11px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);color:var(--muted);display:flex;align-items:center;gap:7px;font-size:11px;user-select:none;white-space:nowrap}
+    .pill .miniDot{width:8px;height:8px;border-radius:999px;background:rgba(11,102,195,.9);box-shadow:0 0 0 3px rgba(11,102,195,.10);flex-shrink:0}
+    .btn{appearance:none;border:1px solid var(--stroke2);background:rgba(255,255,255,.78);color:var(--brand2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;transition:.15s;user-select:none;white-space:nowrap;font-family:inherit}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.95);box-shadow:0 4px 12px rgba(15,23,42,.08)}
+    .btn.primary{background:rgba(11,102,195,.10);border-color:rgba(11,102,195,.28)}
+    .btn.danger{color:#7a2230;background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.20)}
+    .btn.on{background:rgba(11,102,195,.18);border-color:rgba(11,102,195,.38)}
+    .deck{margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));border:1px solid var(--stroke);border-radius:var(--round);box-shadow:var(--shadow);padding:14px;position:relative}
+    .slide{background:rgba(255,255,255,.42);border:1px solid var(--stroke);border-radius:20px;padding:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;min-height:610px;position:relative;overflow:hidden}
+    .left{padding:4px 4px 4px 6px;display:flex;flex-direction:column;overflow-y:auto;max-height:610px}
+    .left::-webkit-scrollbar{width:4px}
+    .left::-webkit-scrollbar-thumb{background:var(--stroke2);border-radius:99px}
+    .kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0}
+    .kicker .bar{width:34px;height:9px;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));box-shadow:0 0 0 5px rgba(11,102,195,.08);flex-shrink:0}
+    .kicker span{font-weight:800;letter-spacing:.4px;font-size:11px;color:var(--brand2);text-transform:uppercase}
+    h1{margin:0 0 8px 0;font-size:clamp(26px,3.2vw,42px);letter-spacing:-.6px;line-height:1.06;flex-shrink:0}
+    .desc{margin:0 0 12px 0;color:var(--muted);font-size:14px;line-height:1.55;flex-shrink:0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px}
+    .card{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px}
+    .card strong{display:block;font-size:12.5px;margin-bottom:7px;color:var(--text)}
+    .card ul{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .card li{margin:3px 0}
+    .bigcard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 14px;margin-top:10px}
+    .bigcard:first-child{margin-top:0}
+    .bigcard .title{font-weight:800;color:var(--brand2);margin-bottom:5px;font-size:13px}
+    .bigcard ul{margin:4px 0 0 0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .bigcard li{margin:3px 0}
+    .bigcard.green{border-color:rgba(22,163,74,.25);background:rgba(22,163,74,.06)}
+    .bigcard.green .title{color:var(--green)}
+    .bigcard.amber{border-color:rgba(217,119,6,.25);background:rgba(217,119,6,.06)}
+    .bigcard.amber .title{color:var(--amber)}
+    .bigcard.red{border-color:rgba(220,38,38,.20);background:rgba(220,38,38,.05)}
+    .bigcard.red .title{color:var(--red)}
+    .bigcard.purple{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.04)}
+    .bigcard.purple .title{color:#7c3aed}
+    .right{border-radius:18px;border:1px solid var(--stroke);background:radial-gradient(400px 260px at 70% 15%,rgba(255,255,255,.88),rgba(255,255,255,.0) 65%),linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.16));padding:13px;display:flex;flex-direction:column;gap:11px}
+    .media{background:rgba(255,255,255,.62);border:1px solid var(--stroke);border-radius:16px;padding:10px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:200px}
+    .media img{max-width:100%;max-height:100%;border-radius:12px;display:none;box-shadow:0 16px 38px rgba(15,23,42,.16);object-fit:cover}
+    .media .ph{color:var(--muted);font-size:12px;text-align:center;padding:16px;line-height:1.6}
+    .rightBottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0}
+    .miniCard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px}
+    .miniCard .label{color:var(--muted);font-size:11px;margin-bottom:4px;font-weight:600}
+    .miniCard .value{font-weight:900;font-size:18px;color:var(--text);letter-spacing:-.2px;line-height:1.2}
+    .controls{margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.54));border:1px solid var(--stroke);border-radius:16px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .progressWrap{flex:1;display:flex;align-items:center;gap:10px;padding:0 8px;min-width:0}
+    .progressTrack{height:9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(185,200,218,.7);overflow:hidden;flex:1;min-width:60px}
+    .progressBar{height:100%;width:5%;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));transition:width .35s cubic-bezier(.4,0,.2,1)}
+    .hint{color:var(--muted);font-size:11px;white-space:nowrap;flex-shrink:0}
+    .penCanvas{position:absolute;inset:0;pointer-events:none;z-index:50;border-radius:var(--round)}
+    .select{border:1px solid var(--stroke2);background:rgba(255,255,255,.78);border-radius:999px;padding:7px 10px;font-weight:700;color:var(--brand2);font-size:11px;outline:none;cursor:pointer;font-family:inherit}
+    .timerBadge{display:inline-flex;align-items:center;gap:6px;background:rgba(11,102,195,.10);border:1px solid rgba(11,102,195,.22);border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:700;color:var(--brand2);margin-bottom:8px}
+    .debateBox{background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(11,102,195,.04));border:1px solid rgba(11,102,195,.22);border-left:4px solid var(--brand);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .debateBox .dtitle{font-weight:800;font-size:12.5px;color:var(--brand2);margin-bottom:5px}
+    .debateBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .labBox{background:linear-gradient(135deg,rgba(22,163,74,.07),rgba(22,163,74,.02));border:1px solid rgba(22,163,74,.22);border-left:4px solid var(--green);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .labBox .ltitle{font-weight:800;font-size:12.5px;color:var(--green);margin-bottom:5px}
+    .labBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .warnBox{background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.22);border-left:4px solid var(--red);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .warnBox .wtitle{font-weight:800;font-size:12.5px;color:var(--red);margin-bottom:5px}
+    .warnBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .stepList{counter-reset:step;list-style:none;padding:0;margin:8px 0 0 0}
+    .stepList li{counter-increment:step;display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.55;margin:6px 0}
+    .stepList li::before{content:counter(step);min-width:22px;height:22px;border-radius:999px;background:rgba(11,102,195,.12);color:var(--brand2);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .revealBox{background:rgba(255,255,255,.72);border:1px dashed rgba(11,102,195,.35);border-radius:14px;padding:11px 13px;margin-top:8px;display:none;color:var(--muted);font-size:12.5px;line-height:1.65}
+    code{background:rgba(11,102,195,.08);border:1px solid rgba(11,102,195,.15);border-radius:5px;padding:1px 6px;font-size:11.5px;color:var(--brand2);font-family:monospace}
+    @media(max-width:1100px){.slide{grid-template-columns:1fr;min-height:unset}.right .media{min-height:240px;flex:unset;height:240px}.left{max-height:unset;overflow:visible}.actions .pill{display:none}}
+    @media(max-width:700px){body{padding:10px}.topbar{padding:10px 12px;gap:8px}.brand img{height:30px}.topcenter{justify-content:flex-start;flex:unset}.actions{gap:6px}.select{display:none}h1{font-size:22px}.grid{grid-template-columns:1fr}.slide{padding:12px;gap:12px}.deck{padding:10px}.controls{flex-wrap:wrap;gap:8px}.progressWrap{order:3;width:100%;padding:0}.hint{display:none}}
+    @media(max-width:480px){.rightBottom{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <img src="cenfotec-logo.png" alt="CENFOTEC" onerror="this.style.display='none'"/>
+      <div class="txt"><b>Dispositivos Móviles y Portátiles</b><span>TI-312 · Semana 3 — Soporte Técnico II</span></div>
+    </div>
+    <div class="topcenter"><div class="counterPill"><span class="dot"></span><span id="counterTxt">01 / 15</span></div></div>
+    <div class="actions">
+      <div class="pill"><span class="miniDot"></span><span>Presencial</span></div>
+      <div class="pill"><span class="miniDot" style="background:rgba(22,163,74,.7)"></span><span>Lab: Packet Tracer</span></div>
+      <button class="btn primary" id="penToggle">✏️ Lápiz</button>
+      <button class="btn danger" id="penClear">Borrar</button>
+      <select class="select" id="penSize"><option value="3">Fino</option><option value="5" selected>Medio</option><option value="8">Grueso</option><option value="12">Extra</option></select>
+      <select class="select" id="penColor"><option value="#0b66c3" selected>Azul</option><option value="#0f172a">Negro</option><option value="#dc2626">Rojo</option><option value="#16a34a">Verde</option><option value="#f59e0b">Amarillo</option></select>
+    </div>
+  </div>
+  <div class="deck">
+    <canvas id="penCanvas" class="penCanvas"></canvas>
+    <div class="slide">
+      <div class="left">
+        <div class="kicker"><div class="bar"></div><span id="kicker">CURSO</span></div>
+        <h1 id="title">TI-312 · Semana 3</h1>
+        <p class="desc" id="desc">Dispositivos móviles y portátiles.</p>
+        <div id="leftBlocks"></div>
+      </div>
+      <div class="right">
+        <div class="media"><img id="slideImg" alt=""/><div class="ph" id="ph">Imagen de la slide</div></div>
+        <div class="rightBottom" id="rightBottom"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <button class="btn primary" id="nextBtn">Siguiente →</button>
+      </div>
+      <div class="progressWrap">
+        <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+        <div class="hint">Teclas: ← → / Espacio</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+const p2=n=>String(n).padStart(2,"0");
+const slides=[
+  {k:"SEMANA 3",ti:"Dispositivos Móviles y Portátiles",de:"Componentes de laptop, instalación de hardware, dispositivos móviles especiales y red con Wi-Fi en Packet Tracer.",
+   lb:`<div class="grid"><div class="card"><strong>Datos del curso</strong><ul><li>Código: TI-312</li><li>Semana: 3 de 4</li><li>Modalidad: Presencial</li><li>Req: TI-311</li></ul></div><div class="card"><strong>Docente</strong><ul><li>Ing. Jeremy Alvarado B.</li><li>8573-9967</li><li>jalvarado@ucenfotec.ac.cr</li></ul></div></div><div class="bigcard"><div class="title">Evaluación</div><div style="color:var(--muted);font-size:13px;line-height:1.7">📋 <b>Proyecto grupal:</b> 55% — avance semana 3<br>🧪 <b>Caso Práctico 3:</b> 15% (Packet Tracer con móviles — hoy)</div></div><div class="bigcard"><div class="title">Herramientas de hoy</div><div style="color:var(--muted);font-size:13px;line-height:1.7">Cisco Packet Tracer · Laptop-PT · Smartphone-PT · WRT300N</div></div>`,
+   rb:{ak:"Semana",av:"3 de 4",bk:"Siguiente",bv:"Semana 4 — Final"},img:"images/s3-portada.svg"},
+
+  {k:"AGENDA",ti:"¿Qué hacemos hoy?",de:"Semana 3 · Tema 3: Dispositivos Móviles y Portátiles — 200 minutos.",
+   lb:`<div class="timerBadge">⏱ Clase 3 · ~200 minutos</div><div class="bigcard green"><div class="title">📖 Bloque A — Teoría (80 min)</div><ul><li>Componentes internos de una laptop</li><li>Configuración inalámbrica y de energía</li><li>Instalación y reemplazo de hardware</li><li>Dispositivos móviles especiales y MDM</li></ul></div><div class="bigcard amber"><div class="title">🧪 Bloque B — Caso Práctico 3 (80 min)</div><ul><li>Packet Tracer: agregar Wi-Fi a la red</li><li>Laptop-PT y Smartphone-PT en la red</li><li>Configurar AP WRT300N</li><li>Verificar conectividad completa</li></ul></div><div class="bigcard"><div class="title">💬 Bloque C — Retro + Proyecto (40 min)</div><ul><li>Revisión grupal de resultados</li><li>Avance final del proyecto · preparar defensa</li></ul></div>`,
+   rb:{ak:"Caso Práctico",av:"3 — Hoy",bk:"Extra clase",bv:"10 horas"},img:"images/s3-agenda.svg"},
+
+  {k:"COMPONENTES",ti:"Componentes internos de una laptop",de:"Cada componente en una laptop es más compacto, propietario y delicado que en un desktop.",
+   lb:`<div class="grid"><div class="card"><strong>🧠 CPU</strong><ul><li>Intel Core i5/i7/i9 · AMD Ryzen</li><li>TDP: 15W ultrabook a 45W gaming</li><li>Throttling: baja velocidad por calor</li><li>Integrado en placa — no reemplazable</li></ul></div><div class="card"><strong>💾 RAM SO-DIMM</strong><ul><li>Más pequeña que DIMM de desktop</li><li>DDR4 / DDR5 — no mezclar generaciones</li><li>8 GB mínimo · 16 GB recomendado</li><li>Soldered en ultrabooks: no actualizable</li></ul></div></div><div class="grid"><div class="card"><strong>💿 SSD</strong><ul><li>M.2 NVMe: 3500 MB/s (más rápido)</li><li>M.2 SATA: 550 MB/s</li><li>2.5" SATA: legacy, económico</li><li>eMMC: soldered, no reemplazable</li></ul></div><div class="card"><strong>🖥 Pantalla</strong><ul><li>IPS: colores fieles, ángulos amplios</li><li>TN: respuesta rápida, gaming</li><li>OLED: negro perfecto, alto contraste</li><li>FHD · QHD · 4K · 60–144 Hz</li></ul></div></div><div class="debateBox"><div class="dtitle">🗣 Pregunta</div><p>¿Cuál componente actualizarías primero si la laptop va lenta: RAM o SSD? ¿Depende del caso?</p></div>`,
+   rb:{ak:"Diferencia clave",av:"Propietario",bk:"Herramienta",bv:"Philips 00 + ESD"},img:"images/s3-componentes.svg"},
+
+  {k:"WI-FI Y ENERGÍA",ti:"Config. inalámbrica y gestión de energía",de:"La gestión de energía puede apagar el adaptador Wi-Fi — siempre verificar en diagnóstico.",
+   lb:`<div class="grid"><div class="card"><strong>📡 Adaptador Wi-Fi</strong><ul><li>Integrado (M.2 o soldered)</li><li>802.11ax (Wi-Fi 6) — dual band</li><li>Bluetooth 5.x en la misma tarjeta</li><li>Driver actualizado = funciona bien</li><li>Fn + F2/F8: activa/desactiva</li></ul></div><div class="card"><strong>🔋 Planes de energía</strong><ul><li>Rendimiento: máximo consumo</li><li>Equilibrado: balance CPU/batería</li><li>Ahorro: reduce frecuencia CPU</li><li>Puede desactivar Wi-Fi para ahorrar</li><li>Suspensión S3 vs Hibernación S4</li></ul></div></div><div class="bigcard"><div class="title">Diagnóstico Wi-Fi — paso a paso</div><ol class="stepList"><li>Driver activo en Administrador de dispositivos</li><li>SSID visible — buscar redes disponibles</li><li>Contraseña correcta (WPA2/WPA3)</li><li>IP obtenida — verificar con <code>ipconfig</code></li><li>Ping al gateway: <code>ping 192.168.x.1</code></li></ol></div><div class="warnBox"><div class="wtitle">⚠ Error frecuente</div><p>El plan de ahorro puede suspender el adaptador Wi-Fi. Si desaparece, verificar: Adm. dispositivos → NIC → Propiedades → Administración de energía → No apagar este dispositivo.</p></div>`,
+   rb:{ak:"Plan recomendado",av:"Equilibrado",bk:"Siempre verificar",bv:"ipconfig + ping"},img:"images/s3-config-wifi.svg"},
+
+  {k:"HARDWARE",ti:"Instalación de hardware en laptops",de:"Respetar el orden, usar herramientas correctas y descargar estática antes de tocar.",
+   lb:`<div class="grid"><div class="card"><strong>💾 RAM</strong><ul><li>SO-DIMM: insertar a 45°, empujar hasta clic</li><li>Misma generación DDR obligatoria</li><li>Pulsera ESD siempre</li><li>POST confirma nueva capacidad</li></ul></div><div class="card"><strong>💿 SSD M.2</strong><ul><li>Verificar llave M o B+M antes de comprar</li><li>Un tornillo de sujeción en la ranura</li><li>Clonar disco antes de reemplazar</li><li>BIOS detecta automáticamente</li></ul></div></div><div class="grid"><div class="card"><strong>🔋 Batería</strong><ul><li>Desconectar conector PRIMERO siempre</li><li>Batería hinchada = peligro inmediato</li><li>Mismo voltaje exacto (7.4V o 11.1V)</li><li>300–500 ciclos de vida útil</li></ul></div><div class="card"><strong>🖥 Pantalla</strong><ul><li>Espátula plástica — nunca metálica</li><li>Conector LCD/eDP: insertar recto</li><li>Pixel test completo al terminar</li><li>Resolución y tipo exactos</li></ul></div></div><div class="warnBox"><div class="wtitle">⚠ Regla de oro</div><p>Desconectar la batería antes de tocar cualquier componente interno. Sin excepción.</p></div>`,
+   rb:{ak:"Herramienta clave",av:"Philips 00",bk:"Antes de tocar",bv:"Desconectar bat."},img:"images/s3-hardware.svg"},
+
+  {k:"PROCEDIMIENTO",ti:"Procedimiento de reemplazo seguro",de:"6 pasos en orden. Saltarse uno es la causa más común de daño adicional.",
+   lb:`<div class="bigcard"><div class="title">Los 6 pasos — siempre en este orden</div><ol class="stepList"><li><b>Documentar:</b> fotografiar estado inicial, tornillos y conectores antes de tocar.</li><li><b>Desconectar:</b> apagar → retirar batería → pulsera ESD → descargar estática.</li><li><b>Desensamblar:</b> tornillos en orden, guardarlos separados, espátula plástica.</li><li><b>Reemplazar:</b> instalar componente nuevo respetando orientación y conectores.</li><li><b>Ensamblar:</b> orden inverso exacto. Verificar que todos los conectores estén bien.</li><li><b>Verificar:</b> encender → POST → SO detecta → prueba funcional completa.</li></ol></div><div class="grid"><div class="card"><strong>Herramientas</strong><ul><li>Destornillador Philips 00/000</li><li>Espátula plástica</li><li>Pulsera ESD</li><li>Pinzas de punta fina</li><li>Organizador tornillos</li></ul></div><div class="card"><strong>Errores comunes</strong><ul><li>Sin ESD antes de tocar</li><li>Forzar conectores invertidos</li><li>Perder tornillos</li><li>No fotografiar antes de abrir</li><li>Destornillador incorrecto</li></ul></div></div>`,
+   rb:{ak:"Pasos",av:"6 en orden",bk:"Error #1",bv:"Sin ESD"},img:"images/s3-reemplazo.svg"},
+
+  {k:"DISPOSITIVOS MÓVILES",ti:"Dispositivos móviles especiales",de:"Más allá del smartphone: el ecosistema móvil empresarial requiere soporte especializado.",
+   lb:`<div class="grid"><div class="card"><strong>📱 Smartphone</strong><ul><li>SoC: CPU+GPU+Radio integrado</li><li>ARM: Snapdragon, Dimensity</li><li>iOS · Android · HarmonyOS</li><li>5G · Wi-Fi 6 · BT 5.x · NFC</li></ul></div><div class="card"><strong>📟 Tablet</strong><ul><li>Pantalla > 7 pulgadas</li><li>Teclado externo opcional</li><li>iPadOS · Android · Windows</li><li>Campo, presentaciones, POS</li></ul></div></div><div class="grid"><div class="card"><strong>⌚ Wearables</strong><ul><li>Smartwatch · Fitness band</li><li>watchOS · Wear OS</li><li>Sensores: HR, GPS, SpO2</li><li>Sync vía Bluetooth</li></ul></div><div class="card"><strong>🦺 Ruggerizados</strong><ul><li>MIL-STD-810 · IP67/IP68</li><li>Golpes, polvo, agua</li><li>Zebra · Honeywell · Getac</li><li>Industria y logística</li></ul></div></div><div class="bigcard purple"><div class="title">MDM — Mobile Device Management</div><ul><li>Control remoto y políticas de seguridad</li><li>Borrado remoto (wipe) si se pierde el equipo</li><li>Inventario de activos · App store empresarial</li><li>Herramientas: Intune · Jamf · Google MDM</li></ul></div>`,
+   rb:{ak:"Estándar",av:"MDM",bk:"Wipe remoto",bv:"Si se pierde"},img:"images/s3-moviles.svg"},
+
+  {k:"PAUSA ACTIVA",ti:"Pausa activa — 5 minutos",de:"Estiramiento, hidratación, descanso visual. Abrí Packet Tracer antes de volver.",
+   lb:`<div class="bigcard green"><div class="title">✅ Lo que vimos — Bloque A</div><ul><li>Componentes laptop: CPU, RAM SO-DIMM, SSD M.2, pantalla</li><li>Config. Wi-Fi y gestión de energía en laptops</li><li>Instalación de RAM, SSD, batería y pantalla</li><li>Procedimiento de reemplazo seguro (6 pasos + ESD)</li><li>Dispositivos móviles especiales y MDM empresarial</li></ul></div><div class="bigcard amber"><div class="title">⏭ Al volver</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Caso Práctico 3 en Packet Tracer.<br>Vamos a agregar laptops Wi-Fi y un smartphone a la red de la empresa.</div></div>`,
+   rb:{ak:"Duración",av:"5 minutos",bk:"Herramienta",bv:"Packet Tracer"},img:"images/s3-pausa.svg"},
+
+  {k:"CASO PRÁCTICO 3",ti:"Laboratorio — Red con laptops y móviles",de:"Extendemos la red del CP1/CP2 agregando conectividad Wi-Fi para laptops y smartphones.",
+   lb:`<div class="labBox"><div class="ltitle">🧪 Herramienta: Cisco Packet Tracer</div><p>Laptop-PT, Smartphone-PT y el Wireless Router WRT300N ya están disponibles en PT.</p></div><div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6">TechSol S.A. incorpora empleados con laptops y smartphones. Necesitan acceso Wi-Fi seguro a la red de la empresa y deben poder comunicarse con las PCs cableadas y el servidor.</div></div><div class="bigcard"><div class="title">🎯 Objetivos</div><ul><li>Agregar y configurar el AP WRT300N</li><li>Conectar 2 Laptop-PT por Wi-Fi al AP</li><li>Agregar 1 Smartphone-PT a la red Wi-Fi</li><li>Asignar IPs estáticas a los nuevos dispositivos</li><li>Verificar 4 pings entre redes cableada y Wi-Fi</li></ul></div>`,
+   rb:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},img:"images/s3-lab.svg"},
+
+  {k:"INSTRUCCIONES",ti:"Pasos — Caso Práctico 3",de:"Abrís el .pkt del CP2 y agregás la red Wi-Fi con los dispositivos móviles.",
+   lb:`<div class="bigcard"><div class="title">Paso a paso en Packet Tracer</div><ol class="stepList"><li>Abrir el .pkt del CP2 (o CP1) → guardar como <code>TI312-Semana3-Grupo.pkt</code></li><li>Agregar <b>Wireless Router WRT300N</b> al canvas → conectarlo al Switch principal con Straight-Through</li><li>Configurar el AP: doble clic → GUI → SSID: <code>TechSol-WiFi</code> · Canal: 6 · WPA2 · Clave: <code>Soporte2024</code></li><li>Agregar 2 <b>Laptop-PT</b> → Config → Wireless0 → SSID: TechSol-WiFi → conectar</li><li>Agregar 1 <b>Smartphone-PT</b> → Config → Wireless0 → misma red Wi-Fi</li><li>IPs estáticas: Laptop1: <code>192.168.30.10</code> · Laptop2: <code>192.168.30.11</code> · Phone: <code>192.168.30.20</code> · GW: <code>192.168.30.1</code></li><li>Verificar: ping Laptop1 → PC0 cableada · ping Phone → Server0</li><li>Documentar: captura topología + tabla IPs actualizada + 4 pings</li></ol></div><div class="debateBox"><div class="dtitle">💡 Pregunta durante el lab</div><p>¿Por qué conviene poner los smartphones en una VLAN separada de las PCs de trabajo? ¿Cómo lo harías en Packet Tracer?</p></div>`,
+   rb:{ak:"Red Wi-Fi",av:"192.168.30.0/24",bk:"AP",bv:"WRT300N"},img:"images/s3-instrucciones.svg"},
+
+  {k:"CONFIG AP",ti:"Configurar el WRT300N en Packet Tracer",de:"El AP se configura por su interfaz GUI dentro de PT — más sencillo que el CLI del router.",
+   lb:`<div class="bigcard"><div class="title">Configuración del AP — GUI</div><ol class="stepList"><li>Doble clic en WRT300N → pestaña <b>GUI</b></li><li>Setup → Network Setup → IP del AP: <code>192.168.30.1</code></li><li>Wireless → Basic Settings → SSID: <code>TechSol-WiFi</code> · Canal: 6</li><li>Wireless Security → WPA2 Personal → Passphrase: <code>Soporte2024</code></li><li>Save Settings → aplicar cambios</li></ol></div><div class="bigcard amber"><div class="title">Conectar Laptop-PT al Wi-Fi</div><ol class="stepList"><li>Doble clic en Laptop-PT → Config → Wireless0</li><li>SSID: <code>TechSol-WiFi</code> · Authentication: WPA2-PSK</li><li>PSK Pass Phrase: <code>Soporte2024</code></li><li>Verificar LED verde = conectado al AP</li><li>Desktop → IP Configuration → Static → ingresar IP, máscara y gateway</li></ol></div><div class="bigcard green"><div class="title">Pings requeridos</div><ul><li>Laptop1 → PC0 cableada (entre redes)</li><li>Laptop1 → Server0 (acceso al servidor)</li><li>Phone → PC0 (smartphone a red cableada)</li><li>Phone → Laptop1 (entre dispositivos Wi-Fi)</li></ul></div>`,
+   rb:{ak:"IP del AP",av:"192.168.30.1",bk:"Canal AP",bv:"6 (libre)"},img:"images/s3-config-ap.svg"},
+
+  {k:"MANTENIMIENTO",ti:"Mantenimiento programado",de:"El mantenimiento preventivo evita el 70% de las fallas. Un técnico proactivo vale más.",
+   lb:`<div class="bigcard"><div class="title">Frecuencias de mantenimiento</div><div class="grid" style="margin-top:8px"><div class="card"><strong style="color:var(--brand)">Diario</strong><ul><li>Revisar % batería</li><li>Cerrar apps innecesarias</li><li>Backup activo</li></ul></div><div class="card"><strong style="color:var(--green)">Semanal</strong><ul><li>Actualizar apps</li><li>Limpiar descargas</li><li>Reinicio completo</li></ul></div></div><div class="grid" style="margin-top:8px"><div class="card"><strong style="color:var(--amber)">Mensual</strong><ul><li>Actualizar SO</li><li>Escaneo antivirus</li><li>Revisar espacio</li></ul></div><div class="card"><strong style="color:var(--red)">Anual</strong><ul><li>Limpieza física</li><li>Cambiar pasta térmica</li><li>Calibrar batería</li></ul></div></div></div><div class="bigcard amber"><div class="title">Problemas comunes</div><ul><li>Sobrecalentamiento → limpiar ventilador / cambiar pasta térmica</li><li>Batería no carga → calibrar o reemplazar</li><li>Wi-Fi desconecta → actualizar driver / cambiar canal AP</li><li>App falla → limpiar caché / reinstalar</li><li>Lento → inicio limpio / RAM insuficiente</li></ul></div>`,
+   rb:{ak:"Prev. de fallas",av:"70%",bk:"Calibrar bat.",bv:"1× al mes"},img:"images/s3-mantenimiento.svg"},
+
+  {k:"RETROALIMENTACIÓN",ti:"Revisión del Caso Práctico 3",de:"Cada grupo comparte su topología y los resultados de los pings.",
+   lb:`<div class="bigcard green"><div class="title">✅ ¿Qué revisamos?</div><ul><li>¿El AP WRT300N está configurado correctamente?</li><li>¿Las laptops se conectaron al SSID?</li><li>¿El smartphone tiene IP válida?</li><li>¿Los 4 pings entre redes son exitosos?</li><li>¿La topología está documentada?</li></ul></div><div class="bigcard"><div class="title">💬 Discusión — 2 min por equipo</div><div style="color:var(--muted);font-size:13px;line-height:1.6">1) ¿Pusieron los móviles en VLAN separada?<br>2) ¿Qué pasa si dos APs usan el mismo canal?<br>3) ¿Cómo ampliarían la red Wi-Fi si hubiera 3 pisos?</div></div><div id="rv1w"><button class="btn primary" onclick="document.getElementById('rv1').style.display='block'">Ver errores frecuentes</button></div><div class="revealBox" id="rv1">SSID con espacio al final · Gateway incorrecto en Laptop-PT (debe ser .30.1 no .30.254) · Laptop sin módulo Wireless (usar Laptop-PT, no PC-PT) · Canal del AP en conflicto con el AP del CP2</div>`,
+   rb:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Pings exitosos"},img:"images/s3-retro.svg"},
+
+  {k:"PROYECTO DEL CURSO",ti:"Avance del proyecto — Semana 3",de:"Última semana de avance. La Semana 4 es la defensa oral final.",
+   lb:`<div class="grid"><div class="card"><strong>📁 Esta semana agregan</strong><ul><li>AP inalámbrico configurado</li><li>Laptops y smartphones en la red</li><li>IPs asignadas y documentadas</li><li>Pings verificados entre redes</li><li>Topología y tabla IPs actualizadas</li></ul></div><div class="card"><strong style="color:var(--red)">⚠ Semana 4 = Defensa</strong><ul><li>Red completa en Packet Tracer</li><li>Documentación técnica lista</li><li>Defensa oral: 10–15 minutos</li><li>Responder preguntas técnicas</li><li>Proyecto 100% completado</li></ul></div></div><div class="bigcard amber"><div class="title">⏱ Extra clase esta semana (10 horas)</div><ul><li>Completar toda la red incluyendo Wi-Fi y móviles</li><li>Actualizar diagrama de red y tabla de IPs</li><li>Preparar presentación oral (practicar en grupo)</li><li>Revisar todos los entregables de las 3 semanas</li><li>Traer proyecto COMPLETO a la Semana 4</li></ul></div><div class="warnBox"><div class="wtitle">⚠ Rúbrica final — 60 pts = 55%</div><p>6 criterios × 10 pts: Requerimientos · Diseño · Implementación PT · Config. móviles · Resolución problemas · Documentación.</p></div>`,
+   rb:{ak:"Peso proyecto",av:"55%",bk:"Extra clase",bv:"10 horas"},img:"images/s3-proyecto.svg"},
+
+  {k:"CIERRE DE CLASE",ti:"Resumen y próxima semana",de:"Semana 3 completada. Semana 4 es la defensa final — proyecto completo.",
+   lb:`<div class="bigcard green"><div class="title">✅ Lo que aprendimos hoy</div><ul><li>Componentes laptop: CPU, RAM SO-DIMM, SSD M.2, pantalla, batería</li><li>Config. Wi-Fi y gestión de energía en portátiles</li><li>Instalación de hardware con procedimiento ESD (6 pasos)</li><li>Dispositivos móviles especiales y MDM empresarial</li><li>Mantenimiento preventivo programado</li><li>Caso Práctico 3: red con AP + Laptop-PT + Smartphone-PT en PT</li><li>Configuración WRT300N y verificación con pings</li></ul></div><div class="bigcard red"><div class="title">🎯 Semana 4 — Defensa Final del Proyecto</div><ul><li>Presentar red completa funcional en Packet Tracer</li><li>Demostrar toda la configuración implementada</li><li>Responder preguntas técnicas del docente</li><li>Entregar documentación técnica completa</li><li>10–15 minutos por grupo</li></ul></div>`,
+   rb:{ak:"Próxima clase",av:"Defensa Final",bk:"Proyecto",bv:"100% listo"},img:"images/s3-cierre.svg"},
+];
+
+const TOTAL=slides.length;
+const $=id=>document.getElementById(id);
+function load(i){
+  const s=slides[i];
+  $("counterTxt").textContent=`${p2(i+1)} / ${p2(TOTAL)}`;
+  $("kicker").textContent=s.k||"";
+  document.querySelector("h1").textContent=s.ti||"";
+  document.querySelector(".desc").textContent=s.de||"";
+  $("leftBlocks").innerHTML=s.lb||"";
+  const rb=$("rightBottom");rb.innerHTML="";
+  if(s.rb){const mk=(l,v)=>{const d=document.createElement("div");d.className="miniCard";d.innerHTML=`<div class="label">${l}</div><div class="value">${v}</div>`;return d};if(s.rb.ak)rb.appendChild(mk(s.rb.ak,s.rb.av||""));if(s.rb.bk)rb.appendChild(mk(s.rb.bk,s.rb.bv||""));}
+  const img=$("slideImg"),ph=$("ph");
+  if(s.img){img.style.display="none";ph.style.display="block";img.src=s.img;img.onload=()=>{img.style.display="block";ph.style.display="none"};img.onerror=()=>{img.style.display="none";ph.textContent="Imagen no encontrada"};}
+  else{img.style.display="none";ph.style.display="block";}
+  $("progressBar").style.width=(((i+1)/TOTAL)*100)+"%";
+  document.querySelector(".left").scrollTop=0;clearPen();
+}
+let idx=0;
+function next(){if(idx<TOTAL-1){idx++;load(idx)}}
+function prev(){if(idx>0){idx--;load(idx)}}
+$("nextBtn").addEventListener("click",next);$("prevBtn").addEventListener("click",prev);
+window.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();next()}if(e.key==="ArrowLeft"){e.preventDefault();prev()}});
+const canvas=$("penCanvas"),deck=document.querySelector(".deck");
+let penOn=false,drawing=false,last={x:0,y:0};
+function resize(){const r=deck.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.floor(r.width*dpr);canvas.height=Math.floor(r.height*dpr);canvas.style.width=r.width+"px";canvas.style.height=r.height+"px";canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0)}
+window.addEventListener("resize",resize);
+function pos(ev){const r=deck.getBoundingClientRect(),src=ev.touches?ev.touches[0]:ev;return{x:src.clientX-r.left,y:src.clientY-r.top}}
+function draw(a,b){const ctx=canvas.getContext("2d");ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=$("penColor").value;ctx.lineWidth=Number($("penSize").value);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+function clearPen(){canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height)}
+deck.addEventListener("mousedown",e=>{if(!penOn)return;drawing=true;last=pos(e);e.preventDefault()});
+deck.addEventListener("mousemove",e=>{if(!penOn||!drawing)return;const p=pos(e);draw(last,p);last=p;e.preventDefault()});
+window.addEventListener("mouseup",()=>drawing=false);
+deck.addEventListener("touchstart",e=>{if(!penOn)return;drawing=true;last=pos(e);e.preventDefault()},{passive:false});
+deck.addEventListener("touchmove",e=>{if(!penOn||!drawing)return;const p=pos(e);draw(last,p);last=p;e.preventDefault()},{passive:false});
+window.addEventListener("touchend",()=>drawing=false);
+$("penToggle").addEventListener("click",()=>{penOn=!penOn;canvas.style.pointerEvents=penOn?"auto":"none";$("penToggle").classList.toggle("on",penOn);$("penToggle").textContent=penOn?"✏️ Activo":"✏️ Lápiz"});
+$("penClear").addEventListener("click",clearPen);
+resize();load(0);
+})();
+</script>
+</body>
+</html>

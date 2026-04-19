@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-312 · Semana 4 — Defensa Final del Proyecto</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    :root{--bg1:#eaf1f8;--bg2:#cfdceb;--stroke:#cfd9e6;--stroke2:#b9c8da;--text:#0f172a;--muted:#50607a;--brand:#0b66c3;--brand2:#0a4f96;--accent:#0ea5e9;--green:#16a34a;--amber:#d97706;--red:#dc2626;--shadow:0 18px 45px rgba(15,23,42,.12);--round:22px;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;color:var(--text);background:radial-gradient(900px 500px at 30% 10%,#fff 0%,rgba(255,255,255,0) 60%),radial-gradient(800px 450px at 75% 65%,#fff 0%,rgba(255,255,255,0) 55%),linear-gradient(160deg,var(--bg1),var(--bg2));min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:16px;}
+    .shell{width:min(1400px,100%);position:relative}
+    .topbar{background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.58));border:1px solid var(--stroke);border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:0}
+    .brand img{height:38px;width:auto;display:block}
+    .brand .txt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+    .brand .txt b{font-size:13px;color:var(--brand2);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand .txt span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topcenter{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0}
+    .counterPill{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);font-weight:800;color:var(--brand2);font-size:13px;white-space:nowrap}
+    .dot{width:9px;height:9px;border-radius:999px;background:var(--red);box-shadow:0 0 0 4px rgba(220,38,38,.15);flex-shrink:0}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
+    .pill{padding:7px 11px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);color:var(--muted);display:flex;align-items:center;gap:7px;font-size:11px;user-select:none;white-space:nowrap}
+    .pill .miniDot{width:8px;height:8px;border-radius:999px;background:rgba(220,38,38,.9);box-shadow:0 0 0 3px rgba(220,38,38,.12);flex-shrink:0}
+    .btn{appearance:none;border:1px solid var(--stroke2);background:rgba(255,255,255,.78);color:var(--brand2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;transition:.15s;user-select:none;white-space:nowrap;font-family:inherit}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.95);box-shadow:0 4px 12px rgba(15,23,42,.08)}
+    .btn.primary{background:rgba(220,38,38,.10);border-color:rgba(220,38,38,.28);color:var(--red)}
+    .btn.danger{color:#7a2230;background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.20)}
+    .btn.on{background:rgba(11,102,195,.18);border-color:rgba(11,102,195,.38);color:var(--brand2)}
+    .deck{margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));border:1px solid var(--stroke);border-radius:var(--round);box-shadow:var(--shadow);padding:14px;position:relative}
+    .slide{background:rgba(255,255,255,.42);border:1px solid var(--stroke);border-radius:20px;padding:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;min-height:610px;position:relative;overflow:hidden}
+    .left{padding:4px 4px 4px 6px;display:flex;flex-direction:column;overflow-y:auto;max-height:610px}
+    .left::-webkit-scrollbar{width:4px}
+    .left::-webkit-scrollbar-thumb{background:var(--stroke2);border-radius:99px}
+    .kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0}
+    .kicker .bar{width:34px;height:9px;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--amber));box-shadow:0 0 0 5px rgba(220,38,38,.08);flex-shrink:0}
+    .kicker span{font-weight:800;letter-spacing:.4px;font-size:11px;color:var(--red);text-transform:uppercase}
+    h1{margin:0 0 8px 0;font-size:clamp(26px,3.2vw,42px);letter-spacing:-.6px;line-height:1.06;flex-shrink:0}
+    .desc{margin:0 0 12px 0;color:var(--muted);font-size:14px;line-height:1.55;flex-shrink:0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px}
+    .card{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px}
+    .card strong{display:block;font-size:12.5px;margin-bottom:7px;color:var(--text)}
+    .card ul{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .card li{margin:3px 0}
+    .bigcard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 14px;margin-top:10px}
+    .bigcard:first-child{margin-top:0}
+    .bigcard .title{font-weight:800;color:var(--brand2);margin-bottom:5px;font-size:13px}
+    .bigcard ul{margin:4px 0 0 0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .bigcard li{margin:3px 0}
+    .bigcard.green{border-color:rgba(22,163,74,.25);background:rgba(22,163,74,.06)}
+    .bigcard.green .title{color:var(--green)}
+    .bigcard.amber{border-color:rgba(217,119,6,.25);background:rgba(217,119,6,.06)}
+    .bigcard.amber .title{color:var(--amber)}
+    .bigcard.red{border-color:rgba(220,38,38,.20);background:rgba(220,38,38,.05)}
+    .bigcard.red .title{color:var(--red)}
+    .bigcard.purple{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.04)}
+    .bigcard.purple .title{color:#7c3aed}
+    .right{border-radius:18px;border:1px solid var(--stroke);background:radial-gradient(400px 260px at 70% 15%,rgba(255,255,255,.88),rgba(255,255,255,.0) 65%),linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.16));padding:13px;display:flex;flex-direction:column;gap:11px}
+    .media{background:rgba(255,255,255,.62);border:1px solid var(--stroke);border-radius:16px;padding:10px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:200px}
+    .media img{max-width:100%;max-height:100%;border-radius:12px;display:none;box-shadow:0 16px 38px rgba(15,23,42,.16);object-fit:cover}
+    .media .ph{color:var(--muted);font-size:12px;text-align:center;padding:16px;line-height:1.6}
+    .rightBottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0}
+    .miniCard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px}
+    .miniCard .label{color:var(--muted);font-size:11px;margin-bottom:4px;font-weight:600}
+    .miniCard .value{font-weight:900;font-size:18px;color:var(--text);letter-spacing:-.2px;line-height:1.2}
+    .controls{margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.54));border:1px solid var(--stroke);border-radius:16px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .progressWrap{flex:1;display:flex;align-items:center;gap:10px;padding:0 8px;min-width:0}
+    .progressTrack{height:9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(185,200,218,.7);overflow:hidden;flex:1;min-width:60px}
+    .progressBar{height:100%;width:5%;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--amber));transition:width .35s cubic-bezier(.4,0,.2,1)}
+    .hint{color:var(--muted);font-size:11px;white-space:nowrap;flex-shrink:0}
+    .penCanvas{position:absolute;inset:0;pointer-events:none;z-index:50;border-radius:var(--round)}
+    .select{border:1px solid var(--stroke2);background:rgba(255,255,255,.78);border-radius:999px;padding:7px 10px;font-weight:700;color:var(--brand2);font-size:11px;outline:none;cursor:pointer;font-family:inherit}
+    .timerBadge{display:inline-flex;align-items:center;gap:6px;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.22);border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:700;color:var(--red);margin-bottom:8px}
+    .defenseBadge{display:inline-flex;align-items:center;gap:6px;background:rgba(220,38,38,.10);border:2px solid rgba(220,38,38,.35);border-radius:999px;padding:8px 18px;font-size:13px;font-weight:800;color:var(--red);margin-bottom:12px}
+    .debateBox{background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(11,102,195,.04));border:1px solid rgba(11,102,195,.22);border-left:4px solid var(--brand);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .debateBox .dtitle{font-weight:800;font-size:12.5px;color:var(--brand2);margin-bottom:5px}
+    .debateBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .warnBox{background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.22);border-left:4px solid var(--red);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .warnBox .wtitle{font-weight:800;font-size:12.5px;color:var(--red);margin-bottom:5px}
+    .warnBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .stepList{counter-reset:step;list-style:none;padding:0;margin:8px 0 0 0}
+    .stepList li{counter-increment:step;display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.55;margin:6px 0}
+    .stepList li::before{content:counter(step);min-width:22px;height:22px;border-radius:999px;background:rgba(220,38,38,.12);color:var(--red);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .rubrRow{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+    .rubrNum{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:20px;color:var(--brand2);min-width:28px}
+    .rubrText{flex:1;font-size:12px;color:var(--muted)}
+    .rubrText b{color:var(--text);display:block;margin-bottom:2px}
+    .rubrPts{font-weight:900;font-size:13px;color:var(--brand);white-space:nowrap}
+    code{background:rgba(11,102,195,.08);border:1px solid rgba(11,102,195,.15);border-radius:5px;padding:1px 6px;font-size:11.5px;color:var(--brand2);font-family:monospace}
+    @media(max-width:1100px){.slide{grid-template-columns:1fr;min-height:unset}.right .media{min-height:240px;flex:unset;height:240px}.left{max-height:unset;overflow:visible}.actions .pill{display:none}}
+    @media(max-width:700px){body{padding:10px}.topbar{padding:10px 12px;gap:8px}.brand img{height:30px}.topcenter{justify-content:flex-start;flex:unset}.actions{gap:6px}.select{display:none}h1{font-size:22px}.grid{grid-template-columns:1fr}.slide{padding:12px;gap:12px}.deck{padding:10px}.controls{flex-wrap:wrap;gap:8px}.progressWrap{order:3;width:100%;padding:0}.hint{display:none}}
+    @media(max-width:480px){.rightBottom{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <img src="cenfotec-logo.png" alt="CENFOTEC" onerror="this.style.display='none'"/>
+      <div class="txt"><b>Defensa Final del Proyecto</b><span>TI-312 · Semana 4 — Soporte Técnico II</span></div>
+    </div>
+    <div class="topcenter"><div class="counterPill"><span class="dot"></span><span id="counterTxt">01 / 10</span></div></div>
+    <div class="actions">
+      <div class="pill"><span class="miniDot"></span><span>Clase Final</span></div>
+      <div class="pill"><span class="miniDot" style="background:rgba(22,163,74,.7)"></span><span>Proyecto: 55%</span></div>
+      <button class="btn primary" id="penToggle">✏️ Lápiz</button>
+      <button class="btn danger" id="penClear">Borrar</button>
+      <select class="select" id="penSize"><option value="3">Fino</option><option value="5" selected>Medio</option><option value="8">Grueso</option><option value="12">Extra</option></select>
+      <select class="select" id="penColor"><option value="#dc2626" selected>Rojo</option><option value="#0b66c3">Azul</option><option value="#0f172a">Negro</option><option value="#16a34a">Verde</option><option value="#f59e0b">Amarillo</option></select>
+    </div>
+  </div>
+  <div class="deck">
+    <canvas id="penCanvas" class="penCanvas"></canvas>
+    <div class="slide">
+      <div class="left">
+        <div class="kicker"><div class="bar"></div><span id="kicker">FINAL</span></div>
+        <h1 id="title">TI-312 · Semana 4</h1>
+        <p class="desc" id="desc">Defensa Final del Proyecto.</p>
+        <div id="leftBlocks"></div>
+      </div>
+      <div class="right">
+        <div class="media"><img id="slideImg" alt=""/><div class="ph" id="ph">Imagen de la slide</div></div>
+        <div class="rightBottom" id="rightBottom"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <button class="btn primary" id="nextBtn">Siguiente →</button>
+      </div>
+      <div class="progressWrap">
+        <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+        <div class="hint">Teclas: ← → / Espacio</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+const p2=n=>String(n).padStart(2,"0");
+const slides=[
+
+  // 1 PORTADA
+  {k:"SEMANA 4 — FINAL",ti:"Defensa Final del Proyecto",
+   de:"Última clase del curso. Teoría de cierre (30 min) + Defensa oral del proyecto grupal (170 min).",
+   lb:`<div class="defenseBadge">🎯 Clase Final — TI-312</div>
+   <div class="grid">
+     <div class="card"><strong>Datos del curso</strong><ul><li>Código: TI-312</li><li>Semana: 4 de 4</li><li>Modalidad: Presencial</li><li>Req: TI-311</li></ul></div>
+     <div class="card"><strong>Docente</strong><ul><li>Ing. Jeremy Alvarado B.</li><li>8573-9967</li><li>jalvarado@ucenfotec.ac.cr</li></ul></div>
+   </div>
+   <div class="bigcard red"><div class="title">Proyecto Final — 55% de la nota</div><ul><li>Red empresarial completa en Packet Tracer</li><li>Defensa oral: 10–15 minutos por grupo</li><li>Rúbrica: 6 criterios × 10 pts = 60 puntos</li><li>Entregables: .pkt + tabla IPs + documentación</li></ul></div>
+   <div class="bigcard"><div class="title">Estructura de hoy</div><ul><li>00:00 → 00:30 — Teoría de cierre (conectividad móvil + diagnóstico)</li><li>00:30 → 03:20 — Defensa oral por grupos</li></ul></div>`,
+   rb:{ak:"Semana",av:"4 / 4 — Final",bk:"Proyecto",bv:"55% nota"},img:"images/s4-portada.svg"},
+
+  // 2 AGENDA
+  {k:"AGENDA",ti:"Estructura de la clase final",
+   de:"30 minutos de teoría de cierre y 170 minutos para la defensa de todos los grupos.",
+   lb:`<div class="timerBadge">⏱ 200 minutos — clase final</div>
+   <div class="bigcard"><div class="title">📖 Bloque A — Teoría de cierre (30 min)</div><ul><li>Conectividad móvil y Bluetooth</li><li>Diagnóstico integrado — resumen del curso</li><li>Lo que debe saber un técnico de soporte al salir</li></ul></div>
+   <div class="bigcard red"><div class="title">🎯 Bloque B + C — Defensa del Proyecto (170 min)</div><ul><li>Sorteo del orden de presentación</li><li>10–15 minutos por grupo</li><li>Red en vivo + preguntas técnicas del docente</li><li>Entrega de documentación al terminar</li></ul></div>
+   <div class="warnBox"><div class="wtitle">⚠ Antes de empezar</div><p>Cada grupo debe tener el archivo .pkt abierto y funcionando antes de que le toque. Si el proyecto no abre o los pings fallan en vivo, resta puntos directamente.</p></div>`,
+   rb:{ak:"Teoría",av:"30 minutos",bk:"Defensa",bv:"170 minutos"},img:"images/s4-agenda.svg"},
+
+  // 3 CONECTIVIDAD MOVIL
+  {k:"TEORÍA DE CIERRE",ti:"Conectividad móvil y Bluetooth",
+   de:"Último tema técnico del curso — repaso de conectividad inalámbrica avanzada en dispositivos móviles.",
+   lb:`<div class="timerBadge">⏱ 15 minutos — Slides 3 y 4</div>
+   <div class="grid">
+     <div class="card"><strong>📶 Bluetooth 5.x</strong><ul><li>Rango hasta 100m (clase 1)</li><li>Emparejar: PIN o toque NFC</li><li>A2DP: audio · HFP: llamadas · PAN: red IP</li><li>BLE (Low Energy): wearables e IoT</li><li>Interferencia con Wi-Fi 2.4 GHz</li></ul></div>
+     <div class="card"><strong>📡 4G LTE / 5G</strong><ul><li>4G LTE: hasta 100 Mbps real</li><li>5G sub-6GHz: cobertura amplia</li><li>5G mmWave: velocidad extrema, corto alcance</li><li>SIM / eSIM: identificación del abonado</li><li>APN: punto de acceso a la red móvil</li></ul></div>
+   </div>
+   <div class="bigcard"><div class="title">NFC — Near Field Communication</div><div style="color:var(--muted);font-size:13px;line-height:1.65">Rango máximo: 4 cm · Uso: pago móvil, control de acceso, emparejamiento Bluetooth rápido. Desactivar NFC en entornos de alta seguridad — riesgo de skimming sin contacto.</div></div>
+   <div class="debateBox"><div class="dtitle">🗣 Pregunta rápida</div><p>Un empleado dice que su Bluetooth "funciona raro" cuando está cerca del punto de acceso Wi-Fi. ¿Cuál es la causa probable y cómo lo solucionarías?</p></div>`,
+   rb:{ak:"Bluetooth",av:"5.x — 100m",bk:"NFC rango",bv:"4 cm máx."},img:"images/s4-conectividad.svg"},
+
+  // 4 DIAGNOSTICO
+  {k:"DIAGNÓSTICO FINAL",ti:"Diagnóstico integrado — resumen del curso",
+   de:"Todo lo que vimos en 4 semanas condensado en una sola metodología de diagnóstico.",
+   lb:`<div class="timerBadge">⏱ 15 minutos — Slide 4</div>
+   <div class="bigcard green"><div class="title">La regla que deben llevar siempre</div><div style="color:var(--muted);font-size:13px;line-height:1.7"><b>Cable → LED → IP → Ping → Servicio</b><br>Diagnosticá siempre de Capa 1 hacia arriba. Nunca saltes capas.</div></div>
+   <div class="grid">
+     <div class="card"><strong>Capa 1 — Física</strong><ul><li>¿Hay cable? ¿LED encendido?</li><li>Fix: cambiar cable, limpiar puerto</li></ul></div>
+     <div class="card"><strong>Capa 2 — Enlace</strong><ul><li>¿El switch ve la MAC?</li><li>Fix: <code>show mac-address-table</code></li></ul></div>
+   </div>
+   <div class="grid">
+     <div class="card"><strong>Capa 3 — Red</strong><ul><li>¿IP, máscara, gateway correctos?</li><li>Fix: <code>ipconfig</code> · ping al gateway</li></ul></div>
+     <div class="card"><strong>Capa 7 — Aplicación</strong><ul><li>¿El servicio responde?</li><li>Fix: <code>nslookup</code> · <code>telnet IP 80</code></li></ul></div>
+   </div>
+   <div class="bigcard amber"><div class="title">Lo que debe saber un técnico de soporte al salir de este curso</div><ul><li>Diseñar y conectar una red LAN con múltiples segmentos</li><li>Configurar router, switches y AP inalámbrico</li><li>Diagnosticar fallos de red capa por capa</li><li>Reemplazar hardware de laptop con procedimiento ESD</li><li>Gestionar dispositivos móviles en entorno empresarial</li></ul></div>`,
+   rb:{ak:"Regla clave",av:"Capa 1→ arriba",bk:"Primer paso",bv:"Cable + LED"},img:"images/s4-diagnostico.svg"},
+
+  // 5 INSTRUCCIONES DEFENSA
+  {k:"INSTRUCCIONES",ti:"¿Cómo es la defensa?",
+   de:"5 pasos en 10 a 15 minutos. Todos los integrantes del grupo participan.",
+   lb:`<div class="bigcard red"><div class="title">Estructura de la presentación</div><ol class="stepList">
+     <li><b>Presentar la empresa (2 min):</b> nombre, sector, cantidad de empleados y departamentos de TechSol S.A.</li>
+     <li><b>Mostrar la topología (3 min):</b> abrir el .pkt en PT y explicar cada dispositivo — ¿por qué eligieron ese y no otro?</li>
+     <li><b>Demostrar conectividad (3 min):</b> ejecutar 4 pings en vivo entre diferentes redes — no capturas, en tiempo real.</li>
+     <li><b>Explicar decisiones técnicas (2 min):</b> topología, esquema de IPs, seguridad aplicada, configuración Wi-Fi.</li>
+     <li><b>Preguntas del docente (3-5 min):</b> el docente hace 2–3 preguntas técnicas — el grupo responde en conjunto.</li>
+   </ol></div>
+   <div class="warnBox"><div class="wtitle">⚠ Puntos que restan directamente</div><p>PT no abre o la red no funciona en vivo · Pings que fallan sin explicación · Solo un integrante habla durante toda la defensa · Tiempo mayor a 15 minutos sin aviso.</p></div>`,
+   rb:{ak:"Duración",av:"10–15 min",bk:"Participan",bv:"Todos"},img:"images/s4-instrucciones.svg"},
+
+  // 6 RUBRICA
+  {k:"RÚBRICA",ti:"Criterios de evaluación — Proyecto Final",
+   de:"6 criterios de 10 puntos cada uno. Total: 60 pts = 55% de la nota del curso.",
+   lb:`<div class="rubrRow"><div class="rubrNum">1</div><div class="rubrText"><b>Definición de requerimientos</b>Identifica correctamente dispositivos, redes y necesidades según el escenario.</div><div class="rubrPts">/ 10</div></div>
+   <div class="rubrRow"><div class="rubrNum">2</div><div class="rubrText"><b>Esbozo y diseño de la red</b>Topología clara y organizada en PT. Arquitectura identificable a simple vista.</div><div class="rubrPts">/ 10</div></div>
+   <div class="rubrRow"><div class="rubrNum">3</div><div class="rubrText"><b>Implementación en Packet Tracer</b>Todos los dispositivos conectados, router configurado, redes funcionando.</div><div class="rubrPts">/ 10</div></div>
+   <div class="rubrRow"><div class="rubrNum">4</div><div class="rubrText"><b>Configuración de dispositivos</b>Laptops y móviles con Wi-Fi. IPs correctas. Pings exitosos entre todas las redes.</div><div class="rubrPts">/ 10</div></div>
+   <div class="rubrRow"><div class="rubrNum">5</div><div class="rubrText"><b>Resolución de problemas</b>Pings requeridos exitosos. Si hubo errores, documenta qué fue y cómo lo resolvió.</div><div class="rubrPts">/ 10</div></div>
+   <div class="rubrRow"><div class="rubrNum">6</div><div class="rubrText"><b>Documentación técnica</b>Entrega: .pkt + tabla IPs + capturas de pings + justificación escrita completa.</div><div class="rubrPts">/ 10</div></div>
+   <div style="background:rgba(220,38,38,.08);border:1.5px solid rgba(220,38,38,.3);border-radius:12px;padding:10px 14px;margin-top:10px;display:flex;align-items:center;justify-content:space-between">
+     <span style="font-size:13px;color:var(--muted)">Total del proyecto</span>
+     <span style="font-family:inherit;font-weight:900;font-size:24px;color:var(--red)">60 / 60 pts</span>
+   </div>`,
+   rb:{ak:"Total",av:"60 puntos",bk:"Nota curso",bv:"55%"},img:"images/s4-rubrica.svg"},
+
+  // 7 PREGUNTAS TIPO
+  {k:"PREGUNTAS DE DEFENSA",ti:"Preguntas típicas del docente",
+   de:"El docente elige 2-3 según lo que vea en la topología. No hay respuestas memorizadas — hay comprensión.",
+   lb:`<div class="grid">
+     <div class="card"><strong style="color:var(--brand)">Sobre diseño de red</strong><ul><li>¿Por qué esa topología y no otra?</li><li>¿Qué pasa si el router se cae?</li><li>¿Por qué usaron /24 y no /30?</li><li>¿Cómo escalarían la red si la empresa crece?</li></ul></div>
+     <div class="card"><strong style="color:var(--green)">Sobre configuración</strong><ul><li>¿Por qué el primer ping da timeout?</li><li>¿Qué hace exactamente <code>no shutdown</code>?</li><li>¿Cuál es la diferencia entre el GW del router y el de las PCs?</li><li>¿Qué es ARP y cuándo ocurre?</li></ul></div>
+   </div>
+   <div class="grid">
+     <div class="card"><strong style="color:var(--amber)">Sobre seguridad</strong><ul><li>¿Cómo protegerían el Wi-Fi de accesos no autorizados?</li><li>¿Por qué poner los móviles en otra subred?</li><li>¿Qué agregarían si tuvieran presupuesto mayor?</li></ul></div>
+     <div class="card"><strong style="color:var(--red)">Sobre diagnóstico</strong><ul><li>¿Qué harían si una PC no puede hacer ping al servidor?</li><li>¿Cómo detectarían una IP duplicada?</li><li>¿Qué significa 169.254.x.x?</li></ul></div>
+   </div>
+   <div class="bigcard green"><div class="title">💡 Consejo para la defensa</div><div style="color:var(--muted);font-size:13px;line-height:1.65">Respondan juntos. Si no saben algo, digan cómo lo investigarían. La honestidad y el razonamiento valen más que inventar. El docente evalúa comprensión, no memoria.</div></div>`,
+   rb:{ak:"Preguntas",av:"2–3 por grupo",bk:"Tip",bv:"Razoná en voz alta"},img:"images/s4-preguntas.svg"},
+
+  // 8 EN VIVO
+  {k:"DURANTE LA DEFENSA",ti:"Dinámica mientras defienden",
+   de:"El orden se sortea al inicio. Mientras un grupo defiende, los demás observan activamente.",
+   lb:`<div class="grid">
+     <div class="card"><strong style="color:var(--red)">El grupo que defiende</strong><ul><li>PT abierto y funcionando antes de empezar</li><li>Hablar al frente, no a la pantalla</li><li>Ejecutar pings en vivo — no mostrar capturas</li><li>Todos los integrantes hablan al menos una vez</li><li>Tiempo máximo: 15 minutos</li></ul></div>
+     <div class="card"><strong style="color:var(--green)">Los grupos que esperan</strong><ul><li>Observar y anotar decisiones del grupo</li><li>Revisar su propio .pkt mientras esperan</li><li>Sin celular durante las defensas</li><li>Respetar el tiempo de los compañeros</li></ul></div>
+   </div>
+   <div class="bigcard amber"><div class="title">⏱ Cronograma estimado (4 grupos)</div><div style="color:var(--muted);font-size:13px;line-height:1.85">00:00 → Sorteo del orden + teoría final (30 min)<br>00:30 → Grupo 1 · 01:00 → Grupo 2<br>01:30 → Grupo 3 · 02:00 → Grupo 4<br>02:30 → Cierre, notas y felicitaciones</div></div>
+   <div class="warnBox"><div class="wtitle">⚠ El día de la defensa</div><p>Cada grupo debe tener cargado el proyecto antes de que empiece el primer grupo. Si le toca y el archivo no abre, el tiempo corre igual.</p></div>`,
+   rb:{ak:"Por grupo",av:"10–15 min",bk:"4 grupos",bv:"~200 min total"},img:"images/s4-envivo.svg"},
+
+  // 9 ENTREGABLES
+  {k:"ENTREGABLES",ti:"Lo que entregan hoy antes de salir",
+   de:"Todo debe entregarse por LMS antes de que termine la clase. Sin excepciones.",
+   lb:`<div class="bigcard red"><div class="title">Checklist de entrega — via plataforma LMS</div><ul>
+     <li>☐ Archivo <code>.pkt</code> funcionando — la red completa debe abrir y los pings ejecutarse</li>
+     <li>☐ Tabla de IPs completa — todos los dispositivos con IP, máscara, gateway y tipo de conexión</li>
+     <li>☐ Captura de la topología — screenshot con todos los cables en verde</li>
+     <li>☐ Capturas de 4 pings exitosos — entre diferentes redes documentadas</li>
+     <li>☐ Justificación técnica — por qué esa topología, esas IPs, esa configuración de seguridad</li>
+     <li>☐ Configuración Wi-Fi — SSID, canal, WPA2 y dispositivos conectados</li>
+     <li>☐ Documentación de un problema — un error que tuvieron y cómo lo resolvieron paso a paso</li>
+   </ul></div>
+   <div class="bigcard green"><div class="title">Formato de entrega</div><div style="color:var(--muted);font-size:13px;line-height:1.65">Un archivo ZIP con todos los documentos o una carpeta en la plataforma.<br>Nombre del archivo: <code>TI312-ProyectoFinal-NombreGrupo.zip</code></div></div>`,
+   rb:{ak:"Entrega",av:"Antes de salir",bk:"Plataforma",bv:"LMS"},img:"images/s4-entregables.svg"},
+
+  // 10 CIERRE DEL CURSO
+  {k:"CIERRE DEL CURSO",ti:"TI-312 — Completado 🎉",
+   de:"4 semanas, 3 casos prácticos y un proyecto completo de red empresarial.",
+   lb:`<div class="bigcard green"><div class="title">✅ Lo que lograron en este curso</div><ul>
+     <li><b>Semana 1:</b> LAN/WAN/OSI/TCP · Switch/Router/Firewall · DNS/DHCP · Caso Práctico 1</li>
+     <li><b>Semana 2:</b> Redes cableadas/inalámbricas · NIC/IoT · Cortafuegos · Caso Práctico 2</li>
+     <li><b>Semana 3:</b> Componentes laptop · Instalación HW · Dispositivos móviles · Caso Práctico 3</li>
+     <li><b>Semana 4:</b> Conectividad móvil · Diagnóstico integrado · Defensa del Proyecto Final</li>
+   </ul></div>
+   <div class="bigcard"><div class="title">🏆 Competencia desarrollada</div><div style="color:var(--muted);font-size:13px;line-height:1.65"><b>CTI-ITOP1-3 · Nivel SFIA 1</b><br>Reconocer componentes de red · Diagnosticar hardware y conectividad · Configurar dispositivos en una red empresarial · Gestionar dispositivos móviles.</div></div>
+   <div class="bigcard red"><div class="title">🙏 Gracias por el semestre</div><div style="color:var(--muted);font-size:13px;line-height:1.65">Ing. Jeremy Alvarado Blanco<br>jalvarado@ucenfotec.ac.cr · 8573-9967<br><br>El conocimiento técnico sin práctica no sirve. Ustedes lo practicaron — eso es lo que se lleva.</div></div>`,
+   rb:{ak:"Curso",av:"Completado ✓",bk:"Siguiente",bv:"TI-411"},img:"images/s4-cierre.svg"},
+];
+
+const TOTAL=slides.length;
+const $=id=>document.getElementById(id);
+function load(i){
+  const s=slides[i];
+  $("counterTxt").textContent=`${p2(i+1)} / ${p2(TOTAL)}`;
+  $("kicker").textContent=s.k||"";
+  document.querySelector("h1").textContent=s.ti||"";
+  document.querySelector(".desc").textContent=s.de||"";
+  $("leftBlocks").innerHTML=s.lb||"";
+  const rb=$("rightBottom");rb.innerHTML="";
+  if(s.rb){const mk=(l,v)=>{const d=document.createElement("div");d.className="miniCard";d.innerHTML=`<div class="label">${l}</div><div class="value">${v}</div>`;return d};if(s.rb.ak)rb.appendChild(mk(s.rb.ak,s.rb.av||""));if(s.rb.bk)rb.appendChild(mk(s.rb.bk,s.rb.bv||""));}
+  const img=$("slideImg"),ph=$("ph");
+  if(s.img){img.style.display="none";ph.style.display="block";img.src=s.img;img.onload=()=>{img.style.display="block";ph.style.display="none"};img.onerror=()=>{img.style.display="none";ph.textContent="Imagen no encontrada"};}else{img.style.display="none";ph.style.display="block";}
+  $("progressBar").style.width=(((i+1)/TOTAL)*100)+"%";
+  document.querySelector(".left").scrollTop=0;clearPen();
+}
+let idx=0;
+function next(){if(idx<TOTAL-1){idx++;load(idx)}}
+function prev(){if(idx>0){idx--;load(idx)}}
+$("nextBtn").addEventListener("click",next);$("prevBtn").addEventListener("click",prev);
+window.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();next()}if(e.key==="ArrowLeft"){e.preventDefault();prev()}});
+const canvas=$("penCanvas"),deck=document.querySelector(".deck");
+let penOn=false,drawing=false,last={x:0,y:0};
+function resize(){const r=deck.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.floor(r.width*dpr);canvas.height=Math.floor(r.height*dpr);canvas.style.width=r.width+"px";canvas.style.height=r.height+"px";canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0)}
+window.addEventListener("resize",resize);
+function pos(ev){const r=deck.getBoundingClientRect(),src=ev.touches?ev.touches[0]:ev;return{x:src.clientX-r.left,y:src.clientY-r.top}}
+function draw(a,b){const ctx=canvas.getContext("2d");ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=$("penColor").value;ctx.lineWidth=Number($("penSize").value);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+function clearPen(){canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height)}
+deck.addEventListener("mousedown",e=>{if(!penOn)return;drawing=true;last=pos(e);e.preventDefault()});
+deck.addEventListener("mousemove",e=>{if(!penOn||!drawing)return;const p=pos(e);draw(last,p);last=p;e.preventDefault()});
+window.addEventListener("mouseup",()=>drawing=false);
+deck.addEventListener("touchstart",e=>{if(!penOn)return;drawing=true;last=pos(e);e.preventDefault()},{passive:false});
+deck.addEventListener("touchmove",e=>{if(!penOn||!drawing)return;const p=pos(e);draw(last,p);last=p;e.preventDefault()},{passive:false});
+window.addEventListener("touchend",()=>drawing=false);
+$("penToggle").addEventListener("click",()=>{penOn=!penOn;canvas.style.pointerEvents=penOn?"auto":"none";$("penToggle").classList.toggle("on",penOn);$("penToggle").textContent=penOn?"✏️ Activo":"✏️ Lápiz"});
+$("penClear").addEventListener("click",clearPen);
+resize();load(0);
+})();
+</script>
+</body>
+</html>

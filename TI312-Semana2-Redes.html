@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-312 · Semana 2 — Configuración y Mantenimiento de Redes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    :root{
+      --bg1:#eaf1f8; --bg2:#cfdceb; --stroke:#cfd9e6; --stroke2:#b9c8da;
+      --text:#0f172a; --muted:#50607a; --brand:#0b66c3; --brand2:#0a4f96;
+      --accent:#0ea5e9; --green:#16a34a; --amber:#d97706; --red:#dc2626;
+      --shadow:0 18px 45px rgba(15,23,42,.12); --round:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 30% 10%,#fff 0%,rgba(255,255,255,0) 60%),
+        radial-gradient(800px 450px at 75% 65%,#fff 0%,rgba(255,255,255,0) 55%),
+        linear-gradient(160deg,var(--bg1),var(--bg2));
+      min-height:100vh; display:flex; justify-content:center;
+      align-items:flex-start; padding:16px;
+    }
+    .shell{width:min(1400px,100%);position:relative}
+    .topbar{
+      background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.58));
+      border:1px solid var(--stroke); border-radius:18px;
+      box-shadow:0 10px 30px rgba(15,23,42,.06);
+      padding:12px 16px; display:flex; align-items:center;
+      justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:0}
+    .brand img{height:38px;width:auto;display:block}
+    .brand .txt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+    .brand .txt b{font-size:13px;color:var(--brand2);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand .txt span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topcenter{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0}
+    .counterPill{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);font-weight:800;color:var(--brand2);font-size:13px;white-space:nowrap}
+    .dot{width:9px;height:9px;border-radius:999px;background:var(--brand);box-shadow:0 0 0 4px rgba(11,102,195,.12);flex-shrink:0}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
+    .pill{padding:7px 11px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);color:var(--muted);display:flex;align-items:center;gap:7px;font-size:11px;user-select:none;white-space:nowrap}
+    .pill .miniDot{width:8px;height:8px;border-radius:999px;background:rgba(11,102,195,.9);box-shadow:0 0 0 3px rgba(11,102,195,.10);flex-shrink:0}
+    .btn{appearance:none;border:1px solid var(--stroke2);background:rgba(255,255,255,.78);color:var(--brand2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;transition:.15s transform ease,.15s background ease,.15s box-shadow ease;user-select:none;white-space:nowrap;font-family:inherit}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.95);box-shadow:0 4px 12px rgba(15,23,42,.08)}
+    .btn:active{transform:translateY(0)}
+    .btn.primary{background:rgba(11,102,195,.10);border-color:rgba(11,102,195,.28)}
+    .btn.danger{color:#7a2230;background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.20)}
+    .btn.on{background:rgba(11,102,195,.18);border-color:rgba(11,102,195,.38)}
+    .deck{margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));border:1px solid var(--stroke);border-radius:var(--round);box-shadow:var(--shadow);padding:14px;position:relative}
+    .slide{background:rgba(255,255,255,.42);border:1px solid var(--stroke);border-radius:20px;padding:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;min-height:610px;position:relative;overflow:hidden}
+    .left{padding:4px 4px 4px 6px;display:flex;flex-direction:column;overflow-y:auto;max-height:610px}
+    .left::-webkit-scrollbar{width:4px}
+    .left::-webkit-scrollbar-thumb{background:var(--stroke2);border-radius:99px}
+    .kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0}
+    .kicker .bar{width:34px;height:9px;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));box-shadow:0 0 0 5px rgba(11,102,195,.08);flex-shrink:0}
+    .kicker span{font-weight:800;letter-spacing:.4px;font-size:11px;color:var(--brand2);text-transform:uppercase}
+    h1{margin:0 0 8px 0;font-size:clamp(26px,3.2vw,42px);letter-spacing:-.6px;line-height:1.06;flex-shrink:0}
+    .desc{margin:0 0 12px 0;color:var(--muted);font-size:14px;line-height:1.55;flex-shrink:0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px}
+    .card{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px}
+    .card strong{display:block;font-size:12.5px;margin-bottom:7px;color:var(--text)}
+    .card ul{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .card li{margin:3px 0}
+    .bigcard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 14px;margin-top:10px}
+    .bigcard:first-child{margin-top:0}
+    .bigcard .title{font-weight:800;color:var(--brand2);margin-bottom:5px;font-size:13px}
+    .bigcard ul{margin:4px 0 0 0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .bigcard li{margin:3px 0}
+    .bigcard.green{border-color:rgba(22,163,74,.25);background:rgba(22,163,74,.06)}
+    .bigcard.green .title{color:var(--green)}
+    .bigcard.amber{border-color:rgba(217,119,6,.25);background:rgba(217,119,6,.06)}
+    .bigcard.amber .title{color:var(--amber)}
+    .bigcard.red{border-color:rgba(220,38,38,.20);background:rgba(220,38,38,.05)}
+    .bigcard.red .title{color:var(--red)}
+    .right{border-radius:18px;border:1px solid var(--stroke);background:radial-gradient(400px 260px at 70% 15%,rgba(255,255,255,.88),rgba(255,255,255,.0) 65%),linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.16));padding:13px;display:flex;flex-direction:column;gap:11px}
+    .media{background:rgba(255,255,255,.62);border:1px solid var(--stroke);border-radius:16px;padding:10px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:200px}
+    .media img{max-width:100%;max-height:100%;border-radius:12px;display:none;box-shadow:0 16px 38px rgba(15,23,42,.16);object-fit:cover}
+    .media .placeholder{color:var(--muted);font-size:12px;text-align:center;padding:16px;line-height:1.6}
+    .rightBottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0}
+    .miniCard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px}
+    .miniCard .label{color:var(--muted);font-size:11px;margin-bottom:4px;font-weight:600}
+    .miniCard .value{font-weight:900;font-size:18px;color:var(--text);letter-spacing:-.2px;line-height:1.2}
+    .controls{margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.54));border:1px solid var(--stroke);border-radius:16px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .progressWrap{flex:1;display:flex;align-items:center;gap:10px;padding:0 8px;min-width:0}
+    .progressTrack{height:9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(185,200,218,.7);overflow:hidden;flex:1;min-width:60px}
+    .progressBar{height:100%;width:5%;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));transition:width .35s cubic-bezier(.4,0,.2,1)}
+    .hint{color:var(--muted);font-size:11px;white-space:nowrap;flex-shrink:0}
+    .revealRow{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+    .revealBox{background:rgba(255,255,255,.72);border:1px dashed rgba(11,102,195,.35);border-radius:14px;padding:11px 13px;margin-top:8px;display:none;color:var(--muted);font-size:12.5px;line-height:1.65}
+    .penCanvas{position:absolute;inset:0;pointer-events:none;z-index:50;border-radius:var(--round)}
+    .select{border:1px solid var(--stroke2);background:rgba(255,255,255,.78);border-radius:999px;padding:7px 10px;font-weight:700;color:var(--brand2);font-size:11px;outline:none;cursor:pointer;font-family:inherit}
+    .timerBadge{display:inline-flex;align-items:center;gap:6px;background:rgba(11,102,195,.10);border:1px solid rgba(11,102,195,.22);border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:700;color:var(--brand2);margin-bottom:8px}
+    .debateBox{background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(11,102,195,.04));border:1px solid rgba(11,102,195,.22);border-left:4px solid var(--brand);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .debateBox .dtitle{font-weight:800;font-size:12.5px;color:var(--brand2);margin-bottom:5px}
+    .debateBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .labBox{background:linear-gradient(135deg,rgba(22,163,74,.07),rgba(22,163,74,.02));border:1px solid rgba(22,163,74,.22);border-left:4px solid var(--green);border-radius:14px;padding:12px 14px;margin-top:10px}
+    .labBox .ltitle{font-weight:800;font-size:12.5px;color:var(--green);margin-bottom:5px}
+    .labBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0}
+    .stepList{counter-reset:step;list-style:none;padding:0;margin:8px 0 0 0}
+    .stepList li{counter-increment:step;display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.55;margin:6px 0}
+    .stepList li::before{content:counter(step);min-width:22px;height:22px;border-radius:999px;background:rgba(11,102,195,.12);color:var(--brand2);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    @media(max-width:1100px){.slide{grid-template-columns:1fr;min-height:unset}.right .media{min-height:240px;flex:unset;height:240px}.left{max-height:unset;overflow:visible}.actions .pill{display:none}}
+    @media(max-width:700px){body{padding:10px}.topbar{padding:10px 12px;gap:8px}.brand img{height:30px}.topcenter{justify-content:flex-start;flex:unset}.actions{gap:6px}.select{display:none}h1{font-size:22px}.grid{grid-template-columns:1fr}.slide{padding:12px;gap:12px}.deck{padding:10px}.controls{flex-wrap:wrap;gap:8px}.progressWrap{order:3;width:100%;padding:0}.hint{display:none}}
+    @media(max-width:480px){.rightBottom{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <img id="logo" src="cenfotec-logo.png" alt="Universidad CENFOTEC" onerror="this.style.display='none'"/>
+      <div class="txt">
+        <b id="topTitle">Configuración y Mantenimiento de Redes</b>
+        <span id="topSub">TI-312 · Semana 2 — Soporte Técnico II</span>
+      </div>
+    </div>
+    <div class="topcenter">
+      <div class="counterPill"><span class="dot"></span><span id="counterTxt">01 / 15</span></div>
+    </div>
+    <div class="actions">
+      <div class="pill"><span class="miniDot"></span><span>Presencial</span></div>
+      <div class="pill"><span class="miniDot" style="background:rgba(22,163,74,.7)"></span><span>Lab: Packet Tracer</span></div>
+      <button class="btn primary" id="penToggle">✏️ Lápiz</button>
+      <button class="btn danger" id="penClear">Borrar</button>
+      <select class="select" id="penSize"><option value="3">Fino</option><option value="5" selected>Medio</option><option value="8">Grueso</option><option value="12">Extra</option></select>
+      <select class="select" id="penColor"><option value="#0b66c3" selected>Azul</option><option value="#0f172a">Negro</option><option value="#dc2626">Rojo</option><option value="#16a34a">Verde</option><option value="#f59e0b">Amarillo</option></select>
+    </div>
+  </div>
+  <div class="deck">
+    <canvas id="penCanvas" class="penCanvas"></canvas>
+    <div class="slide">
+      <div class="left">
+        <div class="kicker"><div class="bar"></div><span id="kicker">CURSO</span></div>
+        <h1 id="title">TI-312 · Semana 2</h1>
+        <p class="desc" id="desc">Configuración y mantenimiento de redes.</p>
+        <div id="leftBlocks"></div>
+      </div>
+      <div class="right">
+        <div class="media"><img id="slideImg" alt=""/><div class="placeholder" id="placeholder">Imagen de la slide</div></div>
+        <div class="rightBottom" id="rightBottom"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <button class="btn primary" id="nextBtn">Siguiente →</button>
+      </div>
+      <div class="progressWrap">
+        <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+        <div class="hint">Teclas: ← → / Espacio</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  function pad2(n){return String(n).padStart(2,"0")}
+  const slides=[
+    // SLIDE 1 — Portada
+    {kicker:"SEMANA 2",title:"Configuración y Mantenimiento de Redes",
+     desc:"Conexión de dispositivos, redes cableadas e inalámbricas, IoT, cortafuegos y diagnóstico de problemas.",
+     leftBlocksHTML:`
+      <div class="grid">
+        <div class="card"><strong>Datos del curso</strong><ul><li>Código: TI-312</li><li>Semana: 2 de 4</li><li>Modalidad: Presencial</li><li>Requisito: TI-311</li></ul></div>
+        <div class="card"><strong>Docente</strong><ul><li>Ing. Jeremy Alvarado B.</li><li>Cel: 8573-9967</li><li>jalvarado@ucenfotec.ac.cr</li></ul></div>
+      </div>
+      <div class="bigcard"><div class="title">Evaluación</div><div style="color:var(--muted);font-size:13px;line-height:1.7">📋 <b>Proyecto grupal:</b> 55% — avance semana 2<br>🧪 <b>Caso Práctico 2:</b> 15% de los casos (hoy)</div></div>
+      <div class="bigcard"><div class="title">Herramientas de hoy</div><div style="color:var(--muted);font-size:13px;line-height:1.7">Cisco Packet Tracer · Wireless Router WRT300N · Dispositivos IoT</div></div>`,
+     rightBadges:{ak:"Semana",av:"2 de 4",bk:"Horas/semana",bv:"3.3 hrs"},imgFile:"images/s2-portada.svg"},
+
+    // SLIDE 2 — Agenda
+    {kicker:"AGENDA",title:"¿Qué hacemos hoy?",
+     desc:"Semana 2 · Tema 2: Configuración y mantenimiento de redes — 200 minutos de clase.",
+     leftBlocksHTML:`
+      <div class="timerBadge">⏱ Clase 2 · ~200 minutos</div>
+      <div class="bigcard green"><div class="title">📖 Bloque A — Teoría (80 min)</div><ul><li>Conexión de dispositivos a la red</li><li>Configuración de redes cableadas e inalámbricas</li><li>NIC y dispositivos IoT</li><li>Configuración de cortafuegos</li><li>Problemas y soluciones de red</li></ul></div>
+      <div class="bigcard amber"><div class="title">🧪 Bloque B — Caso Práctico 2 (80 min)</div><ul><li>Red con AP inalámbrico en Packet Tracer</li><li>Configuración de dispositivo IoT</li><li>Aplicar reglas de cortafuegos básicas</li></ul></div>
+      <div class="bigcard"><div class="title">💬 Bloque C — Retro + Proyecto (40 min)</div><ul><li>Revisión grupal de resultados</li><li>Avance del proyecto del curso</li></ul></div>`,
+     rightBadges:{ak:"Caso Práctico",av:"2 — Hoy",bk:"Extra clase",bv:"10 horas"},imgFile:"images/s2-agenda.svg"},
+
+    // SLIDE 3 — Conexión de dispositivos
+    {kicker:"CONEXIÓN",title:"Conexión de dispositivos a la red",
+     desc:"Antes de configurar, el dispositivo debe estar físicamente conectado de forma correcta.",
+     leftBlocksHTML:`
+      <div class="grid">
+        <div class="card"><strong>🔌 Conexión cableada</strong><ul><li>Cable Ethernet (RJ-45)</li><li>Cat5e / Cat6 / Cat6a</li><li>Velocidad: 100M a 10G</li><li>Full-duplex estándar</li><li>LED verde = enlace activo</li></ul></div>
+        <div class="card"><strong>📡 Conexión inalámbrica</strong><ul><li>Wi-Fi 802.11a/b/g/n/ac/ax</li><li>SSID + autenticación</li><li>WPA2 / WPA3</li><li>2.4 GHz o 5 GHz</li><li>RSSI = intensidad de señal</li></ul></div>
+      </div>
+      <div class="bigcard"><div class="title">Pasos para conectar un dispositivo</div><ul><li>1. Verificar el medio físico (cable o Wi-Fi)</li><li>2. Obtener o asignar IP (DHCP o estática)</li><li>3. Configurar máscara y gateway</li><li>4. Verificar con ping al gateway</li><li>5. Ping a Internet (8.8.8.8)</li></ul></div>
+      <div class="debateBox"><div class="dtitle">🗣 Pregunta de activación</div><p>¿Cuál es la diferencia entre conectar un dispositivo a la red y configurarlo en la red? ¿Puede haber conexión física sin configuración lógica?</p></div>`,
+     rightBadges:{ak:"Capa OSI",av:"1 y 3",bk:"Verificar",bv:"Ping ✓"},imgFile:"images/s2-conexion.svg"},
+
+    // SLIDE 4 — Redes cableadas
+    {kicker:"REDES CABLEADAS",title:"Configuración de redes cableadas",
+     desc:"Ethernet es el estándar dominante para redes LAN. Conocer sus variantes define qué cable y velocidad usar.",
+     leftBlocksHTML:`
+      <div class="bigcard"><div class="title">Estándares Ethernet — IEEE 802.3</div><div style="color:var(--muted);font-size:13px;line-height:1.7"><b>Fast Ethernet (100BASE-TX):</b> 100 Mbps · Cat5 · Para equipos legacy<br><b>Gigabit Ethernet (1000BASE-T):</b> 1 Gbps · Cat5e/Cat6 · Estándar actual<br><b>10G Ethernet (10GBASE-T):</b> 10 Gbps · Cat6a/Cat7 · Servidores y backbone</div></div>
+      <div class="grid">
+        <div class="card"><strong>Cable Straight-Through</strong><ul><li>Dispositivos <b>distintos</b></li><li>PC → Switch</li><li>Switch → Router</li><li>El más común</li></ul></div>
+        <div class="card"><strong>Cable Crossover</strong><ul><li>Dispositivos <b>iguales</b></li><li>PC → PC</li><li>Switch → Switch</li><li>Auto-MDIX lo reemplaza</li></ul></div>
+      </div>
+      <div class="debateBox"><div class="dtitle">🗣 Debate (2 min)</div><p>¿Por qué los switches modernos como el 2960 tienen Auto-MDIX? ¿Qué problema resuelve? ¿Seguís necesitando saber la diferencia?</p></div>`,
+     rightBadges:{ak:"Estándar actual",av:"Gigabit",bk:"Cable más usado",bv:"Straight-Through"},imgFile:"images/s2-cableada.svg"},
+
+    // SLIDE 5 — Redes inalámbricas
+    {kicker:"REDES INALÁMBRICAS",title:"Configuración de redes inalámbricas",
+     desc:"Un AP mal configurado es la causa más frecuente de problemas de Wi-Fi en entornos empresariales.",
+     leftBlocksHTML:`
+      <div class="bigcard"><div class="title">Parámetros clave de un Access Point</div><div style="color:var(--muted);font-size:13px;line-height:1.7"><b>SSID:</b> Nombre de la red. Puede ocultarse pero no mejora la seguridad.<br><b>Canal:</b> En 2.4 GHz usar 1, 6 o 11 para evitar solapamiento.<br><b>Seguridad:</b> WPA3 > WPA2-AES > WPA2-TKIP. Nunca WEP.<br><b>Potencia de señal:</b> Ajustable para limitar el alcance (seguridad).</div></div>
+      <div class="grid">
+        <div class="card"><strong>WPA2 vs WPA3</strong><ul><li>WPA2: AES-CCMP · Suficiente para empresas</li><li>WPA3: SAE · Más resistente a ataques de diccionario</li><li>WPA3 obligatorio en Wi-Fi 6</li></ul></div>
+        <div class="card"><strong>DHCP del AP</strong><ul><li>El AP puede actuar como servidor DHCP</li><li>Asigna IPs a dispositivos Wi-Fi</li><li>Cuidado: doble DHCP en la red</li><li>Mejor práctica: DHCP en el router</li></ul></div>
+      </div>
+      <div class="debateBox"><div class="dtitle">🗣 Caso real (2 min)</div><p>Un empleado conecta su propio router Wi-Fi a la red de la empresa para "tener mejor señal". ¿Qué problemas técnicos puede generar? ¿Cómo lo detectarías?</p></div>`,
+     rightBadges:{ak:"Seguridad mínima",av:"WPA2-AES",bk:"Canales libres",bv:"1 · 6 · 11"},imgFile:"images/s2-inalambrica.svg"},
+
+    // SLIDE 6 — NIC e IoT
+    {kicker:"NIC e IoT",title:"Tarjetas de red y dispositivos IoT",
+     desc:"Cada dispositivo en la red necesita una NIC. Los dispositivos IoT agregan complejidad y riesgo de seguridad.",
+     leftBlocksHTML:`
+      <div class="grid">
+        <div class="card"><strong>🖧 NIC — Network Interface Card</strong><ul><li>Dirección MAC: 48 bits, única</li><li>Tipos: PCI · PCIe · USB · Integrada</li><li>Velocidades: 100M · 1G · 10G</li><li>Capa 2 del modelo OSI</li><li>Necesita driver (controlador)</li></ul></div>
+        <div class="card"><strong>📱 IoT en la red</strong><ul><li>Sensores · Cámaras · Smart Home</li><li>IP asignada como cualquier PC</li><li>Protocolo: MQTT · CoAP · HTTP</li><li>Riesgo: firmware sin actualizar</li><li>Mejor práctica: VLAN separada</li></ul></div>
+      </div>
+      <div class="bigcard amber"><div class="title">⚠ Seguridad IoT — Riesgo real</div><div style="color:var(--muted);font-size:13px;line-height:1.7">En 2016, la botnet <b>Mirai</b> comprometió millones de dispositivos IoT (cámaras, DVRs) con credenciales por defecto y los usó para el mayor ataque DDoS de la historia. Un IoT mal configurado en tu red = puerta trasera.</div></div>
+      <div class="debateBox"><div class="dtitle">🗣 Debate (2 min)</div><p>¿Por qué pondrías los dispositivos IoT en una VLAN separada de las PCs de trabajo? ¿Qué pasa si no lo hacés?</p></div>`,
+     rightBadges:{ak:"MAC Address",av:"Capa 2",bk:"IoT: mejor",bv:"VLAN separada"},imgFile:"images/s2-nic-iot.svg"},
+
+    // SLIDE 7 — Cortafuegos
+    {kicker:"CORTAFUEGOS",title:"Configuración de cortafuegos",
+     desc:"Un firewall sin reglas correctas da una falsa sensación de seguridad. Las reglas importan más que tenerlo.",
+     leftBlocksHTML:`
+      <div class="bigcard"><div class="title">Tipos de cortafuegos</div><div style="color:var(--muted);font-size:13px;line-height:1.7"><b>Stateless (sin estado):</b> Filtra por regla fija (IP origen/destino, puerto, protocolo). Rápido pero limitado.<br><b>Stateful (con estado):</b> Sigue el estado de cada sesión. Permite respuestas de conexiones iniciadas internamente. Más inteligente.</div></div>
+      <div class="grid">
+        <div class="card"><strong>Reglas básicas</strong><ul><li>Deny all (regla base)</li><li>Allow established (respuestas)</li><li>Allow specific ports (80, 443, 22)</li><li>Log denied (auditoría)</li></ul></div>
+        <div class="card"><strong>Configuración en PT</strong><ul><li>Router → Security → ACL</li><li>Access Control List</li><li>permit / deny + red/IP</li><li>Aplicar en interfaz</li></ul></div>
+      </div>
+      <div class="bigcard red"><div class="title">Principio de mínimo privilegio</div><div style="color:var(--muted);font-size:13px;line-height:1.7">Permitir solo lo estrictamente necesario. Denegar todo lo demás por defecto. Si no sabés por qué una regla existe, probablemente no debería estar.</div></div>`,
+     rightBadges:{ak:"Regla base",av:"Deny all",bk:"Tipo recomendado",bv:"Stateful"},imgFile:"images/s2-firewall.svg"},
+
+    // SLIDE 8 — Problemas y soluciones
+    {kicker:"DIAGNÓSTICO",title:"Problemas y soluciones de red",
+     desc:"El 80% de los problemas de red se resuelven con los mismos 5 pasos. El orden importa.",
+     leftBlocksHTML:`
+      <div class="bigcard green"><div class="title">Metodología: Capa 1 → arriba</div><ul><li><b>Capa 1:</b> ¿Hay cable? ¿LED encendido? → Verificar físico</li><li><b>Capa 2:</b> ¿El switch ve la MAC? → show mac-address-table</li><li><b>Capa 3:</b> ¿Tiene IP correcta? → ipconfig / ping gateway</li><li><b>Capa 4-7:</b> ¿El servicio responde? → telnet IP puerto / nmap</li></ul></div>
+      <div class="grid">
+        <div class="card"><strong>Síntomas frecuentes</strong><ul><li>169.254.x.x → DHCP falla</li><li>Ping gateway falla → IP/GW mal</li><li>Ping IP OK, nombre falla → DNS</li><li>LED ámbar → STP convergiendo</li></ul></div>
+        <div class="card"><strong>Herramientas clave</strong><ul><li>ipconfig / ifconfig</li><li>ping · tracert · nslookup</li><li>show ip int brief (Cisco)</li><li>netstat -an · nmap</li></ul></div>
+      </div>
+      <div class="debateBox"><div class="dtitle">🗣 Caso práctico rápido (3 min)</div><p>Un usuario no puede acceder a una página web. Puede hacer ping a 8.8.8.8 pero no a google.com. ¿En qué capa está el problema? ¿Qué hacés primero?</p></div>`,
+     rightBadges:{ak:"Regla de oro",av:"Capa 1 → arriba",bk:"Primero siempre",bv:"Ping al gateway"},imgFile:"images/s2-problemas.svg"},
+
+    // SLIDE 9 — Pausa
+    {kicker:"PAUSA ACTIVA",title:"Pausa activa — 5 minutos",
+     desc:"Estiramiento, hidratación, descanso visual. Volvemos con el Caso Práctico 2.",
+     leftBlocksHTML:`
+      <div class="bigcard green"><div class="title">✅ Lo que vimos — Bloque A</div><ul><li>Conexión de dispositivos (físico y lógico)</li><li>Redes cableadas: Ethernet y tipos de cable</li><li>Redes inalámbricas: AP, SSID, WPA2/3</li><li>NIC: MAC, capas, tipos</li><li>IoT: riesgos y VLAN separada</li><li>Cortafuegos: stateless vs stateful, reglas</li><li>Diagnóstico: metodología capa por capa</li></ul></div>
+      <div class="bigcard amber"><div class="title">⏭ Al volver</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Caso Práctico 2 en Packet Tracer.<br>Vamos a agregar un AP inalámbrico y un dispositivo IoT a la red.</div></div>`,
+     rightBadges:{ak:"Duración",av:"5 minutos",bk:"Siguiente",bv:"Caso Práctico 2"},imgFile:"images/s2-pausa.svg"},
+
+    // SLIDE 10 — Lab intro
+    {kicker:"CASO PRÁCTICO 2",title:"Laboratorio — Red con Wi-Fi e IoT",
+     desc:"Extendemos la red del Caso 1 agregando conectividad inalámbrica y un dispositivo IoT.",
+     leftBlocksHTML:`
+      <div class="labBox"><div class="ltitle">🧪 Herramienta: Cisco Packet Tracer</div><p>Wireless Router WRT300N para el AP · Dispositivos IoT disponibles en End Devices.</p></div>
+      <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6">TechSol S.A. ahora tiene empleados con laptops que necesitan Wi-Fi y un sensor de temperatura IoT en el área de servidores. Deben extender la red del CP1 con estas capacidades nuevas.</div></div>
+      <div class="bigcard"><div class="title">🎯 Objetivos</div><ul><li>Agregar y configurar un AP (WRT300N)</li><li>Conectar 2 laptops por Wi-Fi</li><li>Agregar 1 dispositivo IoT a la red</li><li>Aplicar una ACL básica en el router</li><li>Verificar conectividad completa</li></ul></div>`,
+     rightBadges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},imgFile:"images/s2-lab.svg"},
+
+    // SLIDE 11 — Instrucciones
+    {kicker:"INSTRUCCIONES",title:"Pasos del laboratorio — Caso 2",
+     desc:"Trabajás sobre el archivo del CP1. Si no lo tenés, creá uno nuevo con la topología base.",
+     leftBlocksHTML:`
+      <div class="bigcard"><div class="title">Paso a paso</div><ol class="stepList">
+        <li>Abrir el archivo del CP1 (o crear uno nuevo con router + switch + 3 PCs).</li>
+        <li>Agregar un <b>Wireless Router WRT300N</b> al canvas, conectarlo al Switch0 con Straight-Through.</li>
+        <li>Configurar el AP: SSID = <b>TechSol-WiFi</b> · Seguridad = WPA2 · Password = <b>Soporte2024</b></li>
+        <li>Agregar 2 <b>Laptops</b> (End Devices → Laptop). Conectarlas al AP por Wi-Fi (Config → Wireless).</li>
+        <li>Agregar 1 dispositivo IoT (Home → Sensor IoT). Conectarlo al Switch0.</li>
+        <li>Asignar IPs: Laptops = 192.168.10.20 y .21 · IoT = 192.168.10.50</li>
+        <li>Verificar: ping laptop → PC0 · ping laptop → IoT · ping IoT → gateway.</li>
+        <li>ACL básica en el router: denegar acceso del IoT al servidor (opcional avanzado).</li>
+      </ol></div>
+      <div class="debateBox"><div class="dtitle">💡 Pregunta durante el lab</div><p>¿Por qué el WRT300N funciona como AP y también como router? ¿En qué modo lo estamos usando aquí y por qué?</p></div>`,
+     rightBadges:{ak:"Red a usar",av:"192.168.10.0/24",bk:"AP",bv:"WRT300N"},imgFile:"images/s2-instrucciones.svg"},
+
+    // SLIDE 12 — Config AP
+    {kicker:"CONFIGURACIÓN AP",title:"Cómo configurar el WRT300N en PT",
+     desc:"El wireless router se configura por su interfaz gráfica dentro de Packet Tracer.",
+     leftBlocksHTML:`
+      <div class="bigcard"><div class="title">Pasos en Packet Tracer</div><ol class="stepList">
+        <li>Doble clic en el WRT300N → pestaña <b>GUI</b>.</li>
+        <li>Setup → Network Setup → IP del AP: <b>192.168.10.254</b> (o la que elijas).</li>
+        <li>Wireless → Basic Wireless Settings → SSID: <b>TechSol-WiFi</b> · Canal: 6.</li>
+        <li>Wireless Security → WPA2 Personal → Passphrase: <b>Soporte2024</b>.</li>
+        <li>En la laptop: Config → Wireless → SSID: TechSol-WiFi → contraseña.</li>
+        <li>Verificar: la laptop debe obtener IP por DHCP del AP.</li>
+      </ol></div>
+      <div class="bigcard amber"><div class="title">Conectar la laptop al Wi-Fi</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Doble clic en Laptop → Config → Wireless0 → SSID: TechSol-WiFi · Authentication: WPA2-PSK · PSK Pass Phrase: Soporte2024 → Connect.</div></div>`,
+     rightBadges:{ak:"IP del AP",av:"192.168.10.254",bk:"DHCP rango",bv:".10.100–.10.200"},imgFile:"images/s2-ap.svg"},
+
+    // SLIDE 13 — Retro
+    {kicker:"RETROALIMENTACIÓN",title:"Revisión del Caso Práctico 2",
+     desc:"Cada grupo comparte su implementación. Analizamos decisiones técnicas.",
+     leftBlocksHTML:`
+      <div class="bigcard green"><div class="title">✅ ¿Qué revisamos?</div><ul><li>¿El AP está correctamente configurado?</li><li>¿Las laptops se conectaron al SSID?</li><li>¿El dispositivo IoT tiene IP válida?</li><li>¿El ping entre todos los dispositivos funciona?</li><li>¿La documentación es clara?</li></ul></div>
+      <div class="bigcard"><div class="title">💬 Discusión grupal</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Cada grupo — 2 minutos:<br>1) ¿Pusieron el IoT en VLAN separada? ¿Por qué sí o no?<br>2) ¿Qué pasaría si dos APs usan el mismo canal?<br>3) ¿Qué ACL aplicarían en producción?</div></div>
+      <div class="revealRow">
+        <button class="btn primary" data-reveal="r1">Ver errores frecuentes</button>
+        <button class="btn" data-hide="r1">Ocultar</button>
+      </div>
+      <div class="revealBox" id="r1">Errores comunes: SSID con espacio al final · WPA2 vs WPA2-PSK confundidos · IP del AP en la misma red pero sin gateway configurado · Laptop con Wireless desactivada.</div>`,
+     rightBadges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Evidencia técnica"},imgFile:"images/s2-retro.svg"},
+
+    // SLIDE 14 — Proyecto
+    {kicker:"PROYECTO DEL CURSO",title:"Avance del proyecto — Semana 2",
+     desc:"Esta semana agregan conectividad inalámbrica e IoT a su red empresarial.",
+     leftBlocksHTML:`
+      <div class="grid">
+        <div class="card"><strong>📁 Esta semana agregan</strong><ul><li>Red inalámbrica (AP configurado)</li><li>Al menos 1 dispositivo IoT</li><li>Cortafuegos básico (ACL)</li><li>Documentación actualizada</li></ul></div>
+        <div class="card"><strong>📋 Rúbrica</strong><ul><li>Requerimientos definidos</li><li>Diseño actualizado</li><li>Implementación en PT</li><li>Config dispositivos</li><li>Resolución problemas</li><li>Documentación</li></ul></div>
+      </div>
+      <div class="bigcard amber"><div class="title">⏱ Extra clase esta semana (10 horas)</div><ul><li>Integrar AP y dispositivos Wi-Fi al proyecto</li><li>Agregar IoT con VLAN separada</li><li>Aplicar al menos 2 reglas ACL</li><li>Actualizar diagrama y tabla de IPs</li><li>Traer avance a la Semana 3</li></ul></div>`,
+     rightBadges:{ak:"Peso total",av:"55%",bk:"Extra clase",bv:"10 horas"},imgFile:"images/s2-proyecto.svg"},
+
+    // SLIDE 15 — Cierre
+    {kicker:"CIERRE DE CLASE",title:"Resumen y próxima semana",
+     desc:"Semana 2 completada. Próxima clase: Dispositivos móviles y portátiles.",
+     leftBlocksHTML:`
+      <div class="bigcard green"><div class="title">✅ Lo que aprendimos hoy</div><ul><li>Conexión de dispositivos: cableado y proceso lógico</li><li>Ethernet: estándares, cables y velocidades</li><li>Redes inalámbricas: AP, SSID, WPA2/3, canales</li><li>NIC: MAC, capas, tipos y configuración</li><li>IoT: riesgos, VLAN separada, protocolos</li><li>Cortafuegos: stateless vs stateful, ACLs</li><li>Diagnóstico: metodología capa por capa</li></ul></div>
+      <div class="bigcard amber"><div class="title">📚 Semana 3 — Dispositivos Móviles y Portátiles</div><ul><li>Componentes de una computadora portátil</li><li>Configuración inalámbrica y de energía</li><li>Instalación de hardware móvil</li><li>Reemplazo de componentes de laptop</li><li>Caso Práctico 3 — Essentials Virtual Desktop</li></ul></div>
+      <div class="bigcard"><div class="title">📌 Recordatorio</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Avancen 10 horas en el proyecto esta semana. Traigan el avance con Wi-Fi, IoT y ACLs para la Semana 3.</div></div>`,
+     rightBadges:{ak:"Próxima clase",av:"Semana 3",bk:"Extra clase",bv:"10 horas"},imgFile:"images/s2-cierre.svg"},
+  ];
+
+  const TOTAL=slides.length;
+  const elCounter=document.getElementById("counterTxt");
+  const elKicker=document.getElementById("kicker");
+  const elTitle=document.getElementById("title");
+  const elDesc=document.getElementById("desc");
+  const elLeft=document.getElementById("leftBlocks");
+  const elRightBot=document.getElementById("rightBottom");
+  const elImg=document.getElementById("slideImg");
+  const elPh=document.getElementById("placeholder");
+  const elProgress=document.getElementById("progressBar");
+  const prevBtn=document.getElementById("prevBtn");
+  const nextBtn=document.getElementById("nextBtn");
+  const topTitle=document.getElementById("topTitle");
+  const topSub=document.getElementById("topSub");
+
+  function setSlideImage(src){
+    if(!src){elImg.style.display="none";elPh.style.display="block";return}
+    elImg.style.display="none";elPh.style.display="block";
+    elImg.src=src;
+    elImg.onload=()=>{elImg.style.display="block";elPh.style.display="none"};
+    elImg.onerror=()=>{elImg.style.display="none";elPh.textContent="Imagen no encontrada: "+src};
+  }
+
+  function renderBadges(b){
+    elRightBot.innerHTML="";
+    const mk=(label,value)=>{const d=document.createElement("div");d.className="miniCard";d.innerHTML=`<div class="label">${label}</div><div class="value">${value}</div>`;return d};
+    if(b?.ak) elRightBot.appendChild(mk(b.ak,b.av||""));
+    if(b?.bk) elRightBot.appendChild(mk(b.bk,b.bv||""));
+  }
+
+  function wireReveal(){
+    document.querySelectorAll("[data-reveal]").forEach(btn=>{btn.onclick=()=>{const el=document.getElementById(btn.dataset.reveal);if(el)el.style.display="block"}});
+    document.querySelectorAll("[data-hide]").forEach(btn=>{btn.onclick=()=>{const el=document.getElementById(btn.dataset.hide);if(el)el.style.display="none"}});
+  }
+
+  let idx=0;
+  function render(){
+    const s=slides[idx];
+    elCounter.textContent=`${pad2(idx+1)} / ${pad2(TOTAL)}`;
+    elKicker.textContent=s.kicker||"";
+    elTitle.textContent=s.title||"";
+    elDesc.textContent=s.desc||"";
+    topTitle.textContent=s.topTitle||"Configuración y Mantenimiento de Redes";
+    topSub.textContent=s.topSub||"TI-312 · Semana 2 — Soporte Técnico II";
+    elLeft.innerHTML=s.leftBlocksHTML||"";
+    renderBadges(s.rightBadges||null);
+    setSlideImage(s.imgFile||"");
+    elProgress.style.width=(((idx+1)/TOTAL)*100)+"%";
+    wireReveal();
+    clearPen();
+    document.querySelector(".left").scrollTop=0;
+  }
+
+  function next(){if(idx<TOTAL-1){idx++;render()}}
+  function prev(){if(idx>0){idx--;render()}}
+  nextBtn.addEventListener("click",next);
+  prevBtn.addEventListener("click",prev);
+  window.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();next()}
+    if(e.key==="ArrowLeft"){e.preventDefault();prev()}
+  });
+
+  // PEN
+  const canvas=document.getElementById("penCanvas");
+  const penToggle=document.getElementById("penToggle");
+  const penClear=document.getElementById("penClear");
+  const penSize=document.getElementById("penSize");
+  const penColor=document.getElementById("penColor");
+  let penOn=false,drawing=false,last={x:0,y:0};
+
+  function resizeCanvas(){
+    const deck=document.querySelector(".deck");const r=deck.getBoundingClientRect();const dpr=window.devicePixelRatio||1;
+    canvas.width=Math.floor(r.width*dpr);canvas.height=Math.floor(r.height*dpr);
+    canvas.style.width=r.width+"px";canvas.style.height=r.height+"px";
+    canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener("resize",resizeCanvas);
+
+  function getPos(ev){const r=document.querySelector(".deck").getBoundingClientRect();const src=ev.touches?ev.touches[0]:ev;return{x:src.clientX-r.left,y:src.clientY-r.top}}
+  function drawLine(a,b){const ctx=canvas.getContext("2d");ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=penColor.value;ctx.lineWidth=Number(penSize.value);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+  function clearPen(){canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height)}
+
+  const deck=document.querySelector(".deck");
+  deck.addEventListener("mousedown",e=>{if(!penOn)return;drawing=true;last=getPos(e);e.preventDefault()});
+  deck.addEventListener("mousemove",e=>{if(!penOn||!drawing)return;const p=getPos(e);drawLine(last,p);last=p;e.preventDefault()});
+  window.addEventListener("mouseup",()=>{drawing=false});
+  deck.addEventListener("touchstart",e=>{if(!penOn)return;drawing=true;last=getPos(e);e.preventDefault()},{passive:false});
+  deck.addEventListener("touchmove",e=>{if(!penOn||!drawing)return;const p=getPos(e);drawLine(last,p);last=p;e.preventDefault()},{passive:false});
+  window.addEventListener("touchend",()=>{drawing=false});
+
+  penToggle.addEventListener("click",()=>{penOn=!penOn;canvas.style.pointerEvents=penOn?"auto":"none";penToggle.classList.toggle("on",penOn);penToggle.textContent=penOn?"✏️ Activo":"✏️ Lápiz"});
+  penClear.addEventListener("click",()=>clearPen());
+
+  resizeCanvas();
+  render();
+})();
+</script>
+</body>
+</html>
