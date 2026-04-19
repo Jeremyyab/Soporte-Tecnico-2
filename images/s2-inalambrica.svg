@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <circle cx="400" cy="200" r="140" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="400" y="165" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#0b66c3" text-anchor="middle">Access Point</text>
+  <text x="400" y="190" font-family="Arial,sans-serif" font-size="14" font-weight="normal" fill="#0b66c3" text-anchor="middle">802.11ax</text>
+  <text x="400" y="212" font-family="Arial,sans-serif" font-size="13" font-weight="normal" fill="#50607a" text-anchor="middle">Wi-Fi 6</text>
+  <ellipse cx="400" cy="200" rx="200" ry="60" fill="none" stroke="#0b66c3" stroke-width="1.2" stroke-opacity="0.3" stroke-dasharray="6 4"/>
+  <ellipse cx="400" cy="200" rx="260" ry="80" fill="none" stroke="#0b66c3" stroke-width="0.8" stroke-opacity="0.2" stroke-dasharray="4 6"/>
+  <circle cx="180" cy="340" r="28" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="180" y="345" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">Laptop</text>
+  <circle cx="300" cy="390" r="28" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="300" y="395" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">Phone</text>
+  <circle cx="500" cy="390" r="28" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="500" y="395" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">Tablet</text>
+  <circle cx="620" cy="340" r="28" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="620" y="345" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">Smart TV</text>
+  <line x1="208" y1="325" x2="360" y2="230" stroke="#16a34a60" stroke-width="1.2"/><line x1="326" y1="368" x2="378" y2="238" stroke="#16a34a60" stroke-width="1.2"/>
+  <line x1="474" y1="368" x2="422" y2="238" stroke="#16a34a60" stroke-width="1.2"/><line x1="592" y1="325" x2="440" y2="230" stroke="#16a34a60" stroke-width="1.2"/>
+  <rect x="40" y="50" width="200" height="100" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="140" y="78" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">SSID</text><text x="60" y="98" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">Nombre visible de la red</text><text x="60" y="116" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">Puede ocultarse</text>
+  <rect x="560" y="50" width="200" height="100" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="660" y="78" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">Seguridad</text><text x="580" y="98" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">WPA2 · WPA3</text><text x="580" y="116" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">TKIP → AES</text>
+  <text x="400" y="470" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Canal · Frecuencia · Potencia · Autenticación: los 4 parámetros del AP</text>
+</svg>

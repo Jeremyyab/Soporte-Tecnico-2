@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <rect x="270" y="30" width="260" height="50" rx="12" fill="#dbeafe" stroke="#0b66c3" stroke-width="1.2" stroke-opacity="0.5"/>
+  <text x="400" y="60" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0b66c3" text-anchor="middle">Proyecto — Semana 2</text>
+  <rect x="40" y="110" width="340" height="160" rx="12" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="210" y="140" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#0b66c3" text-anchor="middle">Esta semana agregan</text>
+  <text x="60" y="165" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">✓ Configurar red cableada</text><text x="60" y="185" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">✓ Agregar AP inalámbrico</text>
+  <text x="60" y="205" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">✓ Conectar 1 dispositivo IoT</text><text x="60" y="225" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">✓ Configurar cortafuegos básico</text>
+  <rect x="420" y="110" width="340" height="160" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="590" y="140" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#d97706" text-anchor="middle">Documentación extra</text>
+  <text x="440" y="165" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Diagrama actualizado</text><text x="440" y="185" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Tabla IPs completa</text>
+  <text x="440" y="205" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Configuración del AP</text><text x="440" y="225" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Capturas de conectividad</text>
+  <rect x="40" y="300" width="720" height="110" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="400" y="328" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#16a34a" text-anchor="middle">Avance extra clase — 10 horas</text>
+  <text x="120" y="358" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0b66c3" text-anchor="middle">Semana 2</text><text x="120" y="378" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Configurar redes</text>
+  <text x="340" y="358" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">Semana 3</text><text x="340" y="378" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Dispositivos móviles</text>
+  <text x="560" y="358" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">Semana 4</text><text x="560" y="378" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Defensa final</text>
+  <text x="400" y="460" font-family="Arial,sans-serif" font-size="14" font-weight="normal" fill="#50607a" text-anchor="middle">Traigan el avance del proyecto para la Semana 3</text>
+</svg>

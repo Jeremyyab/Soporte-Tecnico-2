@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <circle cx="400" cy="220" r="130" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <circle cx="400" cy="220" r="100" fill="url(#brand)" stroke="#0b66c3" stroke-width="0"/>
+  <text x="400" y="210" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">TI-312</text>
+  <text x="400" y="240" font-family="Arial,sans-serif" font-size="16" font-weight="normal" fill="#ffffff" text-anchor="middle">Semana 2</text>
+  <circle cx="240" cy="110" r="24" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/><text x="240" y="115" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0b66c3" text-anchor="middle">LAN</text>
+  <circle cx="560" cy="110" r="24" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/><text x="560" y="115" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0b66c3" text-anchor="middle">WAN</text>
+  <circle cx="200" cy="330" r="24" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="200" y="335" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">IoT</text>
+  <circle cx="600" cy="330" r="24" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="600" y="335" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#d97706" text-anchor="middle">WiFi</text>
+  <line x1="264" y1="125" x2="370" y2="170" stroke="#0b66c380" stroke-width="1.5"/><line x1="536" y1="125" x2="430" y2="170" stroke="#0b66c380" stroke-width="1.5"/>
+  <line x1="220" y1="310" x2="300" y2="270" stroke="#16a34a80" stroke-width="1.5"/><line x1="580" y1="310" x2="500" y2="270" stroke="#d9770680" stroke-width="1.5"/>
+  <text x="400" y="430" font-family="Arial,sans-serif" font-size="14" font-weight="normal" fill="#50607a" text-anchor="middle">Configuración y Mantenimiento de Redes</text>
+  <text x="400" y="455" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Universidad CENFOTEC · Escuela de TI</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <rect x="60" y="50" width="680" height="80" rx="12" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="400" y="82" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#0b66c3" text-anchor="middle">Estándares Ethernet — IEEE 802.3</text>
+  <text x="400" y="110" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">La red cableada es la columna vertebral de cualquier infraestructura empresarial</text>
+  <g>
+  <rect x="60" y="160" width="155" height="80" rx="10" fill="#dbeafe" stroke="#0b66c3" stroke-width="1.5"/>
+  <text x="137" y="188" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0b66c3" text-anchor="middle">10BASE-T</text><text x="137" y="208" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">10 Mbps</text><text x="137" y="224" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Cat3</text>
+  <rect x="230" y="160" width="155" height="80" rx="10" fill="#dbeafe" stroke="#0b66c3" stroke-width="1.5"/>
+  <text x="307" y="188" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0b66c3" text-anchor="middle">100BASE-TX</text><text x="307" y="208" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">100 Mbps</text><text x="307" y="224" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Cat5</text>
+  <rect x="400" y="160" width="155" height="80" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="477" y="188" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">1000BASE-T</text><text x="477" y="208" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">1 Gbps</text><text x="477" y="224" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Cat5e/6</text>
+  <rect x="570" y="160" width="170" height="80" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="655" y="188" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#d97706" text-anchor="middle">10GBASE-T</text><text x="655" y="208" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">10 Gbps</text><text x="655" y="224" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Cat6a/7</text>
+  </g>
+  <rect x="60" y="270" width="680" height="140" rx="12" fill="#f0f5fb" stroke="#cfd9e6" stroke-width="1"/>
+  <text x="400" y="298" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Tipos de cable — diferencias clave</text>
+  <line x1="60" y1="308" x2="740" y2="308" stroke="#cfd9e6" stroke-width="0.8"/>
+  <text x="130" y="332" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0b66c3" text-anchor="middle">Straight-Through</text><text x="130" y="352" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Dispositivos distintos</text><text x="130" y="370" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">PC → Switch · Switch → Router</text>
+  <text x="400" y="332" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">Crossover</text><text x="400" y="352" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Dispositivos iguales</text><text x="400" y="370" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">PC → PC · Switch → Switch</text>
+  <text x="650" y="332" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#d97706" text-anchor="middle">Auto-MDIX</text><text x="650" y="352" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Detección automática</text><text x="650" y="370" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">2960 lo tiene integrado</text>
+  <line x1="255" y1="320" x2="255" y2="390" stroke="#cfd9e6" stroke-width="0.8"/><line x1="520" y1="320" x2="520" y2="390" stroke="#cfd9e6" stroke-width="0.8"/>
+  <text x="400" y="455" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Velocidad · Full-duplex · Auto-negociación: los tres pilares de Ethernet moderno</text>
+</svg>

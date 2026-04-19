@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a4f96"/>
+      <stop offset="100%" style="stop-color:#0b66c3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  
+  <rect x="60" y="60" width="300" height="160" rx="12" fill="#dbeafe" stroke="#0b66c3" stroke-width="2"/>
+  <text x="210" y="95" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#0b66c3" text-anchor="middle">Conexión Cableada</text>
+  <text x="80" y="120" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Ethernet Cat5e/Cat6</text><text x="80" y="140" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Conector RJ-45</text>
+  <text x="80" y="160" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Switch ↔ PC</text><text x="80" y="180" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Router ↔ Switch</text>
+  <rect x="440" y="60" width="300" height="160" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="590" y="95" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#16a34a" text-anchor="middle">Conexión Inalámbrica</text>
+  <text x="460" y="120" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">802.11ac/ax (Wi-Fi 5/6)</text><text x="460" y="140" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">SSID + Password</text>
+  <text x="460" y="160" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Autenticación WPA2/WPA3</text><text x="460" y="180" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">AP ↔ Dispositivo</text>
+  <rect x="60" y="260" width="300" height="130" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="210" y="290" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">NIC — Tarjeta de Red</text>
+  <text x="80" y="315" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Dirección MAC única</text><text x="80" y="335" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Capa 2 del modelo OSI</text>
+  <text x="80" y="355" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">PCI, PCIe, USB, integrada</text>
+  <rect x="440" y="260" width="300" height="130" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="590" y="290" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">Diagnóstico de conexión</text>
+  <text x="460" y="315" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">ipconfig / ifconfig</text><text x="460" y="335" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">ping gateway</text>
+  <text x="460" y="355" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Ver LEDs del puerto</text>
+  <text x="400" y="450" font-family="Arial,sans-serif" font-size="13" font-weight="normal" fill="#50607a" text-anchor="middle">La conexión correcta es el primer paso de toda red funcional</text>
+</svg>
