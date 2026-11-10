@@ -4,9 +4,11 @@
    {
      title, sub,            // texto de la barra superior
      theme: "cp" | "",      // "cp" = tema verde de caso práctico
-     pills: ["Presencial", ...],
+     pills: ["Virtual", ...],
      links: [{label, href, cls}],   // botones extra (ej. ir al CP)
-     slides: [{kicker, title, desc, html, badges:{ak,av,bk,bv}, img}]
+     slides: [{kicker, title, desc, html, badges:{ak,av,bk,bv}, img,
+               photos:[{src, cap, credit}]   // opcional: galería de fotos reales
+             }]
    }
    Teclas: ← → Espacio · Inicio/Fin · F = pantalla completa · L = lápiz
    La slide actual queda en la URL (#3) para compartir o recargar.
@@ -49,7 +51,7 @@
         <div id="leftBlocks"></div>
       </div>
       <div class="right">
-        <div class="media"><img id="slideImg" alt=""/><div class="placeholder" id="placeholder">Imagen de la slide</div></div>
+        <div class="media"><img id="slideImg" alt=""/><div class="placeholder" id="placeholder">Imagen de la slide</div><div class="gallery" id="gallery"></div></div>
         <div class="rightBottom" id="rightBottom"></div>
       </div>
     </div>
@@ -75,8 +77,16 @@
   dots.innerHTML = slides.map((s,i)=>`<button title="${pad2(i+1)} · ${(s.title||"").replace(/"/g,"&quot;")}" data-i="${i}"></button>`).join("");
   dots.addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) go(+b.dataset.i); });
 
+  const gal=$("gallery");
+  function setPhotos(list){
+    gal.innerHTML = (list||[]).map(f=>`<figure>
+      <img src="${f.src}" alt="${f.cap}" loading="lazy" onerror="this.closest('figure').classList.add('broken')"/>
+      <figcaption>${f.cap}${f.credit?` <a href="${f.credit}" target="_blank" rel="noopener">Foto: Wikimedia Commons</a>`:""}</figcaption>
+    </figure>`).join("");
+    gal.className = "gallery" + (list&&list.length ? " on n"+list.length : "");
+  }
   function setImg(src){
-    elImg.style.display="none"; elPh.style.display="block"; elPh.textContent="Imagen de la slide";
+    elImg.style.display="none"; elPh.style.display=src?"block":"none"; elPh.textContent="Imagen de la slide";
     if(!src) return;
     elImg.onload=()=>{ elImg.style.display="block"; elPh.style.display="none"; };
     elImg.onerror=()=>{ elPh.textContent="Imagen no encontrada: "+src; };
@@ -100,7 +110,7 @@
     $("desc").textContent=s.desc||"";
     $("leftBlocks").innerHTML=s.html||"";
     badges(s.badges);
-    setImg(s.img);
+    setPhotos(s.photos); setImg(s.photos&&s.photos.length?"":s.img);
     $("progressBar").style.width=((idx+1)/slides.length*100)+"%";
     $("prevBtn").disabled = idx===0;
     $("nextBtn").textContent = idx===slides.length-1 ? "Fin ✓" : "Siguiente →";
