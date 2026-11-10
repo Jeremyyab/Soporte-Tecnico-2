@@ -22,7 +22,7 @@
   <text x="590" y="70" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">IoT — Internet de las Cosas</text>
   <line x1="420" y1="80" x2="760" y2="80" stroke="#16a34a" stroke-width="0.8"/>
   <text x="440" y="105" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Dispositivos con IP en la red</text><text x="440" y="125" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">Sensores · Cámaras · Smart Home</text>
-  <text x="440" y="150" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Protocolo: MQTT · CoAP · HTTP</text>
+  <text x="440" y="150" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Protocolos: MQTT · CoAP · Matter</text>
   <text x="440" y="170" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Seguridad: VLAN separada</text><text x="440" y="192" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">Firmware actualizado siempre</text>
   <text x="440" y="212" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="start">Capa OSI: Capas 3-7</text>
   <rect x="40" y="270" width="720" height="90" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>

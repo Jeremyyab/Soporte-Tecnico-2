@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-312 · Caso Práctico 1 — Diseño de una red básica</title>
+  <link rel="icon" href="images/cenfotec-logo.svg"/>
+  <link rel="stylesheet" href="assets/deck.css"/>
+</head>
+<body>
+<script>
+/* ═══════════════════════════════════════════════
+   TI-312 · Caso Práctico 1 — Diseño de una red básica
+   Para editar: cambiá el contenido de "slides".
+   Cada slide: kicker, title, desc, html, badges, img
+═══════════════════════════════════════════════ */
+window.DECK = {
+  title:"Caso Práctico 1 — Diseño de una red básica",
+  sub:"TI-312 · Semana 1 — Laboratorio en Packet Tracer",
+  theme:"cp",
+  pills:["Grupal","Packet Tracer"],
+  links:[{"label":"📖 Clase Semana 1","href":"TI312-Semana1-Redes.html"}],
+  slides:[
+    /* ── CASO PRÁCTICO 1 ── */
+    {
+      kicker:"CASO PRÁCTICO 1",
+      title:"Diseño de una red básica",
+      desc:"Aplicamos lo visto en la Semana 1: tipos de red, dispositivos, direccionamiento IP y diagnóstico con ping.",
+      html:`
+          <div class="grid">
+          <div class="card"><strong>📌 Datos del caso</strong><ul><li>Semana 1 de 4</li><li>Valor: 15% (de 45% en casos)</li><li>Grupos de 3–4 personas</li><li>Duración: ~80 minutos en clase</li></ul></div>
+          <div class="card"><strong>🧰 Necesitás</strong><ul><li>Cisco Packet Tracer 8.2.2</li><li>Cuenta de Cisco NetAcad (Skills for All)</li><li>Apuntes: OSI, IP, DHCP/DNS</li></ul></div>
+          </div>
+          <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6"><b>TechSol S.A.</b> es una pequeña empresa con 3 departamentos: 6 PCs, 1 servidor, 1 impresora de red y acceso a Internet. El presupuesto es limitado: elijan los dispositivos mínimos necesarios y justifiquen cada decisión.</div></div>
+          <div class="warnBox"><div class="wtitle">⚠ Misma versión de Packet Tracer en todo el grupo</div><p>Usen Packet Tracer 8.2.2 (estable). La 9.0 está en beta y hay reportes de archivos .pkt que no abren entre 8.2.x y 9.0. <span class="updBadge">2026</span></p></div>
+          <div class="ctaRow"><a class="btn" href="TI312-Semana1-Redes.html">📖 Ver la clase de la Semana 1</a></div>`,
+      badges:{ak:"Valor",av:"15%",bk:"Duración",bv:"~80 min"},
+      img:"images/cp1-portada.svg"
+    },
+
+    /* ── 01 · CASO PRÁCTICO 1 ── */
+    {
+      kicker:"HERRAMIENTA Y OBJETIVOS",
+      title:"Laboratorio — Diseño de una red básica",
+      desc:"Actividad grupal en Packet Tracer. Aplicamos todo lo visto: tipos de red, dispositivos, direccionamiento y diagnóstico.",
+      html:`
+          <div class="labBox">
+          <div class="ltitle">🧪 Herramienta: Cisco Packet Tracer</div>
+          <p>Simulador de redes gratuito de Cisco. Permite diseñar, configurar y probar redes de forma virtual sin equipos físicos.</p>
+          </div>
+          <div class="bigcard">
+          <div class="title">📋 Escenario del caso</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Una pequeña empresa de 3 departamentos necesita conectar sus equipos.
+          Tienen: <b>6 PCs</b>, <b>1 servidor</b>, <b>1 impresora de red</b>, <b>acceso a Internet</b>.
+          El presupuesto es limitado, así que deben elegir los dispositivos mínimos necesarios.
+          </div>
+          </div>
+          <div class="bigcard">
+          <div class="title">🎯 Objetivos del laboratorio</div>
+          <ul>
+          <li>Diseñar la topología adecuada</li>
+          <li>Seleccionar los dispositivos correctos</li>
+          <li>Asignar direccionamiento IP lógico</li>
+          <li>Verificar conectividad con ping</li>
+          <li>Documentar la red diseñada</li>
+          </ul>
+          </div>`,
+      badges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},
+      img:"images/packet-tracer.svg"
+    },
+
+    /* ── 02 · INSTRUCCIONES ── */
+    {
+      kicker:"INSTRUCCIONES",
+      title:"Pasos del laboratorio — Caso 1",
+      desc:"Sigan estos pasos en Packet Tracer. Documenten cada decisión con justificación técnica.",
+      html:`
+          <div class="bigcard">
+          <div class="title">Paso a paso</div>
+          <ol class="stepList">
+          <li>Abrir Packet Tracer y crear un proyecto nuevo. Nombrar con sus nombres.</li>
+          <li>Arrastrar los dispositivos: 2 switches, 1 router, 6 PCs, 1 servidor, 1 impresora.</li>
+          <li>Conectar los dispositivos usando los cables correctos (¿straight o cross-over?). ¿Por qué?</li>
+          <li>Asignar IPs estáticas a todos los dispositivos. Usar red 192.168.10.0/24.</li>
+          <li>Configurar el gateway en cada PC (IP del router).</li>
+          <li>Verificar conectividad: ping entre PCs de distintos switches.</li>
+          <li>Verificar acceso al servidor: ping desde todas las PCs.</li>
+          <li>Documentar: captura de pantalla + tabla de IPs + topología elegida.</li>
+          </ol>
+          </div>
+          <div class="debateBox">
+          <div class="dtitle">💡 Pregunta guía durante el lab</div>
+          <p>¿Por qué usamos dos switches en lugar de uno? ¿Qué ventaja da eso a la red? ¿Qué pasaría si uno de los switches falla?</p>
+          </div>`,
+      badges:{ak:"Red a usar",av:"192.168.10.0/24",bk:"Verificación",bv:"Ping ✓"},
+      img:"images/lab-instrucciones.svg"
+    },
+
+    /* ── 03 · DIRECCIONAMIENTO ── */
+    {
+      kicker:"DIRECCIONAMIENTO",
+      title:"Tabla de direccionamiento sugerida",
+      desc:"Usen esta tabla como guía. Pueden adaptarla según el diseño que elijan para su red.",
+      html:`
+          <div class="bigcard">
+          <div class="title">📋 Asignación de IPs — Red 192.168.10.0/24</div>
+          <div style="overflow-x:auto;margin-top:8px">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;color:var(--muted)">
+          <thead>
+          <tr style="background:rgba(11,102,195,.10);color:var(--brand2)">
+          <th style="padding:7px 10px;text-align:left;border-radius:8px 0 0 8px">Dispositivo</th>
+          <th style="padding:7px 10px;text-align:left">Dirección IP</th>
+          <th style="padding:7px 10px;text-align:left">Máscara</th>
+          <th style="padding:7px 10px;text-align:left;border-radius:0 8px 8px 0">Gateway</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">Router (LAN)</td><td>192.168.10.1</td><td>255.255.255.0</td><td>—</td></tr>
+          <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">Servidor</td><td>192.168.10.2</td><td>255.255.255.0</td><td>192.168.10.1</td></tr>
+          <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">Impresora</td><td>192.168.10.3</td><td>255.255.255.0</td><td>192.168.10.1</td></tr>
+          <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">PC-1 a PC-6</td><td>192.168.10.10–15</td><td>255.255.255.0</td><td>192.168.10.1</td></tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+          <div class="bigcard amber">
+          <div class="title">⚠️ Errores comunes a evitar</div>
+          <ul>
+          <li>IPs duplicadas en la red</li>
+          <li>Gateway incorrecto (debe ser la IP del router)</li>
+          <li>Máscara diferente entre dispositivos</li>
+          <li>Cable equivocado (PC-PC necesita crossover en PT si no hay auto-MDIX)</li>
+          </ul>
+          </div>`,
+      badges:{ak:"Máscara",av:"/24",bk:"IPs útiles",bv:"254 por red"},
+      img:"images/tabla-ips.svg"
+    },
+
+    /* ── 04 · RETROALIMENTACIÓN ── */
+    {
+      kicker:"RETROALIMENTACIÓN",
+      title:"Revisión del Caso Práctico 1",
+      desc:"Cada grupo comparte su diseño. Analizamos las decisiones técnicas y las posibles mejoras.",
+      html:`
+          <div class="bigcard green">
+          <div class="title">✅ ¿Qué revisamos?</div>
+          <ul>
+          <li>¿La topología elegida es la más eficiente?</li>
+          <li>¿Los dispositivos seleccionados son los correctos?</li>
+          <li>¿El direccionamiento IP es coherente?</li>
+          <li>¿El ping entre todos los nodos funciona?</li>
+          <li>¿La documentación es clara y completa?</li>
+          </ul>
+          </div>
+          <div class="bigcard">
+          <div class="title">💬 Discusión grupal</div>
+          <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Cada grupo tiene <b>2 minutos</b> para explicar:<br>
+          1) Topología elegida y por qué<br>
+          2) Un problema que encontraron y cómo lo resolvieron<br>
+          3) ¿Qué cambiarían si tuvieran más presupuesto?
+          </div>
+          </div>
+          <div class="revealRow">
+          <button class="btn primary" data-reveal="r1">Ver errores frecuentes</button>
+          <button class="btn" data-hide="r1">Ocultar</button>
+          </div>
+          <div class="revealBox" id="r1">
+          Los errores más comunes: IP duplicada, gateway apuntando a sí mismo, cable equivocado entre switch y router,
+          olvidar configurar el servidor, no probar con ping antes de entregar.
+          </div>`,
+      badges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Evidencia técnica"},
+      img:"images/retroalimentacion.svg"
+    }
+,
+
+    /* ── ENTREGA ── */
+    {
+      kicker:"ENTREGA",
+      title:"Entrega del Caso Práctico 1",
+      desc:"Todo se sube al LMS antes de terminar la clase. Un solo integrante sube por el grupo.",
+      html:`
+          <div class="bigcard green"><div class="title">✅ Checklist de entrega</div><ul>
+          <li>Archivo <code>TI312-CP1-NombreGrupo.pkt</code> que abra y funcione</li>
+          <li>Captura de la topología con todos los enlaces en verde</li>
+          <li>Tabla de direccionamiento IP actualizada</li>
+          <li>Capturas de ping entre PCs de distintos switches y hacia el servidor</li>
+          <li>Respuesta escrita a la pregunta guía del laboratorio</li>
+          <li>Un problema que encontraron y cómo lo resolvieron</li></ul></div>
+          <div class="bigcard"><div class="title">📦 Formato</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Un PDF con capturas y respuestas + el archivo .pkt. Nombre: <code>TI312-CP1-NombreGrupo</code>.</div></div>
+          <div class="ctaRow"><a class="btn" href="TI312-Semana1-Redes.html">📖 Volver a la clase</a><a class="btn home" href="index.html">← Índice del curso</a></div>`,
+      badges:{ak:"Entrega",av:"LMS · hoy",bk:"Este CP vale",bv:"15%"},
+      img:"images/cp-entrega.svg"
+    }
+  ]
+};
+</script>
+<script src="assets/deck.js"></script>
+</body>
+</html>

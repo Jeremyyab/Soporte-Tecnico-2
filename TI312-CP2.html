@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-312 · Caso Práctico 2 — Red con Wi-Fi e IoT</title>
+  <link rel="icon" href="images/cenfotec-logo.svg"/>
+  <link rel="stylesheet" href="assets/deck.css"/>
+</head>
+<body>
+<script>
+/* ═══════════════════════════════════════════════
+   TI-312 · Caso Práctico 2 — Red con Wi-Fi e IoT
+   Para editar: cambiá el contenido de "slides".
+   Cada slide: kicker, title, desc, html, badges, img
+═══════════════════════════════════════════════ */
+window.DECK = {
+  title:"Caso Práctico 2 — Red con Wi-Fi e IoT",
+  sub:"TI-312 · Semana 2 — Laboratorio en Packet Tracer",
+  theme:"cp",
+  pills:["Grupal","Packet Tracer"],
+  links:[{"label":"📖 Clase Semana 2","href":"TI312-Semana2-Redes.html"}],
+  slides:[
+    /* ── CASO PRÁCTICO 2 ── */
+    {
+      kicker:"CASO PRÁCTICO 2",
+      title:"Red con Wi-Fi, IoT y ACL",
+      desc:"Extendemos la red del CP1 con un AP inalámbrico, laptops por Wi-Fi, un sensor IoT y una ACL básica.",
+      html:`
+          <div class="grid">
+          <div class="card"><strong>📌 Datos del caso</strong><ul><li>Semana 2 de 4</li><li>Valor: 15% (de 45% en casos)</li><li>Grupos de 3–4 personas</li><li>Duración: ~80 minutos en clase</li></ul></div>
+          <div class="card"><strong>🧰 Necesitás</strong><ul><li>Archivo .pkt del CP1</li><li>Packet Tracer 8.2.2</li><li>Wireless Router WRT300N y dispositivos IoT</li></ul></div>
+          </div>
+          <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6"><b>TechSol S.A.</b> ahora tiene empleados con laptops que necesitan Wi-Fi y un sensor de temperatura IoT en el área de servidores. Deben extender la red del CP1 sin romper lo que ya funciona.</div></div>
+          <div class="warnBox"><div class="wtitle">⚠ Misma versión de Packet Tracer en todo el grupo</div><p>Usen Packet Tracer 8.2.2 (estable). La 9.0 está en beta y hay reportes de archivos .pkt que no abren entre 8.2.x y 9.0. <span class="updBadge">2026</span></p></div>
+          <div class="ctaRow"><a class="btn" href="TI312-Semana2-Redes.html">📖 Ver la clase de la Semana 2</a></div>`,
+      badges:{ak:"Valor",av:"15%",bk:"Duración",bv:"~80 min"},
+      img:"images/cp2-portada.svg"
+    },
+
+    /* ── 01 · CASO PRÁCTICO 2 ── */
+    {
+      kicker:"HERRAMIENTA Y OBJETIVOS",
+      title:"Laboratorio — Red con Wi-Fi e IoT",
+      desc:"Extendemos la red del Caso 1 agregando conectividad inalámbrica y un dispositivo IoT.",
+      html:`
+          <div class="labBox"><div class="ltitle">🧪 Herramienta: Cisco Packet Tracer</div><p>Wireless Router WRT300N para el AP · Dispositivos IoT disponibles en End Devices.</p></div>
+          <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6">TechSol S.A. ahora tiene empleados con laptops que necesitan Wi-Fi y un sensor de temperatura IoT en el área de servidores. Deben extender la red del CP1 con estas capacidades nuevas.</div></div>
+          <div class="bigcard"><div class="title">🎯 Objetivos</div><ul><li>Agregar y configurar un AP (WRT300N)</li><li>Conectar 2 laptops por Wi-Fi</li><li>Agregar 1 dispositivo IoT a la red</li><li>Aplicar una ACL básica en el router</li><li>Verificar conectividad completa</li></ul></div>`,
+      badges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},
+      img:"images/s2-lab.svg"
+    },
+
+    /* ── 02 · INSTRUCCIONES ── */
+    {
+      kicker:"INSTRUCCIONES",
+      title:"Pasos del laboratorio — Caso 2",
+      desc:"Trabajás sobre el archivo del CP1. Si no lo tenés, creá uno nuevo con la topología base.",
+      html:`
+          <div class="bigcard"><div class="title">Paso a paso</div><ol class="stepList">
+          <li>Abrir el archivo del CP1 (o crear uno nuevo con router + switch + 3 PCs).</li>
+          <li>Agregar un <b>Wireless Router WRT300N</b> al canvas, conectar uno de sus puertos <b>Ethernet (LAN 1–4)</b> al Switch0 con Straight-Through. <i>No uses el puerto Internet</i>: así el WRT300N funciona como AP dentro de la misma red.</li>
+          <li>Configurar el AP: SSID = <b>TechSol-WiFi</b> · Seguridad = WPA2 · Password = <b>Soporte2026</b></li>
+          <li>Agregar 2 <b>Laptops</b> (End Devices → Laptop). Conectarlas al AP por Wi-Fi (Config → Wireless).</li>
+          <li>Agregar 1 dispositivo IoT (Home → Sensor IoT). Conectarlo al Switch0.</li>
+          <li>Asignar IPs: Laptops = 192.168.10.20 y .21 · IoT = 192.168.10.50</li>
+          <li>Verificar: ping laptop → PC0 · ping laptop → IoT · ping IoT → gateway.</li>
+          <li>ACL básica en el router: denegar acceso del IoT al servidor (opcional avanzado).</li>
+          </ol></div>
+          <div class="debateBox"><div class="dtitle">💡 Pregunta durante el lab</div><p>¿Por qué el WRT300N funciona como AP y también como router? ¿En qué modo lo estamos usando aquí y por qué?</p></div>`,
+      badges:{ak:"Red a usar",av:"192.168.10.0/24",bk:"AP",bv:"WRT300N"},
+      img:"images/s2-instrucciones.svg"
+    },
+
+    /* ── 03 · CONFIGURACIÓN AP ── */
+    {
+      kicker:"CONFIGURACIÓN AP",
+      title:"Cómo configurar el WRT300N en PT",
+      desc:"El wireless router se configura por su interfaz gráfica dentro de Packet Tracer.",
+      html:`
+          <div class="bigcard"><div class="title">Pasos en Packet Tracer</div><ol class="stepList">
+          <li>Doble clic en el WRT300N → pestaña <b>GUI</b>.</li>
+          <li>Setup → Network Setup → IP del AP: <b>192.168.10.254</b> (o la que elijas).</li>
+          <li>Wireless → Basic Wireless Settings → SSID: <b>TechSol-WiFi</b> · Canal: 6.</li>
+          <li>Wireless Security → WPA2 Personal → Passphrase: <b>Soporte2026</b>.</li>
+          <li>En la laptop: Config → Wireless → SSID: TechSol-WiFi → contraseña.</li>
+          <li>Setup → DHCP Server: <b>Disabled</b> (evita doble DHCP). Las laptops usan IP estática .20 y .21.</li>
+          </ol></div>
+          <div class="bigcard amber"><div class="title">Conectar la laptop al Wi-Fi</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Doble clic en Laptop → Config → Wireless0 → SSID: TechSol-WiFi · Authentication: WPA2-PSK · PSK Pass Phrase: Soporte2026 → Connect.</div></div>`,
+      badges:{ak:"IP del AP",av:"192.168.10.254",bk:"DHCP del WRT300N",bv:"Desactivado"},
+      img:"images/s2-ap.svg"
+    },
+
+    /* ── 04 · RETROALIMENTACIÓN ── */
+    {
+      kicker:"RETROALIMENTACIÓN",
+      title:"Revisión del Caso Práctico 2",
+      desc:"Cada grupo comparte su implementación. Analizamos decisiones técnicas.",
+      html:`
+          <div class="bigcard green"><div class="title">✅ ¿Qué revisamos?</div><ul><li>¿El AP está correctamente configurado?</li><li>¿Las laptops se conectaron al SSID?</li><li>¿El dispositivo IoT tiene IP válida?</li><li>¿El ping entre todos los dispositivos funciona?</li><li>¿La documentación es clara?</li></ul></div>
+          <div class="bigcard"><div class="title">💬 Discusión grupal</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Cada grupo — 2 minutos:<br>1) ¿Pusieron el IoT en VLAN separada? ¿Por qué sí o no?<br>2) ¿Qué pasaría si dos APs usan el mismo canal?<br>3) ¿Qué ACL aplicarían en producción?</div></div>
+          <div class="revealRow">
+          <button class="btn primary" data-reveal="r1">Ver errores frecuentes</button>
+          <button class="btn" data-hide="r1">Ocultar</button>
+          </div>
+          <div class="revealBox" id="r1">Errores comunes: SSID con espacio al final · WPA2 vs WPA2-PSK confundidos · IP del AP en la misma red pero sin gateway configurado · Laptop con Wireless desactivada.</div>`,
+      badges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Evidencia técnica"},
+      img:"images/s2-retro.svg"
+    }
+,
+
+    /* ── ENTREGA ── */
+    {
+      kicker:"ENTREGA",
+      title:"Entrega del Caso Práctico 2",
+      desc:"Todo se sube al LMS antes de terminar la clase. Un solo integrante sube por el grupo.",
+      html:`
+          <div class="bigcard green"><div class="title">✅ Checklist de entrega</div><ul>
+          <li>Archivo <code>TI312-CP2-NombreGrupo.pkt</code> que abra y funcione</li>
+          <li>Captura de la topología con todos los enlaces en verde</li>
+          <li>Tabla de direccionamiento IP actualizada</li>
+          <li>Configuración del AP: SSID, canal, seguridad WPA2</li>
+          <li>Capturas de pings laptop → PC0, laptop → IoT, IoT → gateway</li>
+          <li>ACL aplicada (si hicieron el reto avanzado)</li>
+          <li>Respuesta escrita a la pregunta guía del laboratorio</li>
+          <li>Un problema que encontraron y cómo lo resolvieron</li></ul></div>
+          <div class="bigcard"><div class="title">📦 Formato</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Un PDF con capturas y respuestas + el archivo .pkt. Nombre: <code>TI312-CP2-NombreGrupo</code>.</div></div>
+          <div class="ctaRow"><a class="btn" href="TI312-Semana2-Redes.html">📖 Volver a la clase</a><a class="btn home" href="index.html">← Índice del curso</a></div>`,
+      badges:{ak:"Entrega",av:"LMS · hoy",bk:"Este CP vale",bv:"15%"},
+      img:"images/cp-entrega.svg"
+    }
+  ]
+};
+</script>
+<script src="assets/deck.js"></script>
+</body>
+</html>

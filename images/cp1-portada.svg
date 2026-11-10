@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eaf1f8"/><stop offset="100%" stop-color="#cfdceb"/></linearGradient>
+    <linearGradient id="lab" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#14532d"/><stop offset="100%" stop-color="#16a34a"/></linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  <rect x="40" y="36" width="720" height="92" rx="16" fill="url(#lab)"/>
+  <text x="70" y="78" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#fff">CASO PRÁCTICO 1</text>
+  <text x="70" y="108" font-family="Arial,sans-serif" font-size="16" fill="#dcfce7">Diseño de una red básica · TechSol S.A.</text>
+  <text x="730" y="96" font-family="Arial,sans-serif" font-size="54" text-anchor="end" fill="#bbf7d0" opacity=".9">🧪</text>
+  <g stroke="#0b66c3" stroke-width="2.5" stroke-linecap="round">
+    <line x1="400" y1="250" x2="170" y2="215"/>
+    <line x1="400" y1="250" x2="170" y2="300"/>
+    <line x1="400" y1="250" x2="630" y2="215"/>
+    <line x1="400" y1="250" x2="630" y2="300"/>
+    <line x1="400" y1="250" x2="330" y2="352"/>
+    <line x1="400" y1="250" x2="470" y2="352"/>
+  </g>
+  <rect x="330" y="222" width="140" height="56" rx="14" fill="#0a4f96"/><text x="400" y="256" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">Router</text>
+  <rect x="108" y="195" width="124" height="40" rx="12" fill="#ffffff" stroke="#b9c8da"/><text x="170" y="220" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Switch 1</text>
+  <rect x="108" y="280" width="124" height="40" rx="12" fill="#ffffff" stroke="#b9c8da"/><text x="170" y="305" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Switch 2</text>
+  <rect x="568" y="195" width="124" height="40" rx="12" fill="#ffffff" stroke="#b9c8da"/><text x="630" y="220" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Servidor</text>
+  <rect x="568" y="280" width="124" height="40" rx="12" fill="#ffffff" stroke="#b9c8da"/><text x="630" y="305" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Impresora</text>
+  <rect x="268" y="332" width="124" height="40" rx="12" fill="#ffffff" stroke="#b9c8da"/><text x="330" y="357" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">6 PCs</text>
+  <rect x="408" y="332" width="124" height="40" rx="12" fill="#ffffff" stroke="#b9c8da"/><text x="470" y="357" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Internet</text>
+  <rect x="46" y="392" width="132" height="64" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="112" y="418" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">PASO 1</text>
+  <text x="112" y="440" font-family="Arial,sans-serif" font-size="13" fill="#0f172a" text-anchor="middle">Diseñar</text>
+  <rect x="190" y="392" width="132" height="64" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="256" y="418" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">PASO 2</text>
+  <text x="256" y="440" font-family="Arial,sans-serif" font-size="13" fill="#0f172a" text-anchor="middle">Conectar</text>
+  <rect x="334" y="392" width="132" height="64" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="400" y="418" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">PASO 3</text>
+  <text x="400" y="440" font-family="Arial,sans-serif" font-size="13" fill="#0f172a" text-anchor="middle">Direccionar</text>
+  <rect x="478" y="392" width="132" height="64" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="544" y="418" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">PASO 4</text>
+  <text x="544" y="440" font-family="Arial,sans-serif" font-size="13" fill="#0f172a" text-anchor="middle">Verificar</text>
+  <rect x="622" y="392" width="132" height="64" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="688" y="418" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">PASO 5</text>
+  <text x="688" y="440" font-family="Arial,sans-serif" font-size="13" fill="#0f172a" text-anchor="middle">Documentar</text>
+</svg>
