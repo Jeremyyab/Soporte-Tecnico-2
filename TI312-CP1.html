@@ -38,6 +38,58 @@ window.DECK = {
       img:"images/cp1-portada.svg"
     },
 
+    /* ── CONOCÉ EL EQUIPO ── */
+    {
+      kicker:"CONOCÉ EL EQUIPO",
+      title:"Los equipos reales detrás de cada ícono",
+      desc:"Antes de arrastrar íconos en Packet Tracer, veamos qué es cada aparato, dónde se ubica en una empresa y qué puertos tiene.",
+      html:`
+          <div class="grid">
+          <div class="card"><strong>🔀 Switch Cisco 2960-24TT</strong><ul><li>Va en el rack del cuarto de comunicaciones</li><li>24 puertos <b>Fa0/1–Fa0/24</b> (100 Mbps) para equipos</li><li>2 uplinks <b>Gi0/1–Gi0/2</b> (1 Gbps) hacia router u otro switch</li><li>Aprende la MAC de quien está en cada puerto</li></ul></div>
+          <div class="card"><strong>🌐 Router Cisco 2911</strong><ul><li>Conecta la LAN con otras redes e Internet</li><li>3 puertos Gigabit <b>G0/0–G0/2</b></li><li>Puerto <b>Console</b> para configurarlo con cable celeste</li><li>Viene con las interfaces <b>apagadas</b></li></ul></div>
+          </div>
+          <div class="grid">
+          <div class="card"><strong>🖥 PC, servidor e impresora</strong><ul><li>Todos tienen una NIC con puerto RJ-45</li><li>En PT el puerto se llama <b>FastEthernet0</b></li><li>El servidor y la impresora llevan IP fija</li></ul></div>
+          <div class="card"><strong>💡 Cómo leer un nombre de puerto</strong><ul><li><b>Fa</b> = FastEthernet · <b>Gi / G</b> = Gigabit</li><li><b>0/1</b> = módulo 0, puerto 1</li><li>Fa0/1 y Gi0/1 son puertos distintos</li></ul></div>
+          </div>
+          <div class="debateBox"><div class="dtitle">🗣 Pregunta rápida</div><p>Si la empresa crece a 40 PCs, ¿alcanza un switch de 24 puertos? ¿Qué harían?</p></div>`,
+      badges:{ak:"Switch",av:"24 + 2 puertos",bk:"Router",bv:"3 Gigabit"},
+      img:"images/cp1-equipos.svg"
+    },
+
+    /* ── EL CABLE ── */
+    {
+      kicker:"EL CABLE",
+      title:"El cable de red por dentro",
+      desc:"Un cable UTP tiene 8 hilos en 4 pares trenzados. El orden de colores en el conector define si el cable es directo o cruzado.",
+      html:`
+          <div class="grid">
+          <div class="card"><strong>🧵 UTP Cat5e / Cat6</strong><ul><li>UTP = par trenzado sin blindaje</li><li>El trenzado cancela la interferencia entre hilos</li><li>Máximo <b>100 m</b> por tramo</li><li>Cat5e: 1 Gbps · Cat6: 1 Gbps (10G a corta distancia) · Cat6a: 10 Gbps</li></ul></div>
+          <div class="card"><strong>🔌 Conector RJ-45</strong><ul><li>8 pines numerados del 1 al 8</li><li>Se arma con ponchadora y se prueba con tester</li><li>Dos normas de orden: <b>T568A</b> y <b>T568B</b></li><li>En Costa Rica lo usual es T568B</li></ul></div>
+          </div>
+          <div class="bigcard"><div class="title">La regla de armado</div><div style="color:var(--muted);font-size:13px;line-height:1.7"><b>Straight-Through:</b> la misma norma en las dos puntas (B con B).<br><b>Cross-Over:</b> una punta en A y la otra en B, así el par que transmite en un extremo llega al par que recibe en el otro.</div></div>
+          <div class="labBox"><div class="ltitle">🧪 Si hay material en el aula</div><p>Pasen un cable armado y un tester: identifiquen la norma de cada punta leyendo los colores con la pestaña del conector hacia abajo.</p></div>`,
+      badges:{ak:"Largo máximo",av:"100 m",bk:"Norma usual",bv:"T568B"},
+      img:"images/cp1-cable.svg"
+    },
+
+    /* ── ¿QUÉ CABLE USO? ── */
+    {
+      kicker:"¿QUÉ CABLE USO?",
+      title:"Straight-Through o Cross-Over",
+      desc:"No depende del nombre del equipo, sino de qué pines usa para transmitir. Esa es la regla que van a aplicar en todo el laboratorio.",
+      html:`
+          <div class="grid">
+          <div class="card"><strong>MDI (transmiten por 1-2)</strong><ul><li>PC</li><li>Router</li><li>Servidor e impresora</li></ul></div>
+          <div class="card"><strong>MDI-X (transmiten por 3-6)</strong><ul><li>Switch</li><li>Hub</li><li>Ya cruzan por dentro</li></ul></div>
+          </div>
+          <div class="bigcard"><div class="title">Qué cable usar en el CP1</div><ul><li>PC, servidor o impresora → switch: <b>Straight-Through</b></li><li>Router → switch: <b>Straight-Through</b></li><li>Switch → switch: <b>Cross-Over</b></li><li>PC → router directo o PC → PC: <b>Cross-Over</b> (pregunta trampa típica)</li></ul></div>
+          <div class="bigcard amber"><div class="title">En Packet Tracer</div><div style="color:var(--muted);font-size:13px;line-height:1.7">Menú <b>Connections</b> (ícono del rayo): Straight-Through es la <b>línea negra continua</b> y Cross-Over la <b>línea negra punteada</b>. No usen el rayo naranja automático: el objetivo es que elijan ustedes.</div></div>
+          <div class="debateBox"><div class="dtitle">🗣 ¿Y en la vida real?</div><p>Casi todo equipo moderno tiene <b>Auto-MDIX</b> y corrige el cable solo. ¿Por qué igual conviene saberlo? Piensen en equipo viejo, en el examen de certificación y en el día que les toque ponchar cables.</p></div>`,
+      badges:{ak:"Distintos",av:"Straight",bk:"Iguales",bv:"Cross-Over"},
+      img:"images/cp1-mdi.svg"
+    },
+
     /* ── 01 · CASO PRÁCTICO 1 ── */
     {
       kicker:"HERRAMIENTA Y OBJETIVOS",

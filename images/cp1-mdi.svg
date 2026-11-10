@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eaf1f8"/><stop offset="100%" stop-color="#cfdceb"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4b5e"/><stop offset="1" stop-color="#1f2a37"/></linearGradient>
+    <linearGradient id="plug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f8fc"/><stop offset="1" stop-color="#c9d6e5"/></linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+<text x="400" y="36" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#0a4f96" text-anchor="middle">¿Por qué straight-through o cross-over?</text>
+<g transform="translate(0,60)"><rect x="60" y="0" width="150" height="150" rx="12" fill="#fff" stroke="#0b66c3" stroke-width="2"/><text x="135" y="24" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0b66c3" text-anchor="middle">PC / Router</text>
+<text x="135" y="40" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">MDI</text>
+<text x="135" y="62" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">TX: pines 1-2</text>
+<text x="135" y="112" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">RX: pines 3-6</text>
+<rect x="590" y="0" width="150" height="150" rx="12" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="665" y="24" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">Switch</text>
+<text x="665" y="40" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">MDI-X</text>
+<text x="665" y="62" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">RX: pines 1-2</text>
+<text x="665" y="112" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">TX: pines 3-6</text>
+<path d="M210 58 H590" stroke="#0b66c3" stroke-width="4"/><path d="M210 108 H590" stroke="#0b66c3" stroke-width="4"/><text x="400" y="30" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#0b66c3" text-anchor="middle">Straight-Through (línea continua en PT)</text>
+<text x="400" y="172" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">El switch ya cruza por dentro: lo que transmite la PC cae donde el switch recibe</text>
+</g>
+<g transform="translate(0,240)"><rect x="60" y="0" width="150" height="150" rx="12" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="135" y="24" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">Switch</text>
+<text x="135" y="40" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">MDI-X</text>
+<text x="135" y="62" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">TX: pines 3-6</text>
+<text x="135" y="112" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">RX: pines 1-2</text>
+<rect x="590" y="0" width="150" height="150" rx="12" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="665" y="24" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">Switch</text>
+<text x="665" y="40" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">MDI-X</text>
+<text x="665" y="62" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">TX: pines 3-6</text>
+<text x="665" y="112" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#0f172a" text-anchor="middle">RX: pines 1-2</text>
+<path d="M210 58 C 330 58, 470 108, 590 108" stroke="#7c3aed" stroke-width="4" fill="none" stroke-dasharray="10 6"/><path d="M210 108 C 330 108, 470 58, 590 58" stroke="#7c3aed" stroke-width="4" fill="none" stroke-dasharray="10 6"/><text x="400" y="30" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#7c3aed" text-anchor="middle">Cross-Over (línea punteada en PT)</text>
+<text x="400" y="172" font-family="Arial,sans-serif" font-size="12" font-weight="normal" fill="#50607a" text-anchor="middle">Los dos transmiten por los mismos pines: el cable los tiene que cruzar</text>
+</g>
+<text x="400" y="470" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0a4f96" text-anchor="middle">Distintos (MDI ↔ MDI-X) = straight · iguales = cross-over · Auto-MDIX lo corrige solo en equipo moderno</text>
+</svg>

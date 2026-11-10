@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eaf1f8"/><stop offset="100%" stop-color="#cfdceb"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4b5e"/><stop offset="1" stop-color="#1f2a37"/></linearGradient>
+    <linearGradient id="plug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f8fc"/><stop offset="1" stop-color="#c9d6e5"/></linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+<text x="400" y="36" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#0a4f96" text-anchor="middle">Así se ven en la vida real</text>
+<rect x="40" y="52" width="720" height="124" rx="12" fill="#fff" stroke="#b9c8da"/>
+<text x="56" y="74" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="start">Switch Cisco Catalyst 2960-24TT — vista frontal, se monta en rack</text>
+<rect x="56" y="84" width="640" height="60" rx="4" fill="url(#metal)"/>
+<text x="64" y="100" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#9fb3cb" text-anchor="start">CISCO</text>
+<circle cx="123" cy="89" r="2" fill="#22c55e"/><rect x="110" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="117.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="114" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="123" cy="117" r="2" fill="#22c55e"/><rect x="110" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="117.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="114" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="159" cy="89" r="2" fill="#22c55e"/><rect x="146" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="153.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="150" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="159" cy="117" r="2" fill="#22c55e"/><rect x="146" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="153.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="150" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="195" cy="89" r="2" fill="#22c55e"/><rect x="182" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="189.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="186" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="195" cy="117" r="2" fill="#22c55e"/><rect x="182" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="189.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="186" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="231" cy="89" r="2" fill="#22c55e"/><rect x="218" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="225.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="222" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="231" cy="117" r="2" fill="#22c55e"/><rect x="218" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="225.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="222" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="267" cy="89" r="2" fill="#22c55e"/><rect x="254" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="261.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="258" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="267" cy="117" r="2" fill="#22c55e"/><rect x="254" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="261.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="258" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="303" cy="89" r="2" fill="#22c55e"/><rect x="290" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="297.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="294" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="303" cy="117" r="2" fill="#22c55e"/><rect x="290" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="297.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="294" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="339" cy="89" r="2" fill="#22c55e"/><rect x="326" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="333.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="330" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="339" cy="117" r="2" fill="#22c55e"/><rect x="326" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="333.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="330" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="375" cy="89" r="2" fill="#22c55e"/><rect x="362" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="369.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="366" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="375" cy="117" r="2" fill="#22c55e"/><rect x="362" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="369.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="366" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="411" cy="89" r="2" fill="#22c55e"/><rect x="398" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="405.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="402" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="411" cy="117" r="2" fill="#22c55e"/><rect x="398" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="405.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="402" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="447" cy="89" r="2" fill="#22c55e"/><rect x="434" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="441.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="438" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="447" cy="117" r="2" fill="#22c55e"/><rect x="434" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="441.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="438" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="483" cy="89" r="2" fill="#22c55e"/><rect x="470" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="477.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="474" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="483" cy="117" r="2" fill="#22c55e"/><rect x="470" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="477.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="474" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="519" cy="89" r="2" fill="#22c55e"/><rect x="506" y="91" width="26" height="17" rx="2" fill="#05090e"/><rect x="513.8" y="108" width="10.4" height="4" fill="#05090e"/><rect x="510" y="94" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<circle cx="519" cy="117" r="2" fill="#22c55e"/><rect x="506" y="119" width="26" height="17" rx="2" fill="#05090e"/><rect x="513.8" y="136" width="10.4" height="4" fill="#05090e"/><rect x="510" y="122" width="18" height="4" fill="#c9a23c" opacity=".8"/>
+<rect x="560" y="96" width="30" height="22" rx="2" fill="#05090e"/><rect x="569.0" y="118" width="12.0" height="4" fill="#05090e"/><rect x="564" y="99" width="22" height="4" fill="#c9a23c" opacity=".8"/>
+<rect x="604" y="96" width="30" height="22" rx="2" fill="#05090e"/><rect x="613.0" y="118" width="12.0" height="4" fill="#05090e"/><rect x="608" y="99" width="22" height="4" fill="#c9a23c" opacity=".8"/>
+<text x="597" y="136" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#f59e0b" text-anchor="middle">Gi0/1   Gi0/2</text>
+<text x="56" y="164" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">24 puertos FastEthernet Fa0/1–Fa0/24 (100 Mbps) para PCs, servidor e impresora · 2 uplinks Gigabit hacia el router u otro switch</text>
+<rect x="40" y="186" width="720" height="124" rx="12" fill="#fff" stroke="#b9c8da"/>
+<text x="56" y="208" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="start">Router Cisco 2911 — vista trasera, donde se conectan los cables</text>
+<rect x="56" y="218" width="640" height="60" rx="4" fill="url(#metal)"/>
+<rect x="80" y="230" width="34" height="22" rx="2" fill="#05090e"/><rect x="90.2" y="252" width="13.600000000000001" height="4" fill="#05090e"/><rect x="84" y="233" width="26" height="4" fill="#c9a23c" opacity=".8"/>
+<text x="97" y="270" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#f59e0b" text-anchor="middle">G0/0</text>
+<rect x="140" y="230" width="34" height="22" rx="2" fill="#05090e"/><rect x="150.2" y="252" width="13.600000000000001" height="4" fill="#05090e"/><rect x="144" y="233" width="26" height="4" fill="#c9a23c" opacity=".8"/>
+<text x="157" y="270" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#f59e0b" text-anchor="middle">G0/1</text>
+<rect x="200" y="230" width="34" height="22" rx="2" fill="#05090e"/><rect x="210.2" y="252" width="13.600000000000001" height="4" fill="#05090e"/><rect x="204" y="233" width="26" height="4" fill="#c9a23c" opacity=".8"/>
+<text x="217" y="270" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#f59e0b" text-anchor="middle">G0/2</text>
+<rect x="280" y="230" width="30" height="22" rx="2" fill="#0ea5e9"/><rect x="289.0" y="252" width="12.0" height="4" fill="#0ea5e9"/><rect x="284" y="233" width="22" height="4" fill="#c9a23c" opacity=".8"/>
+<text x="295" y="270" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#7dd3fc" text-anchor="middle">Console</text>
+<rect x="360" y="228" width="70" height="38" rx="3" fill="#0f1823" stroke="#4b5d72"/><rect x="440" y="228" width="70" height="38" rx="3" fill="#0f1823" stroke="#4b5d72"/><rect x="520" y="228" width="70" height="38" rx="3" fill="#0f1823" stroke="#4b5d72"/><rect x="600" y="228" width="70" height="38" rx="3" fill="#0f1823" stroke="#4b5d72"/><text x="518" y="274" font-family="Arial,sans-serif" font-size="9" font-weight="normal" fill="#9fb3cb" text-anchor="middle">Ranuras para módulos extra (WAN, más puertos)</text>
+<text x="56" y="298" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="start">3 puertos Gigabit G0/0–G0/2 · cada puerto puede ser una red distinta · Console (celeste) sirve para configurarlo</text>
+<rect x="40" y="320" width="228" height="140" rx="12" fill="#fff" stroke="#b9c8da"/>
+<text x="154" y="344" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Servidor</text>
+<rect x="130" y="354" width="48" height="60" rx="4" fill="url(#metal)"/><rect x="138" y="362" width="32" height="5" fill="#4b5d72"/><rect x="138" y="372" width="32" height="5" fill="#4b5d72"/><circle cx="164" cy="404" r="3" fill="#22c55e"/>
+<text x="154" y="432" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">PC robusta: dos fuentes,</text>
+<text x="154" y="448" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">discos en RAID, siempre encendida</text>
+<rect x="286" y="320" width="228" height="140" rx="12" fill="#fff" stroke="#b9c8da"/>
+<text x="400" y="344" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Tarjeta de red (NIC)</text>
+<rect x="350" y="358" width="100" height="54" rx="4" fill="#8a97a8"/><rect x="384" y="370" width="32" height="24" rx="2" fill="#05090e"/><rect x="393.6" y="394" width="12.8" height="4" fill="#05090e"/><rect x="388" y="373" width="24" height="4" fill="#c9a23c" opacity=".8"/>
+<rect x="386" y="372" width="6" height="4" fill="#22c55e"/><rect x="408" y="372" width="6" height="4" fill="#f59e0b"/>
+<text x="400" y="432" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Puerto RJ-45 con 2 LEDs:</text>
+<text x="400" y="448" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">verde = enlace · ámbar = datos</text>
+<rect x="532" y="320" width="228" height="140" rx="12" fill="#fff" stroke="#b9c8da"/>
+<text x="646" y="344" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Impresora de red</text>
+<rect x="606" y="370" width="80" height="40" rx="6" fill="#dfe7f1" stroke="#8a97a8"/><rect x="618" y="358" width="56" height="14" rx="2" fill="#fff" stroke="#8a97a8"/><rect x="616" y="398" width="60" height="4" fill="#8a97a8"/>
+<text x="646" y="432" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Tiene su propia NIC</text>
+<text x="646" y="448" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">y una IP fija, como una PC</text>
+<text x="400" y="484" font-family="Arial,sans-serif" font-size="11" font-weight="normal" fill="#50607a" text-anchor="middle">Ilustraciones de referencia — en Packet Tracer cada equipo es un ícono, pero los puertos se llaman igual</text>
+</svg>
