@@ -124,7 +124,7 @@ window.DECK = {
           <div class="bigcard"><div class="title">Tipos de cortafuegos</div><div style="color:var(--muted);font-size:13px;line-height:1.7"><b>Stateless (sin estado):</b> Filtra por regla fija (IP origen/destino, puerto, protocolo). Rápido pero limitado.<br><b>Stateful (con estado):</b> Sigue el estado de cada sesión. Permite respuestas de conexiones iniciadas internamente. Más inteligente.</div></div>
           <div class="grid">
           <div class="card"><strong>Reglas básicas</strong><ul><li>Deny all (regla base)</li><li>Allow established (respuestas)</li><li>Allow specific ports (443, 22 solo desde admin)</li><li>Log denied (auditoría)</li></ul></div>
-          <div class="card"><strong>Configuración en PT</strong><ul><li>Router → Security → ACL</li><li>Access Control List</li><li>permit / deny + red/IP</li><li>Aplicar en interfaz</li></ul></div>
+          <div class="card"><strong>Configuración en PT</strong><ul><li>Se configuran por <b>CLI</b> del router</li><li><code>access-list 100 deny/permit ...</code></li><li><code>ip access-group 100 in</code> en la interfaz</li><li>Solo filtran tráfico que <b>pasa por el router</b></li></ul></div>
           </div>
           <div class="bigcard red"><div class="title">Principio de mínimo privilegio</div><div style="color:var(--muted);font-size:13px;line-height:1.7">Permitir solo lo estrictamente necesario. Denegar todo lo demás por defecto. Si no sabés por qué una regla existe, probablemente no debería estar.</div></div>`,
       badges:{ak:"Regla base",av:"Deny all",bk:"Tipo recomendado",bv:"Stateful"},
@@ -137,7 +137,7 @@ window.DECK = {
       title:"Problemas y soluciones de red",
       desc:"El 80% de los problemas de red se resuelven con los mismos 5 pasos. El orden importa.",
       html:`
-          <div class="bigcard green"><div class="title">Metodología: Capa 1 → arriba</div><ul><li><b>Capa 1:</b> ¿Hay cable? ¿LED encendido? → Verificar físico</li><li><b>Capa 2:</b> ¿El switch ve la MAC? → show mac-address-table</li><li><b>Capa 3:</b> ¿Tiene IP correcta? → ipconfig / ping gateway</li><li><b>Capa 4-7:</b> ¿El servicio responde? → telnet IP puerto / nmap</li></ul></div>
+          <div class="bigcard green"><div class="title">Metodología: Capa 1 → arriba</div><ul><li><b>Capa 1:</b> ¿Hay cable? ¿LED encendido? → Verificar físico</li><li><b>Capa 2:</b> ¿El switch ve la MAC? → show mac address-table</li><li><b>Capa 3:</b> ¿Tiene IP correcta? → ipconfig / ping gateway</li><li><b>Capa 4-7:</b> ¿El servicio responde? → telnet IP puerto / nmap</li></ul></div>
           <div class="grid">
           <div class="card"><strong>Síntomas frecuentes</strong><ul><li>169.254.x.x → DHCP falla</li><li>Ping gateway falla → IP/GW mal</li><li>Ping IP OK, nombre falla → DNS</li><li>LED ámbar → STP convergiendo</li></ul></div>
           <div class="card"><strong>Herramientas clave</strong><ul><li>ipconfig / ifconfig</li><li>ping · tracert · nslookup</li><li>show ip int brief (Cisco)</li><li>netstat -an · nmap</li></ul></div>

@@ -48,7 +48,7 @@ window.DECK = {
           <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6">TechSol S.A. ahora tiene empleados con laptops que necesitan Wi-Fi y un sensor de temperatura IoT en el área de servidores. Deben extender la red del CP1 con estas capacidades nuevas.</div></div>
           <div class="bigcard"><div class="title">🎯 Objetivos</div><ul><li>Agregar y configurar un AP (WRT300N)</li><li>Conectar 2 laptops por Wi-Fi</li><li>Agregar 1 dispositivo IoT a la red</li><li>Aplicar una ACL básica en el router</li><li>Verificar conectividad completa</li></ul></div>`,
       badges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},
-      img:"images/s2-lab.svg"
+      img:"images/cp2-topologia.svg"
     },
 
     /* ── 02 · INSTRUCCIONES ── */
@@ -58,14 +58,14 @@ window.DECK = {
       desc:"Trabajás sobre el archivo del CP1. Si no lo tenés, creá uno nuevo con la topología base.",
       html:`
           <div class="bigcard"><div class="title">Paso a paso</div><ol class="stepList">
-          <li>Abrir el archivo del CP1 (o crear uno nuevo con router + switch + 3 PCs).</li>
-          <li>Agregar un <b>Wireless Router WRT300N</b> al canvas, conectar uno de sus puertos <b>Ethernet (LAN 1–4)</b> al Switch0 con Straight-Through. <i>No uses el puerto Internet</i>: así el WRT300N funciona como AP dentro de la misma red.</li>
-          <li>Configurar el AP: SSID = <b>TechSol-WiFi</b> · Seguridad = WPA2 · Password = <b>Soporte2026</b></li>
-          <li>Agregar 2 <b>Laptops</b> (End Devices → Laptop). Conectarlas al AP por Wi-Fi (Config → Wireless).</li>
-          <li>Agregar 1 dispositivo IoT (Home → Sensor IoT). Conectarlo al Switch0.</li>
-          <li>Asignar IPs: Laptops = 192.168.10.20 y .21 · IoT = 192.168.10.50</li>
-          <li>Verificar: ping laptop → PC0 · ping laptop → IoT · ping IoT → gateway.</li>
-          <li>ACL básica en el router: denegar acceso del IoT al servidor (opcional avanzado).</li>
+          <li>Abrir el archivo del CP1 y guardarlo como <b>TI312-CP2-NombreGrupo.pkt</b>.</li>
+          <li>Agregar un <b>WRT300N</b> (Network Devices → Wireless Devices). Conectar su puerto <b>Ethernet 1</b> al <b>Fa0/5</b> del Switch0 con Straight-Through. <i>No uses el puerto Internet.</i></li>
+          <li>Configurar el WRT300N por GUI: IP <b>192.168.10.254</b>, DHCP <b>Disabled</b>, SSID <b>TechSol-WiFi</b>, canal 6, WPA2 Personal · AES · <b>Soporte2026</b>.</li>
+          <li>Agregar 2 <b>Laptop-PT</b> y cambiarles la tarjeta: Physical → apagar → sacar <b>PT-LAPTOP-NM-1CFE</b> → poner <b>WPC300N</b> → encender.</li>
+          <li>Conectar cada laptop: Config → Wireless0 → SSID, WPA2-PSK, clave. IPs <b>.20</b> y <b>.21</b>, gateway <b>.1</b>.</li>
+          <li>Agregar 1 dispositivo IoT (End Devices → <b>Home</b>) al <b>Fa0/12</b> del Switch0. IP <b>192.168.10.50</b>, gateway .1.</li>
+          <li>Verificar: laptop → PC0 · laptop → IoT · IoT → gateway · laptop → servidor.</li>
+          <li><b>Reto avanzado:</b> mover el IoT a la VLAN 20 y bloquearle el servidor con una ACL (ver siguiente slide).</li>
           </ol></div>
           <div class="debateBox"><div class="dtitle">💡 Pregunta durante el lab</div><p>¿Por qué el WRT300N funciona como AP y también como router? ¿En qué modo lo estamos usando aquí y por qué?</p></div>`,
       badges:{ak:"Red a usar",av:"192.168.10.0/24",bk:"AP",bv:"WRT300N"},
@@ -78,17 +78,49 @@ window.DECK = {
       title:"Cómo configurar el WRT300N en PT",
       desc:"El wireless router se configura por su interfaz gráfica dentro de Packet Tracer.",
       html:`
-          <div class="bigcard"><div class="title">Pasos en Packet Tracer</div><ol class="stepList">
-          <li>Doble clic en el WRT300N → pestaña <b>GUI</b>.</li>
-          <li>Setup → Network Setup → IP del AP: <b>192.168.10.254</b> (o la que elijas).</li>
-          <li>Wireless → Basic Wireless Settings → SSID: <b>TechSol-WiFi</b> · Canal: 6.</li>
-          <li>Wireless Security → WPA2 Personal → Passphrase: <b>Soporte2026</b>.</li>
-          <li>En la laptop: Config → Wireless → SSID: TechSol-WiFi → contraseña.</li>
-          <li>Setup → DHCP Server: <b>Disabled</b> (evita doble DHCP). Las laptops usan IP estática .20 y .21.</li>
+          <div class="bigcard"><div class="title">WRT300N → pestaña GUI (guardá con Save Settings en cada página)</div><ol class="stepList">
+          <li><b>Setup → Basic Setup:</b> Router IP <b>192.168.10.254</b> / 255.255.255.0 · DHCP Server <b>Disabled</b>.</li>
+          <li><b>Wireless → Basic Wireless Settings:</b> SSID <b>TechSol-WiFi</b> · Standard Channel <b>6</b>.</li>
+          <li><b>Wireless → Wireless Security:</b> WPA2 Personal · Encryption <b>AES</b> · Passphrase <b>Soporte2026</b>.</li>
           </ol></div>
-          <div class="bigcard amber"><div class="title">Conectar la laptop al Wi-Fi</div><div style="color:var(--muted);font-size:13px;line-height:1.6">Doble clic en Laptop → Config → Wireless0 → SSID: TechSol-WiFi · Authentication: WPA2-PSK · PSK Pass Phrase: Soporte2026 → Connect.</div></div>`,
+          <div class="bigcard amber"><div class="title">Laptop: primero la tarjeta Wi-Fi</div><div style="color:var(--muted);font-size:13px;line-height:1.6">La Laptop-PT viene con tarjeta de cable. En <b>Physical</b>: botón de encendido (apagar) → arrastrar <b>PT-LAPTOP-NM-1CFE</b> hacia la lista de módulos → arrastrar <b>WPC300N</b> al hueco vacío → encender. Luego <b>Config → Wireless0</b>: SSID TechSol-WiFi · WPA2-PSK · Soporte2026 · AES. En <b>Desktop → IP Configuration</b>: 192.168.10.20, máscara /24, gateway 192.168.10.1.</div></div>
+          <div class="warnBox"><div class="wtitle">⚠ ¿Por qué DHCP Disabled?</div><p>El WRT300N trae su propio DHCP (192.168.0.x). Si queda encendido, reparte IPs de otra red a quien se conecte y aparece un "doble DHCP".</p></div>`,
       badges:{ak:"IP del AP",av:"192.168.10.254",bk:"DHCP del WRT300N",bv:"Desactivado"},
       img:"images/s2-ap.svg"
+    },
+
+    /* ── RETO AVANZADO ── */
+    {
+      kicker:"RETO AVANZADO",
+      title:"IoT en su propia VLAN + ACL",
+      desc:"Una ACL solo filtra lo que pasa por el router. Si el IoT y el servidor están en la misma red, el tráfico nunca llega al router: primero hay que separar al IoT en otra VLAN.",
+      html:`
+          <div class="grid">
+          <div class="card"><strong>Switch0 · CLI</strong><pre style="margin:6px 0 0;font-size:11.5px;line-height:1.5;white-space:pre-wrap">enable
+configure terminal
+vlan 20
+ name IOT
+interface fa0/12
+ switchport mode access
+ switchport access vlan 20
+interface gi0/1
+ switchport mode trunk
+end</pre></div>
+          <div class="card"><strong>Router · CLI</strong><pre style="margin:6px 0 0;font-size:11.5px;line-height:1.5;white-space:pre-wrap">enable
+configure terminal
+interface g0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+access-list 120 deny ip 192.168.20.0 0.0.0.255 host 192.168.10.2
+access-list 120 permit ip any any
+interface g0/0.20
+ ip access-group 120 in
+end
+write memory</pre></div>
+          </div>
+          <div class="bigcard"><div class="title">Cambiar el IoT y probar</div><ul><li>IoT: IP <b>192.168.20.50</b> · gateway <b>192.168.20.1</b></li><li>IoT → 192.168.20.1 y IoT → PC0: <b>responde</b></li><li>IoT → servidor 192.168.10.2: <b>Destination host unreachable</b> (la ACL lo bloquea)</li><li>Verificar en el router: <code>show access-lists</code> muestra los "matches"</li></ul></div>`,
+      badges:{ak:"VLAN IoT",av:"20 · 192.168.20.0/24",bk:"ACL",bv:"120 in en G0/0.20"},
+      img:"images/cp2-topologia.svg"
     },
 
     /* ── 04 · RETROALIMENTACIÓN ── */
@@ -103,7 +135,7 @@ window.DECK = {
           <button class="btn primary" data-reveal="r1">Ver errores frecuentes</button>
           <button class="btn" data-hide="r1">Ocultar</button>
           </div>
-          <div class="revealBox" id="r1">Errores comunes: SSID con espacio al final · WPA2 vs WPA2-PSK confundidos · IP del AP en la misma red pero sin gateway configurado · Laptop con Wireless desactivada.</div>`,
+          <div class="revealBox" id="r1">Errores comunes: laptop sin cambiar a WPC300N · olvidar Save Settings en el GUI · SSID con mayúsculas distintas · DHCP del WRT300N encendido · cable al puerto Internet en vez de Ethernet 1 · ACL aplicada en G0/0 (no filtra tráfico dentro de la misma red).</div>`,
       badges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Evidencia técnica"},
       img:"images/s2-retro.svg"
     }
