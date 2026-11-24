@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eaf1f8"/><stop offset="100%" stop-color="#cfdceb"/></linearGradient></defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+<text x="400" y="32" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#0a4f96" text-anchor="middle">Topología del Caso Práctico 3</text>
+<rect x="20" y="210" width="400" height="270" rx="14" fill="#e1ecf8" stroke="#0b66c3" stroke-dasharray="6 5"/><text x="36" y="232" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#0a4f96" text-anchor="start">Red de la empresa · 192.168.10.0/24</text>
+<rect x="440" y="210" width="340" height="270" rx="14" fill="#fef3c7" stroke="#d97706" stroke-dasharray="6 5"/><text x="456" y="232" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#b45309" text-anchor="start">Red Wi-Fi móvil · 192.168.30.0/24</text>
+<line x1="300" y1="98" x2="300" y2="156" stroke="#0b66c3" stroke-width="2.5"/>
+<line x1="300" y1="204" x2="130" y2="300" stroke="#0b66c3" stroke-width="2.5"/>
+<line x1="300" y1="204" x2="300" y2="300" stroke="#0b66c3" stroke-width="2.5"/>
+<line x1="300" y1="204" x2="610" y2="276" stroke="#d97706" stroke-width="2.5"/>
+<line x1="130" y1="348" x2="130" y2="380" stroke="#0b66c3" stroke-width="2.5"/>
+<line x1="300" y1="324" x2="250" y2="410" stroke="#d97706" stroke-width="3" stroke-dasharray="3 6" stroke-linecap="round"/>
+<line x1="300" y1="324" x2="370" y2="410" stroke="#d97706" stroke-width="3" stroke-dasharray="3 6" stroke-linecap="round"/>
+<line x1="610" y1="324" x2="520" y2="410" stroke="#d97706" stroke-width="3" stroke-dasharray="3 6" stroke-linecap="round"/>
+<line x1="610" y1="324" x2="630" y2="410" stroke="#d97706" stroke-width="3" stroke-dasharray="3 6" stroke-linecap="round"/>
+<line x1="610" y1="324" x2="735" y2="410" stroke="#d97706" stroke-width="3" stroke-dasharray="3 6" stroke-linecap="round"/>
+<rect x="195.0" y="50" width="210" height="48" rx="12" fill="#0a4f96" stroke="#0a4f96" stroke-width="1.5"/><text x="300" y="72" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#fff" text-anchor="middle">R-Techsol (2911)</text>
+<text x="300" y="89" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#dbeafe" text-anchor="middle">G0/0 .10.1 · G0/0.20 .20.1</text>
+<rect x="215.0" y="156" width="170" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="300" y="178" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">TECHSOL SW1</text>
+<text x="300" y="195" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">Fa0/1 trunk · Fa0/5 AP CP2</text>
+<rect x="45.0" y="300" width="170" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="130" y="322" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">SW2 + Server0</text>
+<text x="130" y="339" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">Server0 .10.2</text>
+<rect x="225.0" y="300" width="150" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="300" y="322" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">AP del CP2</text>
+<text x="300" y="339" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">Ethernet 1 · .10.254</text>
+<text x="300" y="368" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">TechSol-WiFi · canal 6</text>
+<rect x="195.0" y="410" width="110" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="250" y="432" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Laptop0/1</text>
+<text x="250" y="449" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">.10.20 / .21</text>
+<rect x="320.0" y="410" width="100" height="48" rx="12" fill="#e3f5e9" stroke="#16a34a" stroke-width="1.5"/><text x="370" y="432" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">IoT1</text>
+<text x="370" y="449" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">VLAN 20 · .20.50</text>
+<rect x="510.0" y="276" width="200" height="48" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="1.5"/><text x="610" y="298" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">WRT300N-Movil (router)</text>
+<text x="610" y="315" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">Internet: .10.253 · LAN: .30.1</text>
+<text x="470" y="262" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">puerto Internet</text>
+<text x="650" y="350" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">TechSol-Movil · canal 11 · NAT</text>
+<rect x="470.0" y="410" width="100" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="520" y="432" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Laptop2</text>
+<text x="520" y="449" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">.30.10</text>
+<rect x="580.0" y="410" width="100" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="630" y="432" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Laptop3</text>
+<text x="630" y="449" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">.30.11</text>
+<rect x="690.0" y="410" width="90" height="48" rx="12" fill="#fff" stroke="#b9c8da" stroke-width="1.5"/><text x="735" y="432" font-family="Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Phone0</text>
+<text x="735" y="449" font-family="Arial,sans-serif" font-size="10" font-weight="normal" fill="#50607a" text-anchor="middle">.30.20</text>
+<text x="400" y="494" font-family="Arial,sans-serif" font-size="10.5" font-weight="normal" fill="#50607a" text-anchor="middle">Azul: cable · naranja punteado: Wi-Fi · el router WRT300N-Movil traduce (NAT) todo lo que sale de la red .30</text>
+</svg>

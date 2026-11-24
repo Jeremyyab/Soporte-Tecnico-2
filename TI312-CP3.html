@@ -29,9 +29,9 @@ window.DECK = {
       html:`
           <div class="grid">
           <div class="card"><strong>📌 Datos del caso</strong><ul><li>Semana 3 de 4</li><li>Valor: 15% (de 45% en casos)</li><li>Grupos de 3–4 personas</li><li>Duración: ~80 minutos en clase</li></ul></div>
-          <div class="card"><strong>🧰 Necesitás</strong><ul><li>Archivo .pkt del CP2 (o CP1)</li><li>Packet Tracer 8.2.2</li><li>Laptop-PT, Smartphone-PT y WRT300N</li></ul></div>
+          <div class="card"><strong>🧰 Necesitás</strong><ul><li>Archivo .pkt del CP2</li><li>Packet Tracer 8.2.2</li><li>Laptop-PT, Smartphone-PT y WRT300N</li></ul></div>
           </div>
-          <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6"><b>TechSol S.A.</b> incorpora empleados con laptops y smartphones. Necesitan Wi-Fi seguro en su propia subred (192.168.30.0/24) y deben poder llegar a las PCs cableadas y al servidor.</div></div>
+          <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6"><b>TechSol S.A.</b> incorpora empleados con laptops y smartphones. Necesitan una red Wi-Fi <b>separada</b> (192.168.30.0/24) con su propio router, que pueda llegar a las PCs cableadas y al servidor.</div></div>
           <div class="warnBox"><div class="wtitle">⚠ Misma versión de Packet Tracer en todo el grupo</div><p>Usen Packet Tracer 8.2.2 (estable). La 9.0 está en beta y hay reportes de archivos .pkt que no abren entre 8.2.x y 9.0. <span class="updBadge">2026</span></p></div>
           <div class="ctaRow"><a class="btn" href="TI312-Semana3-Redes.html">📖 Ver la clase de la Semana 3</a></div>`,
       badges:{ak:"Valor",av:"15%",bk:"Duración",bv:"~80 min"},
@@ -44,9 +44,11 @@ window.DECK = {
       title:"Laboratorio — Red con laptops y móviles",
       desc:"Extendemos la red del CP1/CP2 agregando conectividad Wi-Fi para laptops y smartphones.",
       html:`
-          <div class="labBox"><div class="ltitle">🧪 Herramienta: Cisco Packet Tracer</div><p>Laptop-PT, Smartphone-PT y el Wireless Router WRT300N ya están disponibles en PT.</p></div><div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6">TechSol S.A. incorpora empleados con laptops y smartphones. Necesitan acceso Wi-Fi seguro a la red de la empresa y deben poder comunicarse con las PCs cableadas y el servidor.</div></div><div class="bigcard"><div class="title">🎯 Objetivos</div><ul><li>Agregar y configurar el AP WRT300N</li><li>Conectar 2 Laptop-PT por Wi-Fi al AP</li><li>Agregar 1 Smartphone-PT a la red Wi-Fi</li><li>Asignar IPs estáticas a los nuevos dispositivos</li><li>Verificar 4 pings entre redes cableada y Wi-Fi</li></ul></div>`,
+          <div class="bigcard"><div class="title">📋 Escenario</div><div style="color:var(--muted);font-size:13px;line-height:1.6">El Wi-Fi del CP2 (<b>TechSol-WiFi</b>) es para equipos de la empresa. Ahora llegan laptops y celulares de uso móvil que deben ir en <b>otra red</b>: un segundo WRT300N, esta vez funcionando como <b>router</b>, crea la red 192.168.30.0/24 y la conecta a la red de la empresa.</div></div>
+<div class="bigcard green"><div class="title">🎯 Objetivos</div><ul><li>Agregar un 2.º WRT300N conectado por su puerto <b>Internet</b></li><li>Configurar su lado Internet (192.168.10.253) y su LAN (192.168.30.1)</li><li>Crear el Wi-Fi <b>TechSol-Movil</b> en el canal 11 con WPA2</li><li>Conectar 2 Laptop-PT y 1 Smartphone-PT</li><li>Verificar 4 pings y explicar por qué el camino inverso falla (NAT)</li></ul></div>
+<div class="warnBox"><div class="wtitle">⚠ Diferencia con el CP2</div><p>En el CP2 el WRT300N era solo un <b>puente</b> (puerto Ethernet 1). En el CP3 se usa como <b>router</b> (puerto Internet): crea una red nueva y traduce las direcciones con NAT.</p></div>`,
       badges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~80 minutos"},
-      img:"images/s3-lab.svg"
+      img:"images/cp3-topologia.svg"
     },
 
     /* ── 02 · INSTRUCCIONES ── */
@@ -55,7 +57,17 @@ window.DECK = {
       title:"Pasos — Caso Práctico 3",
       desc:"Abrís el .pkt del CP2 y agregás la red Wi-Fi con los dispositivos móviles.",
       html:`
-          <div class="bigcard"><div class="title">Paso a paso en Packet Tracer</div><ol class="stepList"><li>Abrir el .pkt del CP2 (o CP1) → guardar como <code>TI312-Semana3-Grupo.pkt</code></li><li>Agregar <b>Wireless Router WRT300N</b> al canvas → conectar su puerto <b>Internet</b> al Switch principal con Straight-Through. En Setup → Internet Setup: IP estática <code>192.168.10.253/24</code>, gateway <code>192.168.10.1</code></li><li>Configurar el AP: doble clic → GUI → SSID: <code>TechSol-WiFi</code> · Canal: 6 · WPA2 · Clave: <code>Soporte2026</code></li><li>Agregar 2 <b>Laptop-PT</b> → Config → Wireless0 → SSID: TechSol-WiFi → conectar</li><li>Agregar 1 <b>Smartphone-PT</b> → Config → Wireless0 → misma red Wi-Fi</li><li>IPs estáticas: Laptop1: <code>192.168.30.10</code> · Laptop2: <code>192.168.30.11</code> · Phone: <code>192.168.30.20</code> · GW: <code>192.168.30.1</code></li><li>Verificar: ping Laptop1 → PC0 cableada · ping Phone → Server0</li><li>Documentar: captura topología + tabla IPs actualizada + 4 pings</li></ol></div><div class="debateBox"><div class="dtitle">💡 Pregunta durante el lab</div><p>¿Por qué conviene poner los smartphones en una VLAN separada de las PCs de trabajo? ¿Cómo lo harías en Packet Tracer?</p></div>`,
+          <div class="bigcard"><div class="title">Paso a paso</div><ol class="stepList">
+<li>Abrir el .pkt del CP2 → guardar como <b>TI312-CP3-NombreGrupo.pkt</b>.</li>
+<li>Agregar un <b>segundo WRT300N</b> (renombrarlo <b>WRT300N-Movil</b>). Conectar su puerto <b>Internet</b> a un puerto libre del SW1 con Straight-Through.</li>
+<li>GUI → Setup → Basic Setup → <b>Internet Setup: Static IP</b> · 192.168.10.253 · 255.255.255.0 · gateway 192.168.10.1 · DNS 192.168.10.2.</li>
+<li>Misma página → <b>Router IP: 192.168.30.1</b> /24 → Save Settings.</li>
+<li>Wireless: SSID <b>TechSol-Movil</b> · canal <b>11</b> · WPA2 Personal · AES · <b>Soporte2026</b> → Save Settings en cada página.</li>
+<li>Agregar <b>Laptop2</b> y <b>Laptop3</b>: cambiar la tarjeta a <b>WPC300N</b> (apagada) y conectarlas a TechSol-Movil.</li>
+<li>Agregar <b>Smartphone0</b> (End Devices): Config → Wireless0 → TechSol-Movil, WPA2-PSK, clave.</li>
+<li>IPs estáticas: Laptop2 <b>.30.10</b> · Laptop3 <b>.30.11</b> · Phone <b>.30.20</b> · gateway <b>192.168.30.1</b>.</li>
+<li>Verificar los 4 pings y documentar.</li></ol></div>
+<div class="debateBox"><div class="dtitle">💡 Pregunta durante el lab</div><p>¿Por qué este Wi-Fi usa otro SSID y el canal 11, si el del CP2 ya existe? ¿Qué pasaría si los dos se llamaran igual?</p></div>`,
       badges:{ak:"Red Wi-Fi",av:"192.168.30.0/24",bk:"AP",bv:"WRT300N"},
       img:"images/s3-instrucciones.svg"
     },
@@ -66,8 +78,13 @@ window.DECK = {
       title:"Configurar el WRT300N en Packet Tracer",
       desc:"El AP se configura por su interfaz GUI dentro de PT — más sencillo que el CLI del router.",
       html:`
-          <div class="bigcard"><div class="title">Configuración del AP — GUI</div><ol class="stepList"><li>Doble clic en WRT300N → pestaña <b>GUI</b></li><li>Setup → Network Setup → IP del AP: <code>192.168.30.1</code></li><li>Wireless → Basic Settings → SSID: <code>TechSol-WiFi</code> · Canal: 6</li><li>Wireless Security → WPA2 Personal → Passphrase: <code>Soporte2026</code></li><li>Save Settings → aplicar cambios</li></ol></div><div class="bigcard amber"><div class="title">Conectar Laptop-PT al Wi-Fi</div><ol class="stepList"><li>Doble clic en Laptop-PT → Config → Wireless0</li><li>SSID: <code>TechSol-WiFi</code> · Authentication: WPA2-PSK</li><li>PSK Pass Phrase: <code>Soporte2026</code></li><li>Verificar LED verde = conectado al AP</li><li>Desktop → IP Configuration → Static → ingresar IP, máscara y gateway</li></ol></div><div class="bigcard green"><div class="title">Pings requeridos</div><ul><li>Laptop1 → PC0 cableada (entre redes)</li><li>Laptop1 → Server0 (acceso al servidor)</li><li>Phone → PC0 (smartphone a red cableada)</li><li>Phone → Laptop1 (entre dispositivos Wi-Fi)</li></ul></div><div class="warnBox"><div class="wtitle">💡 Ojo con el NAT</div><p>En este diseño el WRT300N hace NAT: desde el Wi-Fi hacia la red cableada funciona, pero un ping de PC0 hacia una laptop falla. No es un error de ustedes — ¿saben explicar por qué? Lo vemos en la retro.</p></div>`,
-      badges:{ak:"IP del AP",av:"192.168.30.1",bk:"Canal AP",bv:"6 (libre)"},
+          <div class="grid">
+<div class="card"><strong>Pings requeridos</strong><ul><li>Laptop2 → PC0 (192.168.10.10)</li><li>Laptop2 → Server0 (192.168.10.2)</li><li>Phone0 → PC0</li><li>Phone0 → Laptop2 (entre equipos Wi-Fi)</li></ul></div>
+<div class="card"><strong>Lo que debe fallar</strong><ul><li>PC0 → Laptop2 (192.168.30.10)</li><li>Es esperado: el NAT no deja entrar conexiones que nadie pidió desde adentro</li></ul></div>
+</div>
+<div class="bigcard amber"><div class="title">Errores frecuentes</div><ul><li>Cable en <b>Ethernet 1</b> en vez de <b>Internet</b> (al revés que en el CP2)</li><li>Laptop sin tarjeta <b>WPC300N</b></li><li>Gateway de las laptops en .10.1 en vez de <b>.30.1</b></li><li>Mismo SSID que el AP del CP2: la laptop se conecta al que no es</li><li>Falta <b>Save Settings</b> en alguna página</li></ul></div>
+<div class="warnBox"><div class="wtitle">💡 Ojo con el NAT</div><p>El WRT300N-Movil traduce todo lo que sale de la red .30 a su IP <b>192.168.10.253</b>. Por eso el Wi-Fi llega a la red cableada, pero la red cableada no puede iniciar conexiones hacia el Wi-Fi. Lo explicamos en la retro.</p></div>`,
+      badges:{ak:"Internet · LAN",av:".10.253 · .30.1",bk:"Canal y SSID",bv:"11 · TechSol-Movil"},
       img:"images/s3-config-ap.svg"
     },
 
@@ -77,7 +94,7 @@ window.DECK = {
       title:"Revisión del Caso Práctico 3",
       desc:"Cada grupo comparte su topología y los resultados de los pings.",
       html:`
-          <div class="bigcard green"><div class="title">✅ ¿Qué revisamos?</div><ul><li>¿El AP WRT300N está configurado correctamente?</li><li>¿Las laptops se conectaron al SSID?</li><li>¿El smartphone tiene IP válida?</li><li>¿Los 4 pings entre redes son exitosos?</li><li>¿La topología está documentada?</li></ul></div><div class="bigcard"><div class="title">💬 Discusión — 2 min por equipo</div><div style="color:var(--muted);font-size:13px;line-height:1.6">1) ¿Pusieron los móviles en VLAN separada?<br>2) ¿Qué pasa si dos APs usan el mismo canal?<br>3) ¿Cómo ampliarían la red Wi-Fi si hubiera 3 pisos?</div></div><div id="rv1w"><button class="btn primary" onclick="document.getElementById('rv1').style.display='block'">Ver errores frecuentes</button></div><div class="revealBox" id="rv1">SSID con espacio al final · Gateway incorrecto en Laptop-PT (debe ser .30.1 no .30.254) · Laptop sin módulo Wireless (usar Laptop-PT, no PC-PT) · Canal del AP en conflicto con el AP del CP2</div>`,
+          <div class="bigcard green"><div class="title">✅ ¿Qué revisamos?</div><ul><li>¿El AP WRT300N está configurado correctamente?</li><li>¿Las laptops se conectaron al SSID?</li><li>¿El smartphone tiene IP válida?</li><li>¿Los 4 pings entre redes son exitosos?</li><li>¿La topología está documentada?</li></ul></div><div class="bigcard"><div class="title">💬 Discusión — 2 min por equipo</div><div style="color:var(--muted);font-size:13px;line-height:1.6">1) ¿Pusieron los móviles en VLAN separada?<br>2) ¿Qué pasa si dos APs usan el mismo canal?<br>3) ¿Cómo ampliarían la red Wi-Fi si hubiera 3 pisos?</div></div><div id="rv1w"><button class="btn primary" onclick="document.getElementById('rv1').style.display='block'">Ver errores frecuentes</button></div><div class="revealBox" id="rv1">Cable en Ethernet 1 en vez de Internet · Gateway incorrecto en las laptops (debe ser .30.1) · Laptop sin WPC300N · Mismo SSID o canal que el AP del CP2</div>`,
       badges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Pings exitosos"},
       img:"images/s3-retro.svg"
     }
